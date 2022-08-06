@@ -257,3 +257,148 @@ Received Import Request.
   path: Assets/Materials/Scales.mat
   artifactKey: Guid(23a9465a85a033027b11b53f2af38bc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/Materials/Scales.mat using Guid(23a9465a85a033027b11b53f2af38bc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a95af7036e606b4cfa07871505d38122') in 0.145476 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1382.272395 seconds.
+  path: Assets/Terrain Assets/Default Texture.asset
+  artifactKey: Guid(addd6b0c4581e4f73b0395a4943b9f57) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Terrain Assets/Default Texture.asset using Guid(addd6b0c4581e4f73b0395a4943b9f57) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b42592e10289ce864ff7a254f4b7c5f6') in 0.028075 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Terrain Assets/New Mesh Settings.asset
+  artifactKey: Guid(46ff57af49f874fe2bd2a350a99d063c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Terrain Assets/New Mesh Settings.asset using Guid(46ff57af49f874fe2bd2a350a99d063c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f89a2fa6491bb2677dd9ceaa57a94e52') in 0.001861 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Terrain Assets/New Height Map Settings.asset
+  artifactKey: Guid(740a13ca91e454c51aeb1f625a396eca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Terrain Assets/New Height Map Settings.asset using Guid(740a13ca91e454c51aeb1f625a396eca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '366934144a803522514aa73be12c9fce') in 0.006869 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 88.784325 seconds.
+  path: Assets/Terrain Assets/Default New Height Map Settings.asset
+  artifactKey: Guid(740a13ca91e454c51aeb1f625a396eca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Terrain Assets/Default New Height Map Settings.asset using Guid(740a13ca91e454c51aeb1f625a396eca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c0c51ff3a4b30a05f233629fb86852d4') in 0.002917 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 28.871652 seconds.
+  path: Assets/Terrain Assets/Default Mesh Settings.asset
+  artifactKey: Guid(46ff57af49f874fe2bd2a350a99d063c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Terrain Assets/Default Mesh Settings.asset using Guid(46ff57af49f874fe2bd2a350a99d063c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f8c2c5d95d5badce88e59f07b74b1ae2') in 0.003591 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 13.597157 seconds.
+  path: Assets/Terrain Assets/Default Height Map Settings.asset
+  artifactKey: Guid(740a13ca91e454c51aeb1f625a396eca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Terrain Assets/Default Height Map Settings.asset using Guid(740a13ca91e454c51aeb1f625a396eca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6264e56f06ff8b4668eb0ef3f9e35322') in 0.002064 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 13.625317 seconds.
+  path: Assets/Terrain Assets/Default Height Map Settings 1.asset
+  artifactKey: Guid(d22d232613e38e92c8b41936f957cf4f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Terrain Assets/Default Height Map Settings 1.asset using Guid(d22d232613e38e92c8b41936f957cf4f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a7c1a77379165a37bea2528d65472fac') in 0.001471 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Terrain Assets/Default Mesh Settings 1.asset
+  artifactKey: Guid(b7c39f30692a8af049536d3d8f9f17d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Terrain Assets/Default Mesh Settings 1.asset using Guid(b7c39f30692a8af049536d3d8f9f17d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69631d2f223073a974b5d21dceeb1a96') in 0.002965 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Terrain Assets/Default Texture 1.asset
+  artifactKey: Guid(38d73a720fd9b5bd58945f0f3c0835d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Terrain Assets/Default Texture 1.asset using Guid(38d73a720fd9b5bd58945f0f3c0835d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '31e629f304d998a2f6185448eae3b2e4') in 0.017529 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 31.309071 seconds.
+  path: Assets/Terrain Assets/Island Height Map Settings 1.asset
+  artifactKey: Guid(d22d232613e38e92c8b41936f957cf4f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Terrain Assets/Island Height Map Settings 1.asset using Guid(d22d232613e38e92c8b41936f957cf4f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '72cd7027de0bf31b7d440bfa95e22e9e') in 0.002193 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 18.935473 seconds.
+  path: Assets/Terrain Assets/Island Mesh Settings.asset
+  artifactKey: Guid(b7c39f30692a8af049536d3d8f9f17d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Terrain Assets/Island Mesh Settings.asset using Guid(b7c39f30692a8af049536d3d8f9f17d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17cfbd6c72b006539cbeb9e37ddefdd2') in 0.001647 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 15.438212 seconds.
+  path: Assets/Terrain Assets/Island Texture.asset
+  artifactKey: Guid(38d73a720fd9b5bd58945f0f3c0835d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Terrain Assets/Island Texture.asset using Guid(38d73a720fd9b5bd58945f0f3c0835d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f81cdcfe37e5e8fb2c3650ae25eab749') in 0.008010 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 12.222163 seconds.
+  path: Assets/Terrain Assets/Island Height Map Settings.asset
+  artifactKey: Guid(d22d232613e38e92c8b41936f957cf4f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Terrain Assets/Island Height Map Settings.asset using Guid(d22d232613e38e92c8b41936f957cf4f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8d4cd0b31b527a615455b084b2a615f6') in 0.001910 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004674 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image /home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/PackageCache/com.unity.visualscripting@1.7.8/Editor/VisualScripting.Core/Dependencies/YamlDotNet/Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image /home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/PackageCache/com.unity.visualscripting@1.7.8/Editor/VisualScripting.Core/Dependencies/DotNetZip/Unity.VisualScripting.IonicZip.dll
+Native extension for LinuxStandalone target not found
+Refreshing native plugins compatible for Editor in 0.90 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.001 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2002ms)
+		BeginReloadAssembly (144ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (7ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (54ms)
+		EndReloadAssembly (1703ms)
+			LoadAssemblies (71ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (406ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (86ms)
+			SetupLoadedEditorAssemblies (970ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (18ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (105ms)
+				ProcessInitializeOnLoadAttributes (723ms)
+				ProcessInitializeOnLoadMethodAttributes (98ms)
+				AfterProcessingInitializeOnLoad (22ms)
+				EditorAssembliesLoaded (1ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (16ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.01 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3268 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 17 unused Assets / (21.9 KB). Loaded Objects now: 3782.
+Memory consumption went from 110.7 MB to 110.6 MB.
+Total: 5.518117 ms (FindLiveObjects: 0.283301 ms CreateObjectMapping: 0.183818 ms MarkObjects: 5.009109 ms  DeleteObjects: 0.038548 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 404.784858 seconds.
+  path: Assets/Terrain Assets
+  artifactKey: Guid(daeb5cd6cdf2548318158d5d689f6fe4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Terrain Assets using Guid(daeb5cd6cdf2548318158d5d689f6fe4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70fd7c6a5ffebf3309af2f08fd7e59cd') in 0.006800 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 67.952387 seconds.
+  path: Assets/Terrain Assets/Island Texture.asset
+  artifactKey: Guid(38d73a720fd9b5bd58945f0f3c0835d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Terrain Assets/Island Texture.asset using Guid(38d73a720fd9b5bd58945f0f3c0835d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c48eccf3b90a5bc878f5c6d6c224350') in 0.031554 seconds 
