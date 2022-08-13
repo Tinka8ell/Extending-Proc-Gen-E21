@@ -4,11 +4,11 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class FirstTest
+public class FirstPlayModeTest
 {
     // A Test behaves as an ordinary method
     [Test]
-    public void FirstTestSimplePasses()
+    public void FirstPlayModeTestSimplePasses()
     {
         // Use the Assert class to test conditions
     }
@@ -16,7 +16,7 @@ public class FirstTest
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
     // `yield return null;` to skip a frame.
     [UnityTest]
-    public IEnumerator FirstTestWithEnumeratorPasses()
+    public IEnumerator FirstPlayModeTestWithEnumeratorPasses()
     {
         // Use the Assert class to test conditions.
         // Use yield to skip a frame.

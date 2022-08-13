@@ -5,9 +5,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass", "Assembly-CSharp-firstpass.csproj", "{ad7b9b59-3dea-797e-903d-f201cb8e6770}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayModeTests", "PlayModeTests.csproj", "{1606aceb-95ad-ba51-26f9-645e6a195fbb}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{55d15a4b-ba6f-d46a-1d7a-46d88344da04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests.csproj", "{2bbb79b4-352e-a47f-7d0e-87b2e803d147}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditorModeTests", "EditorModeTests.csproj", "{22982c78-6938-e37c-bf74-da6f82a5d061}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,10 +20,12 @@ Global
 		{c0951f01-3b61-9a38-702e-ac68ccb6a8d0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ad7b9b59-3dea-797e-903d-f201cb8e6770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ad7b9b59-3dea-797e-903d-f201cb8e6770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1606aceb-95ad-ba51-26f9-645e6a195fbb}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1606aceb-95ad-ba51-26f9-645e6a195fbb}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55d15a4b-ba6f-d46a-1d7a-46d88344da04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{55d15a4b-ba6f-d46a-1d7a-46d88344da04}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2bbb79b4-352e-a47f-7d0e-87b2e803d147}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2bbb79b4-352e-a47f-7d0e-87b2e803d147}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22982c78-6938-e37c-bf74-da6f82a5d061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22982c78-6938-e37c-bf74-da6f82a5d061}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
