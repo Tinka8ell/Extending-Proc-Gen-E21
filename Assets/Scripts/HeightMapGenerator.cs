@@ -4,8 +4,28 @@ using UnityEngine;
 
 public static class HeightMapGenerator {
 
-	public static HeightMap GenerateHeightMap(int width, int height, HeightMapSettings settings, Vector2 sampleCentre) {
-		float[,] values = Noise.GenerateNoiseMap (width, height, settings.noiseSettings, sampleCentre);
+	
+	public static HeightMap GenerateCombinedHeightMap(
+			int width, int height, HeightMapSettings islandSettings, HeightMapSettings terrainSettings, float ratio, Vector2 sampleCentre) {
+		HeightMap islandHeightMap = GenerateHeightMap(width, height, islandSettings, sampleCentre);
+		HeightMap terrainHeightMap = GenerateHeightMap(width, height, terrainSettings, sampleCentre);
+		float terrainRatio = 1 - ratio;
+		float[,] values = new float[width, height];
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				values [i, j] = islandHeightMap.values [i, j] * ratio + terrainHeightMap.values [i, j] * terrainRatio;
+			}
+		}
+		float minValue = islandHeightMap.minValue * ratio + terrainHeightMap.minValue * terrainRatio;
+		float maxValue = islandHeightMap.maxValue * ratio + terrainHeightMap.maxValue * terrainRatio;
+		return new HeightMap (values, minValue, maxValue);
+	}
+
+	public static HeightMap GenerateHeightMap(
+			int width, int height, HeightMapSettings settings, Vector2 sampleCentre) {
+		bool deepenSea = settings.deepenSea;
+		float deepenRatio = settings.deepenRatio;
+		float[,] values = Noise.GenerateNoiseMap (width, height, settings.noiseSettings, sampleCentre, deepenSea, deepenRatio);
 
 		AnimationCurve heightCurve_threadsafe = new AnimationCurve (settings.heightCurve.keys);
 

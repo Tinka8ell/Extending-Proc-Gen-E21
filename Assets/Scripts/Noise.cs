@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public static class Noise {
 
 	public enum NormalizeMode {Local, Global};
 
-	public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, NoiseSettings settings, Vector2 sampleCentre) {
+	public static float[,] GenerateNoiseMap(
+			int mapWidth, int mapHeight, NoiseSettings settings, Vector2 sampleCentre, 
+			bool deepenSea, float deepenRatio) {
 		float[,] noiseMap = new float[mapWidth,mapHeight];
 
 		System.Random prng = new System.Random (settings.seed);
@@ -23,6 +25,8 @@ public static class Noise {
 			maxPossibleHeight += amplitude;
 			amplitude *= settings.persistance;
 		}
+
+		float seaLevel = maxPossibleHeight / 2;
 
 		float maxLocalNoiseHeight = float.MinValue;
 		float minLocalNoiseHeight = float.MaxValue;
@@ -59,18 +63,28 @@ public static class Noise {
 
 				if (settings.normalizeMode == NormalizeMode.Global) {
 					float normalizedHeight = (noiseMap [x, y] + 1) / (maxPossibleHeight / 0.9f);
-					noiseMap [x, y] = Mathf.Clamp (normalizedHeight, 0, int.MaxValue);
+					normalizedHeight = Mathf.Clamp (normalizedHeight, 0, int.MaxValue);
+					if (deepenSea && (normalizedHeight < seaLevel)){
+						// if deepenSea and below sea level multiply depth by deepenRatio and limit to bottom
+						normalizedHeight = Mathf.Clamp ((normalizedHeight - seaLevel) * deepenRatio + seaLevel, 0, int.MaxValue);
+					}
+					noiseMap [x, y] = normalizedHeight;
 				}
 			}
 		}
 
+		if (settings.normalizeMode == NormalizeMode.Global) {
+			maxLocalNoiseHeight = maxPossibleHeight;
+			minLocalNoiseHeight = 0;
+		}
+		
 		if (settings.normalizeMode == NormalizeMode.Local) {
 			for (int y = 0; y < mapHeight; y++) {
 				for (int x = 0; x < mapWidth; x++) {
 					noiseMap [x, y] = Mathf.InverseLerp (minLocalNoiseHeight, maxLocalNoiseHeight, noiseMap [x, y]);
 				}
 			}
-	}
+		}
 
 		return noiseMap;
 	}

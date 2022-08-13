@@ -8,11 +8,14 @@ public class MapPreview : MonoBehaviour {
 	public MeshRenderer meshRenderer;
 
 
-	public enum DrawMode {NoiseMap, Mesh, FalloffMap};
+	public enum DrawMode {IslandMap, TerrainMap, IslandMesh, TerrainMesh, CombinedMesh, FalloffMap};
 	public DrawMode drawMode;
 
 	public MeshSettings meshSettings;
-	public HeightMapSettings heightMapSettings;
+	public HeightMapSettings islandHeightSettings;
+	[Range(0,1)]
+	public float ratio = 1;
+	public HeightMapSettings terrainHeightSettings;
 	public TextureData textureData;
 
 	public Material terrainMaterial;
@@ -24,24 +27,41 @@ public class MapPreview : MonoBehaviour {
 	public bool autoUpdate;
 
 
-
-
 	public void DrawMapInEditor() {
 		textureData.ApplyToMaterial (terrainMaterial);
-		textureData.UpdateMeshHeights (terrainMaterial, heightMapSettings.minHeight, heightMapSettings.maxHeight);
-		HeightMap heightMap = HeightMapGenerator.GenerateHeightMap (meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, heightMapSettings, Vector2.zero);
+		HeightMap heightMap;
 
-		if (drawMode == DrawMode.NoiseMap) {
+		if (drawMode == DrawMode.IslandMap) {
+			heightMap = HeightMapGenerator.GenerateHeightMap(
+				meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, islandHeightSettings, Vector2.zero);
 			DrawTexture (TextureGenerator.TextureFromHeightMap (heightMap));
-		} else if (drawMode == DrawMode.Mesh) {
+		} else if (drawMode == DrawMode.TerrainMap) {
+			heightMap = HeightMapGenerator.GenerateHeightMap(
+				meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, islandHeightSettings, Vector2.zero);
+			DrawTexture (TextureGenerator.TextureFromHeightMap (heightMap));
+		} else if (drawMode == DrawMode.IslandMesh) {
+			textureData.UpdateMeshHeights (terrainMaterial, islandHeightSettings.minHeight, islandHeightSettings.maxHeight);
+			heightMap = HeightMapGenerator.GenerateHeightMap(
+				meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, islandHeightSettings, Vector2.zero);
+			DrawMesh (MeshGenerator.GenerateTerrainMesh (heightMap.values,meshSettings, editorPreviewLOD));
+		} else if (drawMode == DrawMode.TerrainMesh) {
+			textureData.UpdateMeshHeights (terrainMaterial, terrainHeightSettings.minHeight, terrainHeightSettings.maxHeight);
+			heightMap = HeightMapGenerator.GenerateHeightMap(
+				meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, terrainHeightSettings, Vector2.zero);
+			DrawMesh (MeshGenerator.GenerateTerrainMesh (heightMap.values,meshSettings, editorPreviewLOD));
+		} else if (drawMode == DrawMode.CombinedMesh) {
+			textureData.UpdateMeshHeights (
+				terrainMaterial, 
+				islandHeightSettings.minHeight * ratio + terrainHeightSettings.minHeight * (1-ratio), 
+				islandHeightSettings.maxHeight * ratio + terrainHeightSettings.maxHeight * (1-ratio));
+			heightMap = HeightMapGenerator.GenerateCombinedHeightMap(
+				meshSettings.numVertsPerLine, meshSettings.numVertsPerLine, islandHeightSettings, terrainHeightSettings, ratio, Vector2.zero);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh (heightMap.values,meshSettings, editorPreviewLOD));
 		} else if (drawMode == DrawMode.FalloffMap) {
-			DrawTexture(TextureGenerator.TextureFromHeightMap(new HeightMap(FalloffGenerator.GenerateFalloffMap(meshSettings.numVertsPerLine),0,1)));
+			heightMap = new HeightMap(FalloffGenerator.GenerateFalloffMap(meshSettings.numVertsPerLine),0,1);
+			DrawTexture(TextureGenerator.TextureFromHeightMap(heightMap));
 		}
 	}
-
-
-
 
 
 	public void DrawTexture(Texture2D texture) {
@@ -77,9 +97,13 @@ public class MapPreview : MonoBehaviour {
 			meshSettings.OnValuesUpdated -= OnValuesUpdated;
 			meshSettings.OnValuesUpdated += OnValuesUpdated;
 		}
-		if (heightMapSettings != null) {
-			heightMapSettings.OnValuesUpdated -= OnValuesUpdated;
-			heightMapSettings.OnValuesUpdated += OnValuesUpdated;
+		if (islandHeightSettings != null) {
+			islandHeightSettings.OnValuesUpdated -= OnValuesUpdated;
+			islandHeightSettings.OnValuesUpdated += OnValuesUpdated;
+		}
+		if (terrainHeightSettings != null) {
+			terrainHeightSettings.OnValuesUpdated -= OnValuesUpdated;
+			terrainHeightSettings.OnValuesUpdated += OnValuesUpdated;
 		}
 		if (textureData != null) {
 			textureData.OnValuesUpdated -= OnTextureValuesUpdated;
