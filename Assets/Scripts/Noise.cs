@@ -26,8 +26,12 @@ public static class Noise {
 			amplitude *= settings.persistance;
 		}
 
-		float seaLevel = maxPossibleHeight / 2;
+		float seaLevel = 0.5f;
 
+/*         Debug.LogFormat(
+			"GenerateNoiseMap: Octaves = {0}, Max Possible = {1}, Sea Level = {2}", 
+			settings.octaves, maxPossibleHeight, seaLevel);
+ */
 		float maxLocalNoiseHeight = float.MinValue;
 		float minLocalNoiseHeight = float.MaxValue;
 
@@ -61,15 +65,23 @@ public static class Noise {
 				}
 				noiseMap [x, y] = noiseHeight;
 
+/* 	        	Debug.LogFormat(
+					"GenerateNoiseMap: Noise Map[{0}, {1}]: Noise Height = {2}", 
+					x, y, noiseHeight);
+ */
 				if (settings.normalizeMode == NormalizeMode.Global) {
-					float normalizedHeight = (noiseMap [x, y] + 1) / (maxPossibleHeight / 0.9f);
-					normalizedHeight = Mathf.Clamp (normalizedHeight, 0, int.MaxValue);
+					// float normalizedHeight = (noiseMap [x, y] + 1) / (maxPossibleHeight / 0.9f);
+					float normalizedHeight = 0.5f + noiseMap [x, y] / (maxPossibleHeight * 2f);
+					normalizedHeight = Mathf.Clamp (normalizedHeight, 0, 1);
 					if (deepenSea && (normalizedHeight < seaLevel)){
 						// if deepenSea and below sea level multiply depth by deepenRatio and limit to bottom
 						normalizedHeight = Mathf.Clamp ((normalizedHeight - seaLevel) * deepenRatio + seaLevel, 0, int.MaxValue);
 					}
 					noiseMap [x, y] = normalizedHeight;
-				}
+/* 		        	Debug.LogFormat(
+						"GenerateNoiseMap: Noise Map[{0}, {1}]: Normalized Height = {2}", 
+						x, y, normalizedHeight);
+ */				}
 			}
 		}
 
