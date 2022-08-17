@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 375
+  controlID: 91
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -121,14 +121,14 @@ MonoBehaviour:
     y: 573
     width: 1467
     height: 393
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 18}
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
   - {fileID: 18}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 91
+  controlID: 81
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 92
+  controlID: 82
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -306,7 +306,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
   m_Spl:
-    ID: 122
+    ID: 395
     splitterInitialOffset: 0
     currentActiveSplitter: -1
     realSizes:
@@ -458,7 +458,7 @@ MonoBehaviour:
       name: Proc Gen E02
       fullName: Proc Gen E02
       resultStatus: 1
-      duration: 0.2427671
+      duration: 0.2237099
       messages: 
       output: 
       stacktrace: 
@@ -475,7 +475,7 @@ MonoBehaviour:
       name: EditorModeTests.dll
       fullName: /home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/EditorModeTests.dll
       resultStatus: 1
-      duration: 0.098297
+      duration: 0.1114326
       messages: 
       output: 
       stacktrace: 
@@ -627,7 +627,7 @@ MonoBehaviour:
       name: TestNoise
       fullName: TestNoise
       resultStatus: 1
-      duration: 0.0915915
+      duration: 0.1043878
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -649,9 +649,9 @@ MonoBehaviour:
       name: CheckGenerateNoiseMapIsland
       fullName: TestNoise.CheckGenerateNoiseMapIsland
       resultStatus: 1
-      duration: 0.0312422
+      duration: 0.0308398
       messages: 
-      output: 'Min: 0.52614, Max: 0.5577039
+      output: 'Min: 0.544459, Max: 0.5685703
 
 '
       stacktrace: 
@@ -668,9 +668,9 @@ MonoBehaviour:
       name: CheckGenerateNoiseMapIslandPlus
       fullName: TestNoise.CheckGenerateNoiseMapIslandPlus
       resultStatus: 1
-      duration: 0.0036652
+      duration: 0.0027134
       messages: 
-      output: 'Min: 0.52614, Max: 0.5577039
+      output: 'Min: 0.544459, Max: 0.5685703
 
 '
       stacktrace: 
@@ -687,7 +687,7 @@ MonoBehaviour:
       name: CheckGenerateNoiseMapMinimal
       fullName: TestNoise.CheckGenerateNoiseMapMinimal
       resultStatus: 1
-      duration: 0.0018387
+      duration: 0.0018248
       messages: 
       output: 'Min: 0.2645173, Max: 0.9219349
 
@@ -706,9 +706,9 @@ MonoBehaviour:
       name: CheckGenerateNoiseMapTexture
       fullName: TestNoise.CheckGenerateNoiseMapTexture
       resultStatus: 1
-      duration: 0.0041934
+      duration: 0.0036935
       messages: 
-      output: 'Min: 0.3154792, Max: 0.7471622
+      output: 'Min: 0.3190255, Max: 0.769053
 
 '
       stacktrace: 
@@ -720,17 +720,19 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1009
       parentUniqueId: EditorModeTests.dll/[EditorModeTests][TestNoise][suite]
-    m_ResultText: 'CheckGenerateNoiseMapTexture (0.004s)
+    m_ResultText: 'TestNoise (0.104s)
 
       ---
 
-      Min: 0.3154792,
-      Max: 0.7471622'
+      You are trying to create
+      a MonoBehaviour using the ''new'' keyword.  This is not allowed.  MonoBehaviours
+      can only be added using AddComponent(). Alternatively, your script can inherit
+      from ScriptableObject or no base class at all'
     m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 8027e64b
-      m_LastClickedID: 1273374592
+      m_SelectedIDs: 358f9547
+      m_LastClickedID: 1200983861
       m_ExpandedIDs: 85a9aebdb7ec5dc3bff209c647f8f3fe358f954731a6a348ffffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -812,9 +814,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 485a0000
-    m_LastClickedID: 23112
-    m_ExpandedIDs: 00000000305a0000325a00003e5a000000ca9a3b
+    m_SelectedIDs: 545a0000
+    m_LastClickedID: 23124
+    m_ExpandedIDs: 00000000385a00003a5a00003c5a000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -842,7 +844,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000305a0000325a0000
+    m_ExpandedIDs: 00000000385a00003a5a00003c5a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -867,8 +869,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 565e0000
-    m_LastClickedInstanceID: 24150
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
@@ -972,9 +974,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 565e0000
-      m_LastClickedID: 24150
-      m_ExpandedIDs: 00f4ffff26f4ffff7af5ffff94f5ffff92f6ffff84f7ffff82f8ffff76f9ffff38fbffff565e0000
+      m_SelectedIDs: e6590000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 78f0ffff28f6ffff50f6ffff38fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -990,7 +992,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 4}
+        m_ClientGUIView: {fileID: 0}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -1224,9 +1226,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1.1047907, y: 2.2490845, z: 75.5464}
+    m_Target: {x: -49.57734, y: -32.31964, z: 132.19753}
     speed: 2
-    m_Value: {x: 1.1047907, y: 2.2490845, z: 75.5464}
+    m_Value: {x: -49.57734, y: -32.31964, z: 132.19753}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1273,9 +1275,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.34550038, y: 0.0146366265, z: -0.005387217, w: -0.9383098}
+    m_Target: {x: -0.33024818, y: 0.14559668, z: -0.051634237, w: -0.93119735}
     speed: 2
-    m_Value: {x: -0.3454936, y: 0.014636341, z: -0.0053871116, w: -0.93829143}
+    m_Value: {x: -0.33023882, y: 0.14559256, z: -0.051632773, w: -0.93117094}
   m_Size:
     m_Target: 166.41
     speed: 2
