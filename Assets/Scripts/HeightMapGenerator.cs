@@ -23,9 +23,7 @@ public static class HeightMapGenerator {
 
 	public static HeightMap GenerateHeightMap(
 			int width, int height, HeightMapSettings settings, Vector2 sampleCentre) {
-		bool deepenSea = settings.deepenSea;
-		float deepenRatio = settings.deepenRatio;
-		float[,] values = Noise.GenerateNoiseMap (width, height, settings.noiseSettings, sampleCentre, deepenSea, deepenRatio);
+		float[,] values = Noise.GenerateNoiseMap (width, height, settings.noiseSettings, sampleCentre);
 
 		AnimationCurve heightCurve_threadsafe = new AnimationCurve (settings.heightCurve.keys);
 

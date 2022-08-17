@@ -6,9 +6,10 @@ public static class Noise {
 	public enum NormalizeMode {Local, Global};
 
 	public static float[,] GenerateNoiseMap(
-			int mapWidth, int mapHeight, NoiseSettings settings, Vector2 sampleCentre, 
-			bool deepenSea, float deepenRatio) {
+			int mapWidth, int mapHeight, NoiseSettings settings, Vector2 sampleCentre) {
 		float[,] noiseMap = new float[mapWidth,mapHeight];
+
+		float seaGradient = settings.seaGradient;
 
 		System.Random prng = new System.Random (settings.seed);
 		Vector2[] octaveOffsets = new Vector2[settings.octaves];
@@ -28,16 +29,11 @@ public static class Noise {
 
 		float seaLevel = 0.5f;
 
-/*         Debug.LogFormat(
-			"GenerateNoiseMap: Octaves = {0}, Max Possible = {1}, Sea Level = {2}", 
-			settings.octaves, maxPossibleHeight, seaLevel);
- */
 		float maxLocalNoiseHeight = float.MinValue;
 		float minLocalNoiseHeight = float.MaxValue;
 
 		float halfWidth = mapWidth / 2f;
 		float halfHeight = mapHeight / 2f;
-
 
 		for (int y = 0; y < mapHeight; y++) {
 			for (int x = 0; x < mapWidth; x++) {
@@ -65,23 +61,18 @@ public static class Noise {
 				}
 				noiseMap [x, y] = noiseHeight;
 
-/* 	        	Debug.LogFormat(
-					"GenerateNoiseMap: Noise Map[{0}, {1}]: Noise Height = {2}", 
-					x, y, noiseHeight);
- */
 				if (settings.normalizeMode == NormalizeMode.Global) {
-					// float normalizedHeight = (noiseMap [x, y] + 1) / (maxPossibleHeight / 0.9f);
-					float normalizedHeight = 0.5f + noiseMap [x, y] / (maxPossibleHeight * 2f);
-					normalizedHeight = Mathf.Clamp (normalizedHeight, 0, 1);
-					if (deepenSea && (normalizedHeight < seaLevel)){
-						// if deepenSea and below sea level multiply depth by deepenRatio and limit to bottom
-						normalizedHeight = Mathf.Clamp ((normalizedHeight - seaLevel) * deepenRatio + seaLevel, 0, int.MaxValue);
+					// old normalisation: float normalizedHeight = (noiseMap [x, y] + 1) / (maxPossibleHeight / 0.9f);
+					float height = noiseMap [x, y];
+					if (height < 0){
+						// modify any "sea" by the sea gradient (1 => no change!)
+						height *= seaGradient;
 					}
-					noiseMap [x, y] = normalizedHeight;
-/* 		        	Debug.LogFormat(
-						"GenerateNoiseMap: Noise Map[{0}, {1}]: Normalized Height = {2}", 
-						x, y, normalizedHeight);
- */				}
+					// now normalise
+					height = seaLevel + height / (maxPossibleHeight * 2f);
+					height = Mathf.Clamp (height, 0, 1);
+					noiseMap [x, y] = height;
+				}
 			}
 		}
 
@@ -109,9 +100,11 @@ public class NoiseSettings {
 
 	public float scale = 50;
 
+	public float seaGradient = 1;
+
 	public int octaves = 6;
 	[Range(0,1)]
-	public float persistance =.6f;
+	public float persistance =0.498f; // was 0.6f;
 	public float lacunarity = 2;
 
 	public int seed;
