@@ -22,12 +22,8 @@ public class TestNoise : MonoBehaviour
     //private static int chunkSize = 120
     //  index 0 => 120
     private static int chunkSize = 48;
-    public static int deafultSize = chunkSize + 5; 
-    public static int defaultMapWidth = deafultSize;
-    public static int defaultMapHeight = deafultSize;
+    public static int defaultSize = chunkSize + 5; 
 
-    public static float minimalMinHeight = 0;
-    public static float minimalMaxHeight = 1;
     public static Vector2 defaultSampleCentre = new Vector2(0f, 0f);
  
     public NoiseSettings minimalNoiseSettings;
@@ -74,8 +70,7 @@ public class TestNoise : MonoBehaviour
         // Act
 
         // Assert
-        CheckGenerateNoiseMap(
-            minimalNoiseSettings);
+        CheckGenerateNoiseMap(minimalNoiseSettings, -1, 1);
     }
 
     [Test]
@@ -85,8 +80,7 @@ public class TestNoise : MonoBehaviour
         // Act
 
         // Assert
-        CheckGenerateNoiseMap(
-            textureNoiseSettings);
+        CheckGenerateNoiseMap(textureNoiseSettings, -1, 1);
     }
 
     [Test]
@@ -96,8 +90,7 @@ public class TestNoise : MonoBehaviour
         // Act
 
         // Assert
-        CheckGenerateNoiseMap(
-            islandNoiseSettings);
+        CheckGenerateNoiseMap(islandNoiseSettings, -1, 1);
     }
 
     [Test]
@@ -107,23 +100,21 @@ public class TestNoise : MonoBehaviour
         // Act
 
         // Assert
-        CheckGenerateNoiseMap(
-            deepIslandNoiseSettings);
+        CheckGenerateNoiseMap(deepIslandNoiseSettings, -deepIslandNoiseSettings.seaGradient, 1);
     }
 
-    public void CheckGenerateNoiseMap(NoiseSettings noiseSettings){
+    public void CheckGenerateNoiseMap(NoiseSettings noiseSettings, float minHeight, float maxHeight){
         // Act
         float[,] actual = Noise.GenerateNoiseMap(
-            defaultMapWidth, 
-            defaultMapHeight,
+            defaultSize,
             noiseSettings, 
             defaultSampleCentre);
 
         // Assert
         float maxNoiseHeight = float.MinValue;
 		float minNoiseHeight = float.MaxValue;
-		for (int y = 0; y < deafultSize; y++) {
-			for (int x = 0; x < deafultSize; x++) {
+		for (int y = 0; y < defaultSize; y++) {
+			for (int x = 0; x < defaultSize; x++) {
                 float height = actual[x, y];
 				if (height > maxNoiseHeight) {
 					maxNoiseHeight = height;
@@ -135,20 +126,20 @@ public class TestNoise : MonoBehaviour
         }
         Debug.LogFormat("Min: {0}, Max: {1}", minNoiseHeight, maxNoiseHeight);
         Assert.GreaterOrEqual(
-            minNoiseHeight, minimalMinHeight, 
+            minNoiseHeight, minHeight, 
             "Min Height {0} should be greater than minimal min height {1}", 
-            minNoiseHeight, minimalMinHeight);
+            minNoiseHeight, minHeight);
         Assert.LessOrEqual(
-            maxNoiseHeight, minimalMaxHeight, 
+            maxNoiseHeight, maxHeight, 
             "Max Height {0} should be less than minimal max height {1}", 
-            maxNoiseHeight, minimalMaxHeight);
+            maxNoiseHeight, maxHeight);
         Assert.Less(
-            minNoiseHeight, minimalMaxHeight, 
+            minNoiseHeight, maxHeight, 
             "Min Height {0} should be less than minimal max height {1}", 
-            minNoiseHeight, minimalMaxHeight);
+            minNoiseHeight, maxHeight);
         Assert.Greater(
-            maxNoiseHeight, minimalMinHeight, 
+            maxNoiseHeight, minHeight, 
             "Max Height {0} should be greater than minimal min height {1}", 
-            maxNoiseHeight, minimalMinHeight);
+            maxNoiseHeight, minHeight);
     }
 }

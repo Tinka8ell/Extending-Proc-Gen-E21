@@ -6,13 +6,13 @@ public static class HeightMapGenerator {
 
 	
 	public static HeightMap GenerateCombinedHeightMap(
-			int width, int height, HeightMapSettings islandSettings, HeightMapSettings terrainSettings, float ratio, Vector2 sampleCentre) {
-		HeightMap islandHeightMap = GenerateHeightMap(width, height, islandSettings, sampleCentre);
-		HeightMap terrainHeightMap = GenerateHeightMap(width, height, terrainSettings, sampleCentre);
+			int size, HeightMapSettings islandSettings, HeightMapSettings terrainSettings, float ratio, Vector2 sampleCentre) {
+		HeightMap islandHeightMap = GenerateHeightMap(size, islandSettings, sampleCentre);
+		HeightMap terrainHeightMap = GenerateHeightMap(size, terrainSettings, sampleCentre);
 		float terrainRatio = 1 - ratio;
-		float[,] values = new float[width, height];
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
+		float[,] values = new float[size, size];
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
 				values [i, j] = islandHeightMap.values [i, j] * ratio + terrainHeightMap.values [i, j] * terrainRatio;
 			}
 		}
@@ -22,16 +22,16 @@ public static class HeightMapGenerator {
 	}
 
 	public static HeightMap GenerateHeightMap(
-			int width, int height, HeightMapSettings settings, Vector2 sampleCentre) {
-		float[,] values = Noise.GenerateNoiseMap (width, height, settings.noiseSettings, sampleCentre);
+			int size, HeightMapSettings settings, Vector2 sampleCentre) {
+		float[,] values = Noise.GenerateNoiseMap (size, settings.noiseSettings, sampleCentre);
 
 		AnimationCurve heightCurve_threadsafe = new AnimationCurve (settings.heightCurve.keys);
 
 		float minValue = float.MaxValue;
 		float maxValue = float.MinValue;
 
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
 				values [i, j] *= heightCurve_threadsafe.Evaluate (values [i, j]) * settings.heightMultiplier;
 
 				if (values [i, j] > maxValue) {
@@ -42,6 +42,9 @@ public static class HeightMapGenerator {
 				}
 			}
 		}
+
+		maxValue = settings.heightMultiplier;
+		minValue = - maxValue;
 
 		return new HeightMap (values, minValue, maxValue);
 	}

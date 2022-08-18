@@ -32,3 +32,11 @@ public class HeightMapSettings : UpdatableData {
 	#endif
 
 }
+
+[System.Serializable]
+public class WeightedNoiseSettings {
+	public NoiseSettings noiseSettings;
+	public float heightMultiplier;
+
+}
+
