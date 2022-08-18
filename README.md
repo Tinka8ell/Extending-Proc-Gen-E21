@@ -38,7 +38,7 @@ island mesh, so I can try to see where ther islands were relative to me, it all 
   * Created Sea Gradient from deepen see and the other one
   * Move the height scaling from the NoiseSettings to the HeightMapSettings, now 0 => don't do this part
   * Add a Sea Level to the NoiseSettings to be able to make islands more sparse!
- 
+
 #### Details
 
 Now that Noise is normalised from 0 to 1, change it to be from -1 to +1 - nominally either side of sea level.
@@ -63,5 +63,26 @@ I was going to clamp values to +/- this range, or modified range, to give flat o
 but this might also give some flat topped mountains - oops! 
 In the end I will go with clamping at the HightMapGeneration stage, 
 but only clamp the -ve values.  we will see what we get.
+
+#### Perception vs Reality!
+
+I can't believe how much I was incorrect in the above!  Just goes to shw that reality
+and our perception are quite different.
+* heightMultiplier was already in HeightMapSettings
+* MapGenerator only has one HeightMapSettings as I have not yet taken the new look to the full app!
+* MapPreview is the only one with two HeightMapSettings
+* As the only differences between the Island and Texture HeightMapSettings is the 
+NoiseSettings scale and seaGradient and the HeightMapSettings heightMultiplier, 
+perhaps a better implementation is MapGenerator and MapPreview will both use an array of HeightMapSettings
+then the presence of each one would generate a seperate HeightMap and they will be combined into one
+by addition for the GenerateCombinedheightMap() method
+
+At the same time as adding some compexity, I feel I should remove some superfluous stuff!
+* We can drop NormalizeMode as we only use Global anyway, and remove the test and any code that was not Global
+* The AnimationCurve heightCurve in HeightMapSettings is usually generating a range from 0 to 1, 
+so the minHeight is always 0f and maxHeight heightMultiplier(* 1f)!
+* We are replacing the falloff generation so that can go too!
+
+So first job is to clear the dross above and then do the new code, and add some proper TDD tests as we go!
 
 
