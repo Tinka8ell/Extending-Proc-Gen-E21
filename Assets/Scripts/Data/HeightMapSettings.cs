@@ -5,21 +5,21 @@ using System.Collections;
 public class HeightMapSettings : UpdatableData {
 
 	public NoiseSettings noiseSettings;
-
-	public bool useFalloff;
-
 	public float heightMultiplier;
+
+	public WeightedNoiseSettings[] weightedNoiseSettings;
+
 	public AnimationCurve heightCurve;
 
 	public float minHeight {
 		get {
-			return heightMultiplier * heightCurve.Evaluate (0);
+			return heightMultiplier * 0f;
 		}
 	}
 
 	public float maxHeight {
 		get {
-			return heightMultiplier * heightCurve.Evaluate (1);
+			return heightMultiplier * 1f;
 		}
 	}
 

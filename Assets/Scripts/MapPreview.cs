@@ -33,7 +33,6 @@ public class MapPreview : MonoBehaviour {
 
 		if (drawMode == DrawMode.IslandMap) {
 			NoiseSettings islandNoiseSettings = new NoiseSettings();
-			islandNoiseSettings.normalizeMode = islandHeightSettings.noiseSettings.normalizeMode;
 			islandNoiseSettings.scale = islandHeightSettings.noiseSettings.scale / meshSettings.numVertsPerLine;
 			islandNoiseSettings.seaGradient = islandHeightSettings.noiseSettings.seaGradient;
 			islandNoiseSettings.octaves = islandHeightSettings.noiseSettings.octaves;
@@ -44,7 +43,6 @@ public class MapPreview : MonoBehaviour {
 
 			HeightMapSettings islandMapSettings = ScriptableObject.CreateInstance("HeightMapSettings") as HeightMapSettings;
 			islandMapSettings.noiseSettings = islandNoiseSettings;
-			islandMapSettings.useFalloff = islandHeightSettings.useFalloff;
 			islandMapSettings.heightMultiplier = islandHeightSettings.heightMultiplier;
 			islandMapSettings.heightCurve = islandHeightSettings.heightCurve;
 

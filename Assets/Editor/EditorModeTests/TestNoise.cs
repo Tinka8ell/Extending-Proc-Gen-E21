@@ -40,21 +40,18 @@ public class TestNoise : MonoBehaviour
     {
         // minimalNoiseSettings
         minimalNoiseSettings = new NoiseSettings();
-    	minimalNoiseSettings.normalizeMode = Noise.NormalizeMode.Global;
      	minimalNoiseSettings.octaves = 1;
     	minimalNoiseSettings.seed = 0;
     	minimalNoiseSettings.offset = new Vector2(0f, 0f);
 
         // textureNoiseSettings;
         textureNoiseSettings = new NoiseSettings();
-    	textureNoiseSettings.normalizeMode = Noise.NormalizeMode.Global;
      	// leave textureNoiseSettings.octaves at 6
     	textureNoiseSettings.seed = 0;
     	textureNoiseSettings.offset = new Vector2(0f, 0f);
 
         // islandNoiseSettings;
         islandNoiseSettings = new NoiseSettings();
-    	islandNoiseSettings.normalizeMode = Noise.NormalizeMode.Global;
      	// leave textureNoiseSettings.octaves at 6
     	islandNoiseSettings.scale = 2000;
     	islandNoiseSettings.seed = 0;
@@ -62,7 +59,6 @@ public class TestNoise : MonoBehaviour
 
         // deepIslandNoiseSettings;
         deepIslandNoiseSettings = new NoiseSettings();
-    	deepIslandNoiseSettings.normalizeMode = Noise.NormalizeMode.Global;
      	// leave textureNoiseSettings.octaves at 6
     	deepIslandNoiseSettings.scale = 2000;
     	deepIslandNoiseSettings.seed = 0;

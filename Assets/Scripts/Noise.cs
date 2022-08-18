@@ -3,8 +3,6 @@ using System.Collections;
 
 public static class Noise {
 
-	public enum NormalizeMode {Local, Global};
-
 	public static float[,] GenerateNoiseMap(
 			int mapWidth, int mapHeight, NoiseSettings settings, Vector2 sampleCentre) {
 		float[,] noiseMap = new float[mapWidth,mapHeight];
@@ -61,33 +59,21 @@ public static class Noise {
 				}
 				noiseMap [x, y] = noiseHeight;
 
-				if (settings.normalizeMode == NormalizeMode.Global) {
-					// old normalisation: float normalizedHeight = (noiseMap [x, y] + 1) / (maxPossibleHeight / 0.9f);
-					float height = noiseMap [x, y];
-					if (height < 0){
-						// modify any "sea" by the sea gradient (1 => no change!)
-						height *= seaGradient;
-					}
-					// now normalise
-					height = seaLevel + height / (maxPossibleHeight * 2f);
-					height = Mathf.Clamp (height, 0, 1);
-					noiseMap [x, y] = height;
+				// old normalisation: float normalizedHeight = (noiseMap [x, y] + 1) / (maxPossibleHeight / 0.9f);
+				float height = noiseMap [x, y];
+				if (height < 0){
+					// modify any "sea" by the sea gradient (1 => no change!)
+					height *= seaGradient;
 				}
+				// now normalise
+				height = seaLevel + height / (maxPossibleHeight * 2f);
+				height = Mathf.Clamp (height, 0, 1);
+				noiseMap [x, y] = height;
 			}
 		}
 
-		if (settings.normalizeMode == NormalizeMode.Global) {
-			maxLocalNoiseHeight = maxPossibleHeight;
-			minLocalNoiseHeight = 0;
-		}
-		
-		if (settings.normalizeMode == NormalizeMode.Local) {
-			for (int y = 0; y < mapHeight; y++) {
-				for (int x = 0; x < mapWidth; x++) {
-					noiseMap [x, y] = Mathf.InverseLerp (minLocalNoiseHeight, maxLocalNoiseHeight, noiseMap [x, y]);
-				}
-			}
-		}
+		maxLocalNoiseHeight = maxPossibleHeight;
+		minLocalNoiseHeight = 0;
 
 		return noiseMap;
 	}
@@ -95,9 +81,14 @@ public static class Noise {
 }
 
 [System.Serializable]
-public class NoiseSettings {
-	public Noise.NormalizeMode normalizeMode;
+public class WeightedNoiseSettings {
+	public NoiseSettings noiseSettings;
+	public float heightMultiplier;
 
+}
+
+[System.Serializable]
+public class NoiseSettings {
 	public float scale = 50;
 
 	public float seaGradient = 1;
