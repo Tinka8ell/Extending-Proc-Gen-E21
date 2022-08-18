@@ -32,8 +32,9 @@ public class MapPreview : MonoBehaviour {
 		HeightMap heightMap;
 
 		if (drawMode == DrawMode.IslandMap) {
+			int scale = meshSettings.numVertsPerLine;
 			NoiseSettings islandNoiseSettings = new NoiseSettings();
-			islandNoiseSettings.scale = islandHeightSettings.noiseSettings.scale / meshSettings.numVertsPerLine;
+			islandNoiseSettings.scale = islandHeightSettings.noiseSettings.scale / scale;
 			islandNoiseSettings.seaGradient = islandHeightSettings.noiseSettings.seaGradient;
 			islandNoiseSettings.octaves = islandHeightSettings.noiseSettings.octaves;
 			islandNoiseSettings.persistance = islandHeightSettings.noiseSettings.persistance;
@@ -43,26 +44,30 @@ public class MapPreview : MonoBehaviour {
 
 			HeightMapSettings islandMapSettings = ScriptableObject.CreateInstance("HeightMapSettings") as HeightMapSettings;
 			islandMapSettings.noiseSettings = islandNoiseSettings;
-			islandMapSettings.heightMultiplier = islandHeightSettings.heightMultiplier;
+			islandMapSettings.heightMultiplier = islandHeightSettings.heightMultiplier/ scale;
 			islandMapSettings.heightCurve = islandHeightSettings.heightCurve;
 
 			heightMap = HeightMapGenerator.GenerateHeightMap(
 				meshSettings.numVertsPerLine, islandMapSettings, Vector2.zero);
 			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
+	        Debug.LogFormat("IslandMap: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
 		} else if (drawMode == DrawMode.IslandMesh) {
 			heightMap = HeightMapGenerator.GenerateHeightMap(
 				meshSettings.numVertsPerLine, islandHeightSettings, Vector2.zero);
+	        Debug.LogFormat("IslandMesh: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
 		} else if (drawMode == DrawMode.TerrainMesh) {
 			heightMap = HeightMapGenerator.GenerateHeightMap(
 				meshSettings.numVertsPerLine, terrainHeightSettings, Vector2.zero);
+	        Debug.LogFormat("TerrainMesh: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
 		} else if (drawMode == DrawMode.CombinedMesh) {
 			heightMap = HeightMapGenerator.GenerateCombinedHeightMap(
 				meshSettings.numVertsPerLine, islandHeightSettings, terrainHeightSettings, ratio, Vector2.zero);
+	        Debug.LogFormat("CombinedMesh: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh (heightMap.values,meshSettings, editorPreviewLOD));
 		} else if (drawMode == DrawMode.FalloffMap) {

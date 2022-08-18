@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 1016
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Inspector
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 77
+  controlID: 61
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -68,8 +68,8 @@ MonoBehaviour:
     y: 0
     width: 453
     height: 966
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 20
+  controlID: 81
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 21
+  controlID: 82
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -306,7 +306,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
   m_Spl:
-    ID: 395
+    ID: 1673
     splitterInitialOffset: 0
     currentActiveSplitter: -1
     realSizes:
@@ -458,7 +458,7 @@ MonoBehaviour:
       name: Proc Gen E02
       fullName: Proc Gen E02
       resultStatus: 1
-      duration: 0.2237099
+      duration: 0.2898276
       messages: 
       output: 
       stacktrace: 
@@ -475,7 +475,7 @@ MonoBehaviour:
       name: EditorModeTests.dll
       fullName: /home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/EditorModeTests.dll
       resultStatus: 1
-      duration: 0.1114326
+      duration: 0.1466451
       messages: 
       output: 
       stacktrace: 
@@ -491,7 +491,7 @@ MonoBehaviour:
       name: FirstTest
       fullName: FirstTest
       resultStatus: 1
-      duration: 0.0664771
+      duration: 0.0572055
       messages: 
       output: 
       stacktrace: 
@@ -508,7 +508,7 @@ MonoBehaviour:
       name: T00_PassingTest
       fullName: FirstTest.T00_PassingTest
       resultStatus: 1
-      duration: 0.0448972
+      duration: 0.0322649
       messages: 
       output: 
       stacktrace: 
@@ -525,7 +525,7 @@ MonoBehaviour:
       name: T01_X2Y0
       fullName: FirstTest.T01_X2Y0
       resultStatus: 1
-      duration: 0.0023764
+      duration: 0.0010975
       messages: 
       output: 
       stacktrace: 
@@ -542,7 +542,7 @@ MonoBehaviour:
       name: T02_X0Y4
       fullName: FirstTest.T02_X0Y4
       resultStatus: 1
-      duration: 0.0012011
+      duration: 0.0002876
       messages: 
       output: 
       stacktrace: 
@@ -559,7 +559,7 @@ MonoBehaviour:
       name: T03_X1Y1
       fullName: FirstTest.T03_X1Y1
       resultStatus: 1
-      duration: 0.0005134
+      duration: 0.0002154
       messages: 
       output: 
       stacktrace: 
@@ -576,7 +576,7 @@ MonoBehaviour:
       name: T04_Xn1Y9
       fullName: FirstTest.T04_Xn1Y9
       resultStatus: 1
-      duration: 0.000286
+      duration: 0.0001726
       messages: 
       output: 
       stacktrace: 
@@ -593,7 +593,7 @@ MonoBehaviour:
       name: T05_Xn2Y16
       fullName: FirstTest.T05_Xn2Y16
       resultStatus: 1
-      duration: 0.0002291
+      duration: 0.0001743
       messages: 
       output: 
       stacktrace: 
@@ -610,7 +610,7 @@ MonoBehaviour:
       name: T06_X3Y1
       fullName: FirstTest.T06_X3Y1
       resultStatus: 1
-      duration: 0.0002162
+      duration: 0.0001878
       messages: 
       output: 
       stacktrace: 
@@ -627,7 +627,7 @@ MonoBehaviour:
       name: TestNoise
       fullName: TestNoise
       resultStatus: 1
-      duration: 0.1043878
+      duration: 0.1001946
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -649,9 +649,9 @@ MonoBehaviour:
       name: CheckGenerateNoiseMapIsland
       fullName: TestNoise.CheckGenerateNoiseMapIsland
       resultStatus: 1
-      duration: 0.0308398
+      duration: 0.0403724
       messages: 
-      output: 'Min: 0.544459, Max: 0.5685703
+      output: 'Min: 0.08891807, Max: 0.1371406
 
 '
       stacktrace: 
@@ -668,9 +668,9 @@ MonoBehaviour:
       name: CheckGenerateNoiseMapIslandPlus
       fullName: TestNoise.CheckGenerateNoiseMapIslandPlus
       resultStatus: 1
-      duration: 0.0027134
+      duration: 0.00291
       messages: 
-      output: 'Min: 0.544459, Max: 0.5685703
+      output: 'Min: 0.08891807, Max: 0.1371406
 
 '
       stacktrace: 
@@ -687,9 +687,9 @@ MonoBehaviour:
       name: CheckGenerateNoiseMapMinimal
       fullName: TestNoise.CheckGenerateNoiseMapMinimal
       resultStatus: 1
-      duration: 0.0018248
+      duration: 0.0012607
       messages: 
-      output: 'Min: 0.2645173, Max: 0.9219349
+      output: 'Min: -0.4709654, Max: 0.8438698
 
 '
       stacktrace: 
@@ -706,9 +706,9 @@ MonoBehaviour:
       name: CheckGenerateNoiseMapTexture
       fullName: TestNoise.CheckGenerateNoiseMapTexture
       resultStatus: 1
-      duration: 0.0036935
+      duration: 0.0027519
       messages: 
-      output: 'Min: 0.3190255, Max: 0.769053
+      output: 'Min: -0.361949, Max: 0.5381061
 
 '
       stacktrace: 
@@ -720,7 +720,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1009
       parentUniqueId: EditorModeTests.dll/[EditorModeTests][TestNoise][suite]
-    m_ResultText: 'TestNoise (0.104s)
+    m_ResultText: 'TestNoise (0.100s)
 
       ---
 
@@ -814,9 +814,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 565a0000
-    m_LastClickedID: 23126
-    m_ExpandedIDs: 000000003e5a0000405a0000425a000000ca9a3b
+    m_SelectedIDs: 5c5a0000
+    m_LastClickedID: 23132
+    m_ExpandedIDs: 00000000465a0000485a00004a5a000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -844,7 +844,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003e5a0000405a0000425a0000
+    m_ExpandedIDs: 00000000465a0000485a00004a5a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -974,9 +974,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: f4590000
-      m_LastClickedID: 0
-      m_ExpandedIDs: 38fbffff
+      m_SelectedIDs: 685c0000
+      m_LastClickedID: 23656
+      m_ExpandedIDs: c2efffffe8efffff06f1ffff38fbffff5e59000082590000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -992,7 +992,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 0}
+        m_ClientGUIView: {fileID: 4}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -1226,9 +1226,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -49.57734, y: -32.31964, z: 132.19753}
+    m_Target: {x: -67.120514, y: -133.60251, z: 312.998}
     speed: 2
-    m_Value: {x: -49.57734, y: -32.31964, z: 132.19753}
+    m_Value: {x: -67.120514, y: -133.60251, z: 312.998}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1275,13 +1275,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.33024818, y: 0.14559668, z: -0.051634237, w: -0.93119735}
+    m_Target: {x: -0.19914073, y: 0.08865313, z: -0.018083867, w: -0.97582173}
     speed: 2
-    m_Value: {x: -0.33024818, y: 0.14559668, z: -0.051634233, w: -0.9311973}
+    m_Value: {x: -0.1991336, y: 0.08864996, z: -0.01808322, w: -0.97578686}
   m_Size:
-    m_Target: 166.41
+    m_Target: 236.17255
     speed: 2
-    m_Value: 166.41
+    m_Value: 236.17255
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1368,7 +1368,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1

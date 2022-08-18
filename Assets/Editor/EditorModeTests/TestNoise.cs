@@ -124,7 +124,6 @@ public class TestNoise : MonoBehaviour
 				}
             }
         }
-        Debug.LogFormat("Min: {0}, Max: {1}", minNoiseHeight, maxNoiseHeight);
         Assert.GreaterOrEqual(
             minNoiseHeight, minHeight, 
             "Min Height {0} should be greater than minimal min height {1}", 

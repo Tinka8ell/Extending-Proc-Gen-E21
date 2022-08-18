@@ -18,6 +18,7 @@ public static class HeightMapGenerator {
 		}
 		float minValue = islandHeightMap.minValue * ratio + terrainHeightMap.minValue * terrainRatio;
 		float maxValue = islandHeightMap.maxValue * ratio + terrainHeightMap.maxValue * terrainRatio;
+        Debug.LogFormat("GenerateCombinedHeightMap: Min = {0}, Max = {1}", minValue, maxValue);
 		return new HeightMap (values, minValue, maxValue);
 	}
 
@@ -32,16 +33,33 @@ public static class HeightMapGenerator {
 
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				values [i, j] *= heightCurve_threadsafe.Evaluate (values [i, j]) * settings.heightMultiplier;
+				// never understood this bit!
+				//   values [i, j] *= heightCurve_threadsafe.Evaluate (values [i, j]) * settings.heightMultiplier;
+				// for now take out the heightCurve ...
+				//   values [i, j] *= settings.heightMultiplier;
+				float value = values [i, j];
+				// move -1 to 1 range to 0 to 1
+				value = (value + 1f) / 2f;
+				// apply heightCurve
+				value = heightCurve_threadsafe.Evaluate(value);
+				// move back to -1 to 1 range
+				value = value * 2f - 1f;
+				// limit sea depth to -1
+				value = Mathf.Clamp(value, -1f, 2f); // should be no where near 2, but might be a smidge over 1
+				// apply heightMultiplier
+				value *= settings.heightMultiplier;
 
-				if (values [i, j] > maxValue) {
-					maxValue = values [i, j];
+				if (value > maxValue) {
+					maxValue = value;
 				}
-				if (values [i, j] < minValue) {
-					minValue = values [i, j];
+				if (value < minValue) {
+					minValue = value;
 				}
+				values [i, j] = value;
 			}
 		}
+
+        Debug.LogFormat("GenerateHeightMap: Actual: Min = {0}, Max = {1}", minValue, maxValue);
 
 		maxValue = settings.heightMultiplier;
 		minValue = - maxValue;
