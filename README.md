@@ -10,6 +10,8 @@ I am looking to create a "Survival" RPG based on generated islands.
 2. Use perlin noise to make islands
   * Kinda worked, but then they were hard to find and looked too low again!
 3. Change the islandifying parameters
+  * Better but th coasts are too steep!
+4. Sort out the coasts 
 
 ### Islands are the wrong scale
 
@@ -84,5 +86,13 @@ so the minHeight is always 0f and maxHeight heightMultiplier(* 1f)!
 * We are replacing the falloff generation so that can go too!
 
 So first job is to clear the dross above and then do the new code, and add some proper TDD tests as we go!
+
+### Sort out the coasts
+
+The statndard annimation cure is intended to do the smoothingm but when applying it to the full range, 
+from sea to land, it does the opposite and makes the coasts steeper.  Solution is to use the curve for
+just the land and then look at doing the same for twice the range going into the sea as we know 
+the sea is likely to be at least twice as deep as the land is high!.  This may need to be modified for
+the sea gradient as well as this extends the maximun depth of the sea.
 
 
