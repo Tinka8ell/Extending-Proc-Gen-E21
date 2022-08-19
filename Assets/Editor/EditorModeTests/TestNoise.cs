@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 
 [TestFixture]
-public class TestNoise : MonoBehaviour
+public class TestNoise
 {
     // [Test]
     public void FrameworkForCheck(){
