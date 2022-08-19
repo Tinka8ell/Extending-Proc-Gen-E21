@@ -5,13 +5,15 @@ I am looking to create a "Survival" RPG based on generated islands.
 
 ## What to change and why
 
-1. Islands are the wrong scale
-  * Did not realise this until I added some scaling blobs which made visible how low they were!
-2. Use perlin noise to make islands
-  * Kinda worked, but then they were hard to find and looked too low again!
-3. Change the islandifying parameters
-  * Better but th coasts are too steep!
-4. Sort out the coasts 
+1. [Islands are the wrong scale](#islands-are-the-wrong-scale)
+   * Did not realise this until I added some scaling blobs which made visible how low they were!
+1. [Use perlin noise to make islands](#use-perlin-noise-to-make-islands)
+   * Kinda worked, but then they were hard to find and looked too low again!
+1. [Change the islandifying parameters](#change-the-islandifying-parameters)
+   * Better but th coasts are too steep!
+1. [Sort out the coasts](#sort-out-the-coasts)
+
+## The details ...
 
 ### Islands are the wrong scale
 
