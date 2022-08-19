@@ -38,12 +38,19 @@ public static class HeightMapGenerator {
 				// for now take out the heightCurve ...
 				//   values [i, j] *= settings.heightMultiplier;
 				float value = values [i, j];
-				// move -1 to 1 range to 0 to 1
-				value = (value + 1f) / 2f;
-				// apply heightCurve
-				value = heightCurve_threadsafe.Evaluate(value);
-				// move back to -1 to 1 range
-				value = value * 2f - 1f;
+				if (value < 0) {
+					// for sea apply curve over twice depth
+					// move -2 to 0 range to 0 to 1
+					value = 1f + value / 2f;
+					// apply heightCurve
+					value = heightCurve_threadsafe.Evaluate(value);
+					// move back to -2 to 0 range
+					value = (value - 1f) * 2f;
+				} else {
+					// for land apply curve over full height
+					// apply heightCurve
+					value = heightCurve_threadsafe.Evaluate(value);
+				}
 				// limit sea depth to -1
 				value = Mathf.Clamp(value, -1f, 2f); // should be no where near 2, but might be a smidge over 1
 				// apply heightMultiplier

@@ -12,6 +12,8 @@ I am looking to create a "Survival" RPG based on generated islands.
 1. [Change the islandifying parameters](#change-the-islandifying-parameters)
    * Better but th coasts are too steep!
 1. [Sort out the coasts](#sort-out-the-coasts)
+   * Looks better in preview mode, but not when we start the game
+1. [Need to get preview / map and game to match](#need-to-get-preview-/-map-and-game-to-match)
 
 ## The details ...
 
@@ -97,4 +99,9 @@ just the land and then look at doing the same for twice the range going into the
 the sea is likely to be at least twice as deep as the land is high!.  This may need to be modified for
 the sea gradient as well as this extends the maximun depth of the sea.
 
+### Need to get preview / map and game to match
 
+The game mode start location does not match either island or terrain mesh views in the Map Preview.
+The island map preview does not seem to match the islan view either so we can't use it to "move" to
+a better location.  On top of this we have not yet implemented the combined map generation in the game mode.
+For that matter we have not made it more generic to use the array idea.  So much to do, but where to start?
