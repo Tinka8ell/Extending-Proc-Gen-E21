@@ -102,6 +102,19 @@ the sea gradient as well as this extends the maximun depth of the sea.
 ### Need to get preview / map and game to match
 
 The game mode start location does not match either island or terrain mesh views in the Map Preview.
-The island map preview does not seem to match the islan view either so we can't use it to "move" to
+The island map preview does not seem to match the island view either so we can't use it to "move" to
 a better location.  On top of this we have not yet implemented the combined map generation in the game mode.
 For that matter we have not made it more generic to use the array idea.  So much to do, but where to start?
+
+#### A Plan!
+
+* KISS - so lets simplify
+  * Move combined to use the array, not that we plan to do more than 2, but so we can easily do less
+  * Combined, will become just generate, and we will start with a simple (zero height) map and add any that we generate
+  * The old generate becomes partial, and as each partial will assume the min = - max so combined can just add these
+  * Also make sure they all use one size rather than width and height
+* Add a sample location for the Preview so we can move them arround more easily
+* Also work out whether noise sample centre works the same way
+* May also consider any changes so value\[x, y\] relates to cordinate (x, y) and Vector3(x, value\[x, y\], y)
+* Finally consider a find an island method, where we start at (0, 0) and go west in chunks till we find land, 
+and then back east 1 chunk and move west to find it's shore?  Just a thought.
