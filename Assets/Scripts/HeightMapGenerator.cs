@@ -24,13 +24,8 @@ public static class HeightMapGenerator {
 			}
 		}
 
-        Debug.LogFormat("GenerateCombinedHeightMap: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
+        // Debug.LogFormat("GenerateHeightMap: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 		return heightMap;
-	}
-
-	public static HeightMap TemporaryGenerateHeightMap(
-			int size, HeightMapSettings settings, Vector2 sampleCentre) {
-		return GeneratePartialHeightMap(size, settings, sampleCentre, 0);
 	}
 
 	public static HeightMap GeneratePartialHeightMap(
@@ -44,10 +39,6 @@ public static class HeightMapGenerator {
 
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				// never understood this bit!
-				//   values [i, j] *= heightCurve_threadsafe.Evaluate (values [i, j]) * settings.heightMultiplier;
-				// for now take out the heightCurve ...
-				//   values [i, j] *= settings.heightMultiplier;
 				float value = values [i, j];
 				if (value < 0) {
 					// for sea apply curve over twice depth
@@ -77,7 +68,7 @@ public static class HeightMapGenerator {
 			}
 		}
 
-        Debug.LogFormat("GeneratePartialHeightMap: Actual: Min = {0}, Max = {1}", minValue, maxValue);
+        // Debug.LogFormat("GeneratePartialHeightMap: Actual: Min = {0}, Max = {1}", minValue, maxValue);
 
 		maxValue = settings.weightedNoiseSettings[index].heightMultiplier;
 		minValue = - maxValue;

@@ -50,8 +50,6 @@ public class TestHeightmapGenerator
 
         // minimalHeightMapSettings
         minimalHeightMapSettings = ScriptableObject.CreateInstance("HeightMapSettings") as HeightMapSettings;
-        minimalHeightMapSettings.noiseSettings = minimalNoiseSettings;
-        minimalHeightMapSettings.heightMultiplier = 50;
         minimalHeightMapSettings.heightCurve = heightCurve;
         minimalHeightMapSettings.weightedNoiseSettings = new WeightedNoiseSettings[1];
         minimalHeightMapSettings.weightedNoiseSettings[0] = minimalWeightedNoiseSettings;
@@ -128,21 +126,21 @@ public class TestHeightmapGenerator
             }
         }
         Assert.GreaterOrEqual(
-            minHeight, -1f * minimalHeightMapSettings.heightMultiplier, 
+            minHeight, -1f * minimalHeightMapSettings.weightedNoiseSettings[0].heightMultiplier, 
             "Min Height {0} should be greater than minimal min height {1}", 
-            minHeight, -1f * minimalHeightMapSettings.heightMultiplier);
+            minHeight, -1f * minimalHeightMapSettings.weightedNoiseSettings[0].heightMultiplier);
         Assert.LessOrEqual(
-            maxHeight, 1f * minimalHeightMapSettings.heightMultiplier, 
+            maxHeight, 1f * minimalHeightMapSettings.weightedNoiseSettings[0].heightMultiplier, 
             "Max Height {0} should be less than minimal max height {1}", 
-            maxHeight, 1f * minimalHeightMapSettings.heightMultiplier);
+            maxHeight, 1f * minimalHeightMapSettings.weightedNoiseSettings[0].heightMultiplier);
         Assert.Less(
-            minHeight, 1f * minimalHeightMapSettings.heightMultiplier, 
+            minHeight, 1f * minimalHeightMapSettings.weightedNoiseSettings[0].heightMultiplier, 
             "Min Height {0} should be less than minimal max height {1}", 
-            minHeight, 1f * minimalHeightMapSettings.heightMultiplier);
+            minHeight, 1f * minimalHeightMapSettings.weightedNoiseSettings[0].heightMultiplier);
         Assert.Greater(
-            maxHeight, -1f * minimalHeightMapSettings.heightMultiplier, 
+            maxHeight, -1f * minimalHeightMapSettings.weightedNoiseSettings[0].heightMultiplier, 
             "Max Height {0} should be greater than minimal min height {1}", 
-            maxHeight, -1f * minimalHeightMapSettings.heightMultiplier);
+            maxHeight, -1f * minimalHeightMapSettings.weightedNoiseSettings[0].heightMultiplier);
     }
 
 }

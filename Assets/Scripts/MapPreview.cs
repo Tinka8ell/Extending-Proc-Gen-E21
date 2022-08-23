@@ -8,10 +8,11 @@ public class MapPreview : MonoBehaviour {
 	public MeshRenderer meshRenderer;
 
 
-	public enum DrawMode {IslandMap, IslandMesh, TerrainMesh};
+	public enum DrawMode {IslandMap, IslandMesh, TerrainMesh, CombinedMesh};
 	public DrawMode drawMode;
 
 	public MeshSettings meshSettings;
+	public HeightMapSettings combinedHeightSettings;
 	public HeightMapSettings islandHeightSettings;
 	public HeightMapSettings terrainHeightSettings;
 	public TextureData textureData;
@@ -32,21 +33,19 @@ public class MapPreview : MonoBehaviour {
 		if (drawMode == DrawMode.IslandMap) {
 			int scale = meshSettings.numVertsPerLine;
 			NoiseSettings islandNoiseSettings = new NoiseSettings();
-			islandNoiseSettings.scale = islandHeightSettings.noiseSettings.scale / scale;
-			islandNoiseSettings.seaGradient = islandHeightSettings.noiseSettings.seaGradient;
-			islandNoiseSettings.octaves = islandHeightSettings.noiseSettings.octaves;
-			islandNoiseSettings.persistance = islandHeightSettings.noiseSettings.persistance;
-			islandNoiseSettings.lacunarity = islandHeightSettings.noiseSettings.lacunarity;
-			islandNoiseSettings.seed = islandHeightSettings.noiseSettings.seed;
-			islandNoiseSettings.offset = islandHeightSettings.noiseSettings.offset - new Vector2(meshSettings.numVertsPerLine / 2, meshSettings.numVertsPerLine / 2);
+			islandNoiseSettings.scale = islandHeightSettings.weightedNoiseSettings[0].noiseSettings.scale / scale;
+			islandNoiseSettings.seaGradient = islandHeightSettings.weightedNoiseSettings[0].noiseSettings.seaGradient;
+			islandNoiseSettings.octaves = islandHeightSettings.weightedNoiseSettings[0].noiseSettings.octaves;
+			islandNoiseSettings.persistance = islandHeightSettings.weightedNoiseSettings[0].noiseSettings.persistance;
+			islandNoiseSettings.lacunarity = islandHeightSettings.weightedNoiseSettings[0].noiseSettings.lacunarity;
+			islandNoiseSettings.seed = islandHeightSettings.weightedNoiseSettings[0].noiseSettings.seed;
+			islandNoiseSettings.offset = islandHeightSettings.weightedNoiseSettings[0].noiseSettings.offset - new Vector2(meshSettings.numVertsPerLine / 2, meshSettings.numVertsPerLine / 2);
 
 			WeightedNoiseSettings weightedIslandNoiseSettings = new WeightedNoiseSettings();
 			weightedIslandNoiseSettings.noiseSettings = islandNoiseSettings;
-			weightedIslandNoiseSettings.heightMultiplier = islandHeightSettings.heightMultiplier/ scale;
+			weightedIslandNoiseSettings.heightMultiplier = islandHeightSettings.weightedNoiseSettings[0].heightMultiplier/ scale;
 
 			HeightMapSettings islandMapSettings = ScriptableObject.CreateInstance("HeightMapSettings") as HeightMapSettings;
-			islandMapSettings.noiseSettings = islandNoiseSettings;
-			islandMapSettings.heightMultiplier = islandHeightSettings.heightMultiplier/ scale;
 			islandMapSettings.heightCurve = islandHeightSettings.heightCurve;
 			islandMapSettings.weightedNoiseSettings = new WeightedNoiseSettings[1];
 			islandMapSettings.weightedNoiseSettings[0] = weightedIslandNoiseSettings;
@@ -54,18 +53,24 @@ public class MapPreview : MonoBehaviour {
 			heightMap = HeightMapGenerator.GenerateHeightMap(
 				meshSettings.numVertsPerLine, islandMapSettings, Vector2.zero);
 			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
-	        Debug.LogFormat("IslandMap: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
+	        // Debug.LogFormat("IslandMap: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
 		} else if (drawMode == DrawMode.IslandMesh) {
 			heightMap = HeightMapGenerator.GenerateHeightMap(
 				meshSettings.numVertsPerLine, islandHeightSettings, Vector2.zero);
-	        Debug.LogFormat("IslandMesh: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
+	        // Debug.LogFormat("IslandMesh: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
 		} else if (drawMode == DrawMode.TerrainMesh) {
 			heightMap = HeightMapGenerator.GenerateHeightMap(
 				meshSettings.numVertsPerLine, terrainHeightSettings, Vector2.zero);
-	        Debug.LogFormat("TerrainMesh: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
+	        // Debug.LogFormat("TerrainMesh: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
+			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
+			DrawMesh (MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
+		} else if (drawMode == DrawMode.CombinedMesh) {
+			heightMap = HeightMapGenerator.GenerateHeightMap(
+				meshSettings.numVertsPerLine, combinedHeightSettings, Vector2.zero);
+	        // Debug.LogFormat("TerrainMesh: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
 		}
