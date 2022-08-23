@@ -5,8 +5,8 @@ using UnityEngine;
 public static class HeightMapGenerator {
 
 	
-	public static HeightMap GenerateCombinedHeightMap(
-			int size, HeightMapSettings settings, float ratio, Vector2 sampleCentre) {
+	public static HeightMap GenerateHeightMap(
+			int size, HeightMapSettings settings, Vector2 sampleCentre) {
 		HeightMap heightMap = new HeightMap(new float[size, size], 0, 0);
 		for(int index = 0; index < settings.weightedNoiseSettings.Length; index++){
 			if (settings.weightedNoiseSettings[index].noiseSettings != null){
@@ -28,7 +28,7 @@ public static class HeightMapGenerator {
 		return heightMap;
 	}
 
-	public static HeightMap GenerateHeightMap(
+	public static HeightMap TemporaryGenerateHeightMap(
 			int size, HeightMapSettings settings, Vector2 sampleCentre) {
 		return GeneratePartialHeightMap(size, settings, sampleCentre, 0);
 	}
