@@ -66,7 +66,7 @@ public class MapPreview : MonoBehaviour {
 			DrawMesh (MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
 		} else if (drawMode == DrawMode.CombinedMesh) {
 			heightMap = HeightMapGenerator.GenerateCombinedHeightMap(
-				meshSettings.numVertsPerLine, islandHeightSettings, terrainHeightSettings, ratio, Vector2.zero);
+				meshSettings.numVertsPerLine, islandHeightSettings, ratio, Vector2.zero);
 	        Debug.LogFormat("CombinedMesh: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh (heightMap.values,meshSettings, editorPreviewLOD));

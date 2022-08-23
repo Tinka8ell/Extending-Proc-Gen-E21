@@ -6,26 +6,23 @@ public static class HeightMapGenerator {
 
 	
 	public static HeightMap GenerateCombinedHeightMap(
-			int size, HeightMapSettings islandSettings, HeightMapSettings terrainSettings, float ratio, Vector2 sampleCentre) {
+			int size, HeightMapSettings settings, float ratio, Vector2 sampleCentre) {
 		HeightMap heightMap = new HeightMap(new float[size, size], 0, 0);
-		HeightMap islandHeightMap = GenerateHeightMap(size, islandSettings, sampleCentre);
-		HeightMap terrainHeightMap = GenerateHeightMap(size, terrainSettings, sampleCentre);
+		for(int index = 0; index < settings.weightedNoiseSettings.Length; index++){
+			if (settings.weightedNoiseSettings[index].noiseSettings != null){
+				if (settings.weightedNoiseSettings[index].heightMultiplier > 0){
+					HeightMap partialHeightMap = GeneratePartialHeightMap(size, settings, sampleCentre, index);
 
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
-				heightMap.values [i, j] += islandHeightMap.values [i, j];
+					for (int i = 0; i < size; i++) {
+						for (int j = 0; j < size; j++) {
+							heightMap.values [i, j] += partialHeightMap.values [i, j];
+						}
+					}
+					heightMap.minValue += partialHeightMap.minValue;
+					heightMap.maxValue += partialHeightMap.maxValue;
+				}
 			}
 		}
-		heightMap.minValue += islandHeightMap.minValue;
-		heightMap.maxValue += islandHeightMap.maxValue;
-
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
-				heightMap.values [i, j] += terrainHeightMap.values [i, j];
-			}
-		}
-		heightMap.minValue += terrainHeightMap.minValue;
-		heightMap.maxValue += terrainHeightMap.maxValue;
 
         Debug.LogFormat("GenerateCombinedHeightMap: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 		return heightMap;
