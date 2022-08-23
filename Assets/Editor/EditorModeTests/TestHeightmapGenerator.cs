@@ -30,6 +30,8 @@ public class TestHeightmapGenerator
  
     public NoiseSettings minimalNoiseSettings;
 
+    public WeightedNoiseSettings minimalWeightedNoiseSettings;
+
     public HeightMapSettings minimalHeightMapSettings;
 
     [OneTimeSetUp]
@@ -41,12 +43,18 @@ public class TestHeightmapGenerator
     	minimalNoiseSettings.seed = 0;
     	minimalNoiseSettings.offset = new Vector2(0f, 0f);
 
+        // minimalWeightedNoiseSettings
+        minimalWeightedNoiseSettings = new WeightedNoiseSettings();
+        minimalWeightedNoiseSettings.noiseSettings = minimalNoiseSettings;
+        minimalWeightedNoiseSettings.heightMultiplier = 50;
+
         // minimalHeightMapSettings
         minimalHeightMapSettings = ScriptableObject.CreateInstance("HeightMapSettings") as HeightMapSettings;
         minimalHeightMapSettings.noiseSettings = minimalNoiseSettings;
         minimalHeightMapSettings.heightMultiplier = 50;
         minimalHeightMapSettings.heightCurve = heightCurve;
-
+        minimalHeightMapSettings.weightedNoiseSettings = new WeightedNoiseSettings[1];
+        minimalHeightMapSettings.weightedNoiseSettings[0] = minimalWeightedNoiseSettings;
     }
 
     [Test]
