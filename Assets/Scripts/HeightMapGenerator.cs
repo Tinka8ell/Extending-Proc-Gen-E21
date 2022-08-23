@@ -7,24 +7,38 @@ public static class HeightMapGenerator {
 	
 	public static HeightMap GenerateCombinedHeightMap(
 			int size, HeightMapSettings islandSettings, HeightMapSettings terrainSettings, float ratio, Vector2 sampleCentre) {
+		HeightMap heightMap = new HeightMap(new float[size, size], 0, 0);
 		HeightMap islandHeightMap = GenerateHeightMap(size, islandSettings, sampleCentre);
 		HeightMap terrainHeightMap = GenerateHeightMap(size, terrainSettings, sampleCentre);
-		float terrainRatio = 1 - ratio;
-		float[,] values = new float[size, size];
+
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				values [i, j] = islandHeightMap.values [i, j] * ratio + terrainHeightMap.values [i, j] * terrainRatio;
+				heightMap.values [i, j] += islandHeightMap.values [i, j];
 			}
 		}
-		float minValue = islandHeightMap.minValue * ratio + terrainHeightMap.minValue * terrainRatio;
-		float maxValue = islandHeightMap.maxValue * ratio + terrainHeightMap.maxValue * terrainRatio;
-        Debug.LogFormat("GenerateCombinedHeightMap: Min = {0}, Max = {1}", minValue, maxValue);
-		return new HeightMap (values, minValue, maxValue);
+		heightMap.minValue += islandHeightMap.minValue;
+		heightMap.maxValue += islandHeightMap.maxValue;
+
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				heightMap.values [i, j] += terrainHeightMap.values [i, j];
+			}
+		}
+		heightMap.minValue += terrainHeightMap.minValue;
+		heightMap.maxValue += terrainHeightMap.maxValue;
+
+        Debug.LogFormat("GenerateCombinedHeightMap: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
+		return heightMap;
 	}
 
 	public static HeightMap GenerateHeightMap(
 			int size, HeightMapSettings settings, Vector2 sampleCentre) {
-		float[,] values = Noise.GenerateNoiseMap (size, settings.noiseSettings, sampleCentre);
+		return GeneratePartialHeightMap(size, settings, sampleCentre, 0);
+	}
+
+	public static HeightMap GeneratePartialHeightMap(
+			int size, HeightMapSettings settings, Vector2 sampleCentre, int index=0) {
+		float[,] values = Noise.GenerateNoiseMap (size, settings.weightedNoiseSettings[index].noiseSettings, sampleCentre);
 
 		AnimationCurve heightCurve_threadsafe = new AnimationCurve (settings.heightCurve.keys);
 
@@ -54,7 +68,7 @@ public static class HeightMapGenerator {
 				// limit sea depth to -1
 				value = Mathf.Clamp(value, -1f, 2f); // should be no where near 2, but might be a smidge over 1
 				// apply heightMultiplier
-				value *= settings.heightMultiplier;
+				value *= settings.weightedNoiseSettings[index].heightMultiplier;
 
 				if (value > maxValue) {
 					maxValue = value;
@@ -66,9 +80,9 @@ public static class HeightMapGenerator {
 			}
 		}
 
-        Debug.LogFormat("GenerateHeightMap: Actual: Min = {0}, Max = {1}", minValue, maxValue);
+        Debug.LogFormat("GeneratePartialHeightMap: Actual: Min = {0}, Max = {1}", minValue, maxValue);
 
-		maxValue = settings.heightMultiplier;
+		maxValue = settings.weightedNoiseSettings[index].heightMultiplier;
 		minValue = - maxValue;
 
 		return new HeightMap (values, minValue, maxValue);
@@ -77,9 +91,9 @@ public static class HeightMapGenerator {
 }
 
 public struct HeightMap {
-	public readonly float[,] values;
-	public readonly float minValue;
-	public readonly float maxValue;
+	public float[,] values;
+	public float minValue;
+	public float maxValue;
 
 	public HeightMap (float[,] values, float minValue, float maxValue)
 	{
