@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 53
+  controlID: 64
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -68,8 +68,8 @@ MonoBehaviour:
     y: 0
     width: 453
     height: 966
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -95,8 +95,8 @@ MonoBehaviour:
     y: 0
     width: 363
     height: 573
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 20
+  controlID: 54
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 21
+  controlID: 55
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -269,8 +269,8 @@ MonoBehaviour:
     y: 0
     width: 1104
     height: 573
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -306,7 +306,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
   m_Spl:
-    ID: 259
+    ID: 561
     splitterInitialOffset: 0
     currentActiveSplitter: -1
     realSizes:
@@ -458,7 +458,7 @@ MonoBehaviour:
       name: Proc Gen E02
       fullName: Proc Gen E02
       resultStatus: 1
-      duration: 0.2013361
+      duration: 0.1974209
       messages: 
       output: 
       stacktrace: 
@@ -475,7 +475,7 @@ MonoBehaviour:
       name: EditorModeTests.dll
       fullName: /home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/EditorModeTests.dll
       resultStatus: 1
-      duration: 0.0858078
+      duration: 0.0649997
       messages: 
       output: 
       stacktrace: 
@@ -627,7 +627,7 @@ MonoBehaviour:
       name: TestHeightmapGenerator
       fullName: TestHeightmapGenerator
       resultStatus: 1
-      duration: 0.0822575
+      duration: 0.0600769
       messages: 
       output: 
       stacktrace: 
@@ -644,7 +644,7 @@ MonoBehaviour:
       name: CheckAnimationCurve
       fullName: TestHeightmapGenerator.CheckAnimationCurve
       resultStatus: 1
-      duration: 0.039988
+      duration: 0.0265232
       messages: 
       output: 
       stacktrace: 
@@ -661,9 +661,12 @@ MonoBehaviour:
       name: CheckGenerateHeightMapMinimal
       fullName: TestHeightmapGenerator.CheckGenerateHeightMapMinimal
       resultStatus: 1
-      duration: 0.0033348
+      duration: 0.006896
       messages: 
-      output: 'GenerateHeightMap: Actual: Min = 0, Max = 0
+      output: 'GeneratePartialHeightMap: Actual: Min = -14.02403, Max = 46.7241
+
+        GenerateCombinedHeightMap:
+        Min = -50, Max = 50
 
 '
       stacktrace: 
@@ -680,14 +683,9 @@ MonoBehaviour:
       name: TestNoise
       fullName: TestNoise
       resultStatus: 1
-      duration: 0.1001946
+      duration: 0.1293987
       messages: 
-      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
-        This is not allowed.  MonoBehaviours can only be added using AddComponent().
-        Alternatively, your script can inherit from ScriptableObject or no base class
-        at all
-
-'
+      output: 
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -702,11 +700,9 @@ MonoBehaviour:
       name: CheckGenerateNoiseMapIsland
       fullName: TestNoise.CheckGenerateNoiseMapIsland
       resultStatus: 1
-      duration: 0.0403724
+      duration: 0.0036563
       messages: 
-      output: 'Min: 0.08891807, Max: 0.1371406
-
-'
+      output: 
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -721,11 +717,9 @@ MonoBehaviour:
       name: CheckGenerateNoiseMapIslandPlus
       fullName: TestNoise.CheckGenerateNoiseMapIslandPlus
       resultStatus: 1
-      duration: 0.00291
+      duration: 0.002242
       messages: 
-      output: 'Min: 0.08891807, Max: 0.1371406
-
-'
+      output: 
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -740,11 +734,9 @@ MonoBehaviour:
       name: CheckGenerateNoiseMapMinimal
       fullName: TestNoise.CheckGenerateNoiseMapMinimal
       resultStatus: 1
-      duration: 0.0012607
+      duration: 0.0010321
       messages: 
-      output: 'Min: -0.4709654, Max: 0.8438698
-
-'
+      output: 
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -759,11 +751,9 @@ MonoBehaviour:
       name: CheckGenerateNoiseMapTexture
       fullName: TestNoise.CheckGenerateNoiseMapTexture
       resultStatus: 1
-      duration: 0.0027519
+      duration: 0.0029193
       messages: 
-      output: 'Min: -0.361949, Max: 0.5381061
-
-'
+      output: 
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -773,7 +763,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1009
       parentUniqueId: EditorModeTests.dll/[EditorModeTests][TestNoise][suite]
-    m_ResultText: TestHeightmapGenerator (0.082s)
+    m_ResultText: TestHeightmapGenerator (0.060s)
     m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}
@@ -847,22 +837,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Editor/EditorModeTests
+    - Assets/Terrain Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 81
   m_LastFolders:
-  - Assets/Editor/EditorModeTests
+  - Assets/Terrain Assets
   m_LastFoldersGridSize: 81
   m_LastProjectPath: /home/tinka/Zenva/Under Development/Extending Proc Gen E21
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 525a0000
-    m_LastClickedID: 23122
-    m_ExpandedIDs: 00000000465a0000485a00004a5a000000ca9a3b
+    m_SelectedIDs: 685a0000
+    m_LastClickedID: 23144
+    m_ExpandedIDs: 00000000485a00004a5a00004c5a000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -890,7 +880,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000465a0000485a00004a5a0000
+    m_ExpandedIDs: 00000000485a00004a5a00004c5a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -915,8 +905,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 745a0000
-    m_LastClickedInstanceID: 23156
+    m_SelectedInstanceIDs: 4a600000
+    m_LastClickedInstanceID: 24650
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
@@ -934,7 +924,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 5}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -1020,9 +1010,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 785f0000
-      m_LastClickedID: 24440
-      m_ExpandedIDs: 3ef2ffff5ef2ffff52f3ffff44f4ffff30f5ffff74f6ffff64f7ffff58f8ffff38fbffff9c5f0000
+      m_SelectedIDs: 4a600000
+      m_LastClickedID: 24650
+      m_ExpandedIDs: 98edffffbcedffff24f0ffff48f0fffffaf2ffff1af3ffff38f4ffff3af5ffff38fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1323,7 +1313,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.19551449, y: -0.018533653, z: 0.0036926207, w: -0.9805627}
     speed: 2
-    m_Value: {x: -0.19551626, y: -0.015591214, z: 0.0031059277, w: -0.9805716}
+    m_Value: {x: -0.19550605, y: -0.018532854, z: 0.0036924614, w: -0.98052037}
   m_Size:
     m_Target: 244.31152
     speed: 2

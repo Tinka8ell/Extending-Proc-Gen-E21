@@ -17,6 +17,8 @@ public class MapPreview : MonoBehaviour {
 	public HeightMapSettings terrainHeightSettings;
 	public TextureData textureData;
 
+	public Vector2 sampleCentre;
+
 	public Material terrainMaterial;
 
 
@@ -51,25 +53,25 @@ public class MapPreview : MonoBehaviour {
 			islandMapSettings.weightedNoiseSettings[0] = weightedIslandNoiseSettings;
 
 			heightMap = HeightMapGenerator.GenerateHeightMap(
-				meshSettings.numVertsPerLine, islandMapSettings, Vector2.zero);
+				meshSettings.numVertsPerLine, islandMapSettings, sampleCentre);
 			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
 	        // Debug.LogFormat("IslandMap: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
 		} else if (drawMode == DrawMode.IslandMesh) {
 			heightMap = HeightMapGenerator.GenerateHeightMap(
-				meshSettings.numVertsPerLine, islandHeightSettings, Vector2.zero);
+				meshSettings.numVertsPerLine, islandHeightSettings, sampleCentre);
 	        // Debug.LogFormat("IslandMesh: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
 		} else if (drawMode == DrawMode.TerrainMesh) {
 			heightMap = HeightMapGenerator.GenerateHeightMap(
-				meshSettings.numVertsPerLine, terrainHeightSettings, Vector2.zero);
+				meshSettings.numVertsPerLine, terrainHeightSettings, sampleCentre);
 	        // Debug.LogFormat("TerrainMesh: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
 		} else if (drawMode == DrawMode.CombinedMesh) {
 			heightMap = HeightMapGenerator.GenerateHeightMap(
-				meshSettings.numVertsPerLine, combinedHeightSettings, Vector2.zero);
+				meshSettings.numVertsPerLine, combinedHeightSettings, sampleCentre);
 	        // Debug.LogFormat("TerrainMesh: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
@@ -79,7 +81,7 @@ public class MapPreview : MonoBehaviour {
 
 	public void DrawTexture(Texture2D texture) {
 		textureRender.sharedMaterial.mainTexture = texture;
-		textureRender.transform.localScale = new Vector3 (texture.width, 1, texture.height) /10f;
+		textureRender.transform.localScale = new Vector3 (texture.width, 1, texture.height) / 10f;
 
 		textureRender.gameObject.SetActive (true);
 		meshFilter.gameObject.SetActive (false);

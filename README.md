@@ -114,7 +114,8 @@ For that matter we have not made it more generic to use the array idea.  So much
   * The old generate becomes partial, and as each partial will assume the min = - max so combined can just add these
   * Also make sure they all use one size rather than width and height
   * Steps above completed!
-* Add a sample location for the Preview so we can move them arround more easily
+* Add a sample location for the Preview so we can move them around more easily
+  * added
 * Also work out whether noise sample centre works the same way
 * May also consider any changes so value\[x, y\] relates to cordinate (x, y) and Vector3(x, value\[x, y\], y)
 * Finally consider a find an island method, where we start at (0, 0) and go west in chunks till we find land, 
