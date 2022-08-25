@@ -6,12 +6,12 @@ public static class HeightMapGenerator {
 
 	
 	public static HeightMap GenerateHeightMap(
-			int size, HeightMapSettings settings, Vector2 sampleCentre) {
+			int size, HeightMapSettings settings, Vector2 sampleCentre, float mapScale=1f) {
 		HeightMap heightMap = new HeightMap(new float[size, size], 0, 0);
 		for(int index = 0; index < settings.weightedNoiseSettings.Length; index++){
 			if (settings.weightedNoiseSettings[index].noiseSettings != null){
 				if (settings.weightedNoiseSettings[index].heightMultiplier > 0){
-					HeightMap partialHeightMap = GeneratePartialHeightMap(size, settings, sampleCentre, index);
+					HeightMap partialHeightMap = GeneratePartialHeightMap(size, settings, sampleCentre, index, mapScale);
 
 					for (int i = 0; i < size; i++) {
 						for (int j = 0; j < size; j++) {
@@ -29,8 +29,9 @@ public static class HeightMapGenerator {
 	}
 
 	public static HeightMap GeneratePartialHeightMap(
-			int size, HeightMapSettings settings, Vector2 sampleCentre, int index=0) {
-		float[,] values = Noise.GenerateNoiseMap (size, settings.weightedNoiseSettings[index].noiseSettings, sampleCentre);
+			int size, HeightMapSettings settings, Vector2 sampleCentre, int index, float mapScale) {
+		// Debug.LogFormat("GeneratePartialHeightMap: Index = {2}, Sea: Gradient = {0}, Level = {1}", settings.weightedNoiseSettings[index].noiseSettings.seaGradient, settings.weightedNoiseSettings[index].noiseSettings.seaLevel, index);
+		float[,] values = Noise.GenerateNoiseMap (size, settings.weightedNoiseSettings[index].noiseSettings, sampleCentre, mapScale);
 
 		AnimationCurve heightCurve_threadsafe = new AnimationCurve (settings.heightCurve.keys);
 

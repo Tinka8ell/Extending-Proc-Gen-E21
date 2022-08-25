@@ -11,19 +11,22 @@ public class MapPreview : MonoBehaviour {
 	public enum DrawMode {IslandMap, IslandMesh, TerrainMesh, CombinedMesh};
 	public DrawMode drawMode;
 
+	public Vector2 sampleCentre;
+
+	[Range(1, 120 + 5)]
+	public float mapScale = 10;
+
 	public MeshSettings meshSettings;
 	public HeightMapSettings combinedHeightSettings;
 	public HeightMapSettings islandHeightSettings;
 	public HeightMapSettings terrainHeightSettings;
 	public TextureData textureData;
 
-	public Vector2 sampleCentre;
-
 	public Material terrainMaterial;
 
 
 
-	[Range(0,MeshSettings.numSupportedLODs-1)]
+	[Range(0, MeshSettings.numSupportedLODs-1)]
 	public int editorPreviewLOD;
 	public bool autoUpdate;
 
@@ -33,43 +36,62 @@ public class MapPreview : MonoBehaviour {
 		HeightMap heightMap;
 
 		if (drawMode == DrawMode.IslandMap) {
-			int scale = meshSettings.numVertsPerLine;
-			NoiseSettings islandNoiseSettings = new NoiseSettings();
-			islandNoiseSettings.scale = islandHeightSettings.weightedNoiseSettings[0].noiseSettings.scale / scale;
-			islandNoiseSettings.seaGradient = islandHeightSettings.weightedNoiseSettings[0].noiseSettings.seaGradient;
-			islandNoiseSettings.octaves = islandHeightSettings.weightedNoiseSettings[0].noiseSettings.octaves;
-			islandNoiseSettings.persistance = islandHeightSettings.weightedNoiseSettings[0].noiseSettings.persistance;
-			islandNoiseSettings.lacunarity = islandHeightSettings.weightedNoiseSettings[0].noiseSettings.lacunarity;
-			islandNoiseSettings.seed = islandHeightSettings.weightedNoiseSettings[0].noiseSettings.seed;
-			islandNoiseSettings.offset = islandHeightSettings.weightedNoiseSettings[0].noiseSettings.offset - new Vector2(meshSettings.numVertsPerLine / 2, meshSettings.numVertsPerLine / 2);
+			// Zoom out by mapScale ...
 
-			WeightedNoiseSettings weightedIslandNoiseSettings = new WeightedNoiseSettings();
-			weightedIslandNoiseSettings.noiseSettings = islandNoiseSettings;
-			weightedIslandNoiseSettings.heightMultiplier = islandHeightSettings.weightedNoiseSettings[0].heightMultiplier/ scale;
-
+			// new islandMapSettings (HeightMapSettings):
 			HeightMapSettings islandMapSettings = ScriptableObject.CreateInstance("HeightMapSettings") as HeightMapSettings;
 			islandMapSettings.heightCurve = islandHeightSettings.heightCurve;
-			islandMapSettings.weightedNoiseSettings = new WeightedNoiseSettings[1];
-			islandMapSettings.weightedNoiseSettings[0] = weightedIslandNoiseSettings;
+			int countOfWweighted = combinedHeightSettings.weightedNoiseSettings.Length;
+			islandMapSettings.weightedNoiseSettings = new WeightedNoiseSettings[countOfWweighted];
+			for(int index = 0; index < countOfWweighted; index++){
+				// zoomedIslandNoiseSettings (WeightedNoiseSettings):
+				WeightedNoiseSettings zoomedIslandNoiseSettings = new WeightedNoiseSettings();
+				zoomedIslandNoiseSettings.noiseSettings = combinedHeightSettings.weightedNoiseSettings[index].noiseSettings;
+				// and zoom:
+				zoomedIslandNoiseSettings.heightMultiplier = combinedHeightSettings.weightedNoiseSettings[index].heightMultiplier/ mapScale;
 
+				islandMapSettings.weightedNoiseSettings[index] = zoomedIslandNoiseSettings;
+			}
+
+			// get HeightMap adjusted to map scale:
 			heightMap = HeightMapGenerator.GenerateHeightMap(
-				meshSettings.numVertsPerLine, islandMapSettings, sampleCentre);
+				meshSettings.numVertsPerLine, islandMapSettings, sampleCentre, mapScale);
 			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
 	        // Debug.LogFormat("IslandMap: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
 		} else if (drawMode == DrawMode.IslandMesh) {
+			// Only show island noise part
+
+			// new islandMapSettings (HeightMapSettings):
+			HeightMapSettings islandMapSettings = ScriptableObject.CreateInstance("HeightMapSettings") as HeightMapSettings;
+			islandMapSettings.heightCurve = islandHeightSettings.heightCurve;
+			islandMapSettings.weightedNoiseSettings = new WeightedNoiseSettings[1];
+			islandMapSettings.weightedNoiseSettings[0] = combinedHeightSettings.weightedNoiseSettings[0];
+
+			// get HeightMap adjusted to map scale:
 			heightMap = HeightMapGenerator.GenerateHeightMap(
-				meshSettings.numVertsPerLine, islandHeightSettings, sampleCentre);
+				meshSettings.numVertsPerLine, islandMapSettings, sampleCentre);
 	        // Debug.LogFormat("IslandMesh: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
 		} else if (drawMode == DrawMode.TerrainMesh) {
+			// Only show terrain noise part
+
+			// new islandMapSettings (HeightMapSettings):
+			HeightMapSettings islandMapSettings = ScriptableObject.CreateInstance("HeightMapSettings") as HeightMapSettings;
+			islandMapSettings.heightCurve = islandHeightSettings.heightCurve;
+			islandMapSettings.weightedNoiseSettings = new WeightedNoiseSettings[1];
+			islandMapSettings.weightedNoiseSettings[0] = combinedHeightSettings.weightedNoiseSettings[1];
+
+			// get HeightMap adjusted to map scale:
 			heightMap = HeightMapGenerator.GenerateHeightMap(
-				meshSettings.numVertsPerLine, terrainHeightSettings, sampleCentre);
+				meshSettings.numVertsPerLine, islandMapSettings, sampleCentre);
 	        // Debug.LogFormat("TerrainMesh: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);
 			textureData.UpdateMeshHeights (terrainMaterial, heightMap.minValue, heightMap.maxValue);
 			DrawMesh (MeshGenerator.GenerateTerrainMesh(heightMap.values, meshSettings, editorPreviewLOD));
 		} else if (drawMode == DrawMode.CombinedMesh) {
+			// show the combined mesh
+			
 			heightMap = HeightMapGenerator.GenerateHeightMap(
 				meshSettings.numVertsPerLine, combinedHeightSettings, sampleCentre);
 	        // Debug.LogFormat("TerrainMesh: Min = {0}, Max = {1}", heightMap.minValue, heightMap.maxValue);

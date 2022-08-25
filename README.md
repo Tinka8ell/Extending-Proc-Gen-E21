@@ -117,6 +117,19 @@ For that matter we have not made it more generic to use the array idea.  So much
 * Add a sample location for the Preview so we can move them around more easily
   * added
 * Also work out whether noise sample centre works the same way
+  * In GenerateNoiseMap, NoiseSettings.offset and sampleCentre are treated as equals (plus in x direction and minus in the y (z) direction)
+  * The offset / sample is also at the same increments as the height map coordinates
+  * Effectively we have offsets into the perlin noise of offset = random(but fixed) + settings.offset + sampleCentre
+  * We then sample a square offset +/- (size/2, size/2) all / frequency and then / scale
+  * If we only had 1 octave (so frequency would be 1):
+    * (offset + sample - half-size) / scale to
+    * (offset + sample + half-size) / scale 
+  * so to keep the same sample / offset when scale is reduced to give bigger part of map:
+    * offset and sample need to be increased by that factor
+  * well it's a theory, let's try it!
+  * Nope! It didn't, but changing to use a map zoom propogated down to GenerateHeightMap() and GenerateNoise() works!
+  * To complete this section also adjusted the CombinedHeightSettigns to get something that looks good!
+  * Now need to remove the Unity Assets from the project in GIT!
 * May also consider any changes so value\[x, y\] relates to cordinate (x, y) and Vector3(x, value\[x, y\], y)
 * Finally consider a find an island method, where we start at (0, 0) and go west in chunks till we find land, 
 and then back east 1 chunk and move west to find it's shore?  Just a thought.

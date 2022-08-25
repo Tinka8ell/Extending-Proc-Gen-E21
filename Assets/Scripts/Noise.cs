@@ -11,7 +11,12 @@ public static class Noise {
 	 * with the expectation that these will be truncated by height map generation.
 	 */
 	public static float[,] GenerateNoiseMap(
-			int size, NoiseSettings settings, Vector2 sampleCentre) {
+			int size, NoiseSettings settings, Vector2 sampleCentre, float zoom=1f) {
+		float seaGradient = settings.seaGradient;
+		float seaLevel = settings.seaLevel;
+		// Debug.LogFormat("GenerateNoiseMap: Centre = {2}, Sea: Gradient = {0}, Level = {1}", seaGradient, seaLevel, settings.offset + sampleCentre);
+		// Debug.LogFormat("GenerateNoiseMap: Scale = {0}, Octaves = {1}, Persistance = {2}, Lacunarity = {3}, Seed = {4}", settings.scale, settings.octaves, settings.persistance, settings.lacunarity, settings.seed);
+
 		float[,] noiseMap = new float[size, size];
 
 		// reset random number generation so get consistant random numbers
@@ -42,8 +47,8 @@ public static class Noise {
 				float noiseHeight = 0;
 
 				for (int i = 0; i < settings.octaves; i++) {
-					float sampleX = (x-halfWidth + octaveOffsets[i].x) / settings.scale * frequency;
-					float sampleY = (y-halfHeight + octaveOffsets[i].y) / settings.scale * frequency;
+					float sampleX = ((x - halfWidth) * zoom + octaveOffsets[i].x) / settings.scale * frequency;
+					float sampleY = ((y - halfHeight) * zoom + octaveOffsets[i].y) / settings.scale * frequency;
 
 					// PerlinNoise generates values from 0f to 1f (approximately!)
 					// So must convert to range -1f to 1f
@@ -56,11 +61,12 @@ public static class Noise {
 
 				noiseHeight /= maxPossibleHeight; // move from a range +/- noiseHeight to +/- 1
 
-				float range = 1 - settings.seaLevel;
+				float range = 1 - seaLevel;
+				noiseHeight -= seaLevel; // move sea level to 0
 				noiseHeight /= range; // move from a range +/- range to +/- 1 (ignore massively negative numbers out of range)
 
 				if (noiseHeight < 0) {
-					noiseHeight *= settings.seaGradient; // enhance sea depth further if required
+					noiseHeight *= seaGradient; // enhance sea depth further if required
 				}
 
 				noiseMap [x, y] = noiseHeight;
