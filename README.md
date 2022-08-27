@@ -17,6 +17,7 @@ I am looking to create a "Survival" RPG based on generated islands.
    * Sort of got it working, but need a tidy up
 1. [ Add some sea to every terrain chunck](#add-some-sea-to-every-terrain-chunck)
    * Got that working, but switching between 1st person and Ethan is frought!
+1. [Use 1st and 3rd person prefabs](#use-1st-and-3rd-person-prefabs)
 1. [The next stage](#the-next-stage)
    * Standard assets
    * Biomes
@@ -154,6 +155,12 @@ Taking stuff from [The next stage](#the-next-stage):
 Jimmy Vegas, [Mini Unity Tutorial - How To Switch First Person & Third Person View](https://www.youtube.com/watch?v=nR5P7AH4aHE)
   * [Kickstart your game with First and Third Person Controllers](https://www.youtube.com/watch?v=jXz5b_9z0Bc)
 
+### Use 1st and 3rd person prefabs
+
+1. Add the assest from store
+1. Create a "Player" using both and write a script to swap
+1. Add UMA skeleton etc. 
+
 ### The next stage
 
 This is my bucket of things I think of.
@@ -188,7 +195,7 @@ Further thinking on this (at least for now):
 * Start the game (for now, so we can "see" it) in 1st person looking down from the west at max height and no gravity
   * After the LOD=0 terrain chunk we are over is complete:
     * Evaluate it
-      * Is it sea (all below sea level / low-tide) - add sea **_ - Added structure to support this! _**
+      * Is it sea (all below sea level / low-tide) - add sea **- Added structure to support this!**
       * Is it no sea (all above sea level / high-tide) - never add sea
       * Land locked (all way round the edge above sea level / high-tide) - may need lake water
     * If we are sea then slide one chunk west and repeat
