@@ -28,7 +28,22 @@ public class TerrainChunk {
 	MeshSettings meshSettings;
 	Transform viewer;
 
-	public TerrainChunk(Vector2 coord, HeightMapSettings heightMapSettings, MeshSettings meshSettings, LODInfo[] detailLevels, int colliderLODIndex, Transform parent, Transform viewer, Material material) {
+	/* Create Terrain Chunk
+	 * Initialised from TerrainGenerator
+	 * Initialised invisible
+	 * LODMesh array initialised with callbacks
+	 * Contents are added by callbacks after it is Loaded
+	 */
+	public TerrainChunk(
+		Vector2 coord, 
+		HeightMapSettings heightMapSettings, 
+		MeshSettings meshSettings, 
+		LODInfo[] detailLevels, 
+		int colliderLODIndex, 
+		Transform parent, 
+		Transform viewer, 
+		Material material) 
+		{
 		this.coord = coord;
 		this.detailLevels = detailLevels;
 		this.colliderLODIndex = colliderLODIndex;
@@ -61,18 +76,21 @@ public class TerrainChunk {
 		}
 
 		maxViewDst = detailLevels [detailLevels.Length - 1].visibleDstThreshold;
-
 	}
 
+	/* Load the terrain Chunck
+	 * Actually kick of the callback process to build it in the background
+	 */
 	public void Load() {
+		// Request the basic HeightMap to be used for this chunck
 		ThreadedDataRequester.RequestData(
 			() => HeightMapGenerator.GenerateHeightMap (
 				meshSettings.numVertsPerLine, heightMapSettings, sampleCentre), 
 			OnHeightMapReceived);
 	}
 
-
-
+	/* Once the HeightMap has been created update it to match
+	 */
 	void OnHeightMapReceived(object heightMapObject) {
 		this.heightMap = (HeightMap)heightMapObject;
 		heightMapReceived = true;
@@ -80,13 +98,15 @@ public class TerrainChunk {
 		UpdateTerrainChunk ();
 	}
 
-	Vector2 viewerPosition {
-		get {
-			return new Vector2 (viewer.position.x, viewer.position.z);
-		}
-	}
-
-
+	/* Update a chunk because of changes
+	 * Only if we have the height map
+	 * If it has become visible:
+	 *   Calculate the LOD index
+	 *   If index changes (note initialised to -1 so must have changed when first get height map)
+	 *     if got the mesh: set it
+	 *     else: request it
+	 * If visibility changed then react to it
+	 */
 	public void UpdateTerrainChunk() {
 		if (heightMapReceived) {
 			float viewerDstFromNearestEdge = Mathf.Sqrt (bounds.SqrDistance (viewerPosition));
@@ -114,12 +134,9 @@ public class TerrainChunk {
 						lodMesh.RequestMesh (heightMap, meshSettings);
 					}
 				}
-
-
 			}
 
 			if (wasVisible != visible) {
-				
 				SetVisible (visible);
 				if (onVisibilityChanged != null) {
 					onVisibilityChanged (this, visible);
@@ -128,6 +145,11 @@ public class TerrainChunk {
 		}
 	}
 
+	/* Update the collision mask
+	 * Callback used by TerrainGenerator when viewer has moved and chunk is visible
+	 * If within collider LOD index, and not yet requested it: request it
+	 * If now dangerously close and have it: apply the collider mesh 
+	 */
 	public void UpdateCollisionMesh() {
 		if (!hasSetCollider) {
 			float sqrDstFromViewerToEdge = bounds.SqrDistance (viewerPosition);
@@ -147,6 +169,15 @@ public class TerrainChunk {
 		}
 	}
 
+	// utility methods
+
+	// Convert "viewer" to a 2D position
+	Vector2 viewerPosition {
+		get {
+			return new Vector2 (viewer.position.x, viewer.position.z);
+		}
+	}
+
 	public void SetVisible(bool visible) {
 		meshObject.SetActive (visible);
 	}
@@ -163,6 +194,9 @@ class LODMesh {
 	public bool hasRequestedMesh;
 	public bool hasMesh;
 	int lod;
+
+	// Once created initialised to UpdateTerrainChunck
+	// and if collision LOD also UpdateCollisionMask
 	public event System.Action updateCallback;
 
 	public LODMesh(int lod) {
@@ -172,13 +206,14 @@ class LODMesh {
 	void OnMeshDataReceived(object meshDataObject) {
 		mesh = ((MeshData)meshDataObject).CreateMesh ();
 		hasMesh = true;
-
-		updateCallback ();
+		updateCallback(); // so the relevant callbacks get called
 	}
 
 	public void RequestMesh(HeightMap heightMap, MeshSettings meshSettings) {
 		hasRequestedMesh = true;
-		ThreadedDataRequester.RequestData (() => MeshGenerator.GenerateTerrainMesh (heightMap.values, meshSettings, lod), OnMeshDataReceived);
+		ThreadedDataRequester.RequestData (
+			() => MeshGenerator.GenerateTerrainMesh (heightMap.values, meshSettings, lod), 
+			OnMeshDataReceived);
 	}
 
 }
