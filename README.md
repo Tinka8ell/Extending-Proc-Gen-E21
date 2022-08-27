@@ -190,5 +190,7 @@ Further thinking on this (at least for now):
 
 This is for things I might do, or were a way forward, but the priorities changed.
 
+* Documenting the ThreadedDataRequester, I notice that all queued data gets processed on a frame
+  * This may be better throttle to limit how much data gets actioned each frame
 * Consider any changes so value\[x, y\] relates to cordinate (x, y) and Vector3(x, value\[x, y\], y)
 

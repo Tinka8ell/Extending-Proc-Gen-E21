@@ -94,7 +94,6 @@ public class TerrainChunk {
 	void OnHeightMapReceived(object heightMapObject) {
 		this.heightMap = (HeightMap)heightMapObject;
 		heightMapReceived = true;
-
 		UpdateTerrainChunk ();
 	}
 
@@ -161,8 +160,8 @@ public class TerrainChunk {
 			}
 
 			if (sqrDstFromViewerToEdge < colliderGenerationDistanceThreshold * colliderGenerationDistanceThreshold) {
-				if (lodMeshes [colliderLODIndex].hasMesh) {
-					meshCollider.sharedMesh = lodMeshes [colliderLODIndex].mesh;
+				if (lodMeshes[colliderLODIndex].hasMesh) {
+					meshCollider.sharedMesh = lodMeshes[colliderLODIndex].mesh;
 					hasSetCollider = true;
 				}
 			}
