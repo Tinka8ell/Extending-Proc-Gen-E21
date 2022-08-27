@@ -14,6 +14,15 @@ I am looking to create a "Survival" RPG based on generated islands.
 1. [Sort out the coasts](#sort-out-the-coasts)
    * Looks better in preview mode, but not when we start the game
 1. [Need to get preview / map and game to match](#need-to-get-preview-/-map-and-game-to-match)
+   * Sort of got it working, but need a tidy up
+1. [ Add some sea to every terrain chunck](#add-some-sea-to-every-terrain-chunck)
+   * Got that working, but switching between 1st person and Ethan is frought!
+1. [The next stage](#the-next-stage)
+   * Standard assets
+   * Biomes
+   * Game start
+   * Back burner
+
 
 ## The details ...
 
@@ -133,7 +142,21 @@ For that matter we have not made it more generic to use the array idea.  So much
     * that was easier said than done!  Think it is now working, and added an "Ethan", but controls are funny
   * Also added a bit of "sea" using a water effect.  I like it!  Now to add that to terrain chuncks.
 
+### Add some sea to every terrain chunck
+
+Taking stuff from [The next stage](#the-next-stage):
+* Create my own Sea effect (copy of StandardAsset profesional water)
+* Add start of Biome creation to force each terrain to get a sea
+* Exploring the new run time requires 1st person controller as Ethan not working as I would like
+* Swapping to 1st person from Ethan caused chaos (again) as need to move the "Viewer" object
+* I have got to fix this, and after seeing a couple of videos, I want to go back and try with the new 1st and 3rd person controllers
+  * 1st and 3rd swapper using [Unity Chan](https://assetstore.unity.com/packages/3d/characters/unity-chan-model-18705): 
+Jimmy Vegas, [Mini Unity Tutorial - How To Switch First Person & Third Person View](https://www.youtube.com/watch?v=nR5P7AH4aHE)
+  * [Kickstart your game with First and Third Person Controllers](https://www.youtube.com/watch?v=jXz5b_9z0Bc)
+
 ### The next stage
+
+This is my bucket of things I think of.
 
 #### Standard assets
 
@@ -165,7 +188,7 @@ Further thinking on this (at least for now):
 * Start the game (for now, so we can "see" it) in 1st person looking down from the west at max height and no gravity
   * After the LOD=0 terrain chunk we are over is complete:
     * Evaluate it
-      * Is it sea (all below sea level / low-tide) - add sea
+      * Is it sea (all below sea level / low-tide) - add sea * - Added structure to support this! *
       * Is it no sea (all above sea level / high-tide) - never add sea
       * Land locked (all way round the edge above sea level / high-tide) - may need lake water
     * If we are sea then slide one chunk west and repeat

@@ -179,9 +179,13 @@ public class TerrainChunk {
 	}
 
 	public void AddBiome(){
+		// Debug.LogFormat("AddBiome called for {0}", meshObject.transform.position);
 		biome = new Biome();
 		hasBiome = true;
+		// temp for now
+		biome.seaType = SeaType.HasSea;
 		if (biome.seaType == SeaType.HasSea){
+			// Debug.LogFormat("AddBiome creating sea for {0}", meshObject.transform.position);
 			seaObject = GameObject.Instantiate<GameObject>(seaPrefab, meshObject.transform.position, Quaternion.identity, meshObject.transform);
 		}
 	}
