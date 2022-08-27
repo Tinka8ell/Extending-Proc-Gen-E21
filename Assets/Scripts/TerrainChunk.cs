@@ -6,7 +6,9 @@ public class TerrainChunk {
 	public event System.Action<TerrainChunk, bool> onVisibilityChanged;
 	public Vector2 coord;
 	 
-	GameObject meshObject;
+	GameObject meshObject; // this chunck
+	GameObject seaObject; // if sea is associated with this chunk
+	GameObject seaPrefab;
 	Vector2 sampleCentre;
 	Bounds bounds;
 
@@ -28,6 +30,9 @@ public class TerrainChunk {
 	MeshSettings meshSettings;
 	Transform viewer;
 
+	bool hasBiome;
+	Biome biome;
+
 	/* Create Terrain Chunk
 	 * Initialised from TerrainGenerator
 	 * Initialised invisible
@@ -42,7 +47,8 @@ public class TerrainChunk {
 		int colliderLODIndex, 
 		Transform parent, 
 		Transform viewer, 
-		Material material) 
+		Material material,
+		GameObject seaPrefab) 
 		{
 		this.coord = coord;
 		this.detailLevels = detailLevels;
@@ -50,6 +56,7 @@ public class TerrainChunk {
 		this.heightMapSettings = heightMapSettings;
 		this.meshSettings = meshSettings;
 		this.viewer = viewer;
+		this.seaPrefab = seaPrefab;
 
 		sampleCentre = coord * meshSettings.meshWorldSize / meshSettings.meshScale;
 		Vector2 position = coord * meshSettings.meshWorldSize ;
@@ -108,6 +115,9 @@ public class TerrainChunk {
 	 */
 	public void UpdateTerrainChunk() {
 		if (heightMapReceived) {
+			if (!hasBiome){
+				AddBiome();
+			}
 			float viewerDstFromNearestEdge = Mathf.Sqrt (bounds.SqrDistance (viewerPosition));
 
 			bool wasVisible = IsVisible ();
@@ -136,9 +146,9 @@ public class TerrainChunk {
 			}
 
 			if (wasVisible != visible) {
-				SetVisible (visible);
+				SetVisible(visible);
 				if (onVisibilityChanged != null) {
-					onVisibilityChanged (this, visible);
+					onVisibilityChanged(this, visible);
 				}
 			}
 		}
@@ -168,17 +178,29 @@ public class TerrainChunk {
 		}
 	}
 
+	public void AddBiome(){
+		biome = new Biome();
+		hasBiome = true;
+		if (biome.seaType == SeaType.HasSea){
+			seaObject = GameObject.Instantiate<GameObject>(seaPrefab, meshObject.transform.position, Quaternion.identity, meshObject.transform);
+		}
+	}
+
+
 	// utility methods
 
 	// Convert "viewer" to a 2D position
 	Vector2 viewerPosition {
 		get {
-			return new Vector2 (viewer.position.x, viewer.position.z);
+			return new Vector2(viewer.position.x, viewer.position.z);
 		}
 	}
 
 	public void SetVisible(bool visible) {
-		meshObject.SetActive (visible);
+		meshObject.SetActive(visible);
+		if (seaObject != null) { // if we have an associated sea object then keep it in sync
+			seaObject.SetActive(visible);
+		}
 	}
 
 	public bool IsVisible() {
@@ -215,4 +237,10 @@ class LODMesh {
 			OnMeshDataReceived);
 	}
 
+}
+
+enum SeaType {Unknown, HasSea, NotSea, LandLocked};
+
+class Biome{
+	public SeaType seaType = SeaType.Unknown;
 }
