@@ -18,6 +18,9 @@ I am looking to create a "Survival" RPG based on generated islands.
 1. [ Add some sea to every terrain chunck](#add-some-sea-to-every-terrain-chunck)
    * Got that working, but switching between 1st person and Ethan is frought!
 1. [Use 1st and 3rd person prefabs](#use-1st-and-3rd-person-prefabs)
+   * Installed and working StarterAssets:
+     * First Person Controller
+     * Third Person Controller
 1. [The next stage](#the-next-stage)
    * Standard assets
    * Biomes
@@ -157,7 +160,9 @@ Jimmy Vegas, [Mini Unity Tutorial - How To Switch First Person & Third Person Vi
 
 ### Use 1st and 3rd person prefabs
 
-1. Add the assest from store
+1. Add the assest from store - installed and working StarterAssets:
+   * First Person Controller
+   * Third Person Controller
 1. Create a "Player" using both and write a script to swap
 1. Add UMA skeleton etc. 
 
