@@ -188,7 +188,7 @@ Further thinking on this (at least for now):
 * Start the game (for now, so we can "see" it) in 1st person looking down from the west at max height and no gravity
   * After the LOD=0 terrain chunk we are over is complete:
     * Evaluate it
-      * Is it sea (all below sea level / low-tide) - add sea * - Added structure to support this! *
+      * Is it sea (all below sea level / low-tide) - add sea **_ - Added structure to support this! _**
       * Is it no sea (all above sea level / high-tide) - never add sea
       * Land locked (all way round the edge above sea level / high-tide) - may need lake water
     * If we are sea then slide one chunk west and repeat
