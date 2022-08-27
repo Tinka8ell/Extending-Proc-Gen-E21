@@ -106,7 +106,7 @@ The island map preview does not seem to match the island view either so we can't
 a better location.  On top of this we have not yet implemented the combined map generation in the game mode.
 For that matter we have not made it more generic to use the array idea.  So much to do, but where to start?
 
-#### A Plan!
+#### last iteration - I do need some better naming
 
 * KISS - so lets simplify
   * Move combined to use the array, not that we plan to do more than 2, but so we can easily do less
@@ -130,6 +130,65 @@ For that matter we have not made it more generic to use the array idea.  So much
   * Nope! It didn't, but changing to use a map zoom propogated down to GenerateHeightMap() and GenerateNoise() works!
   * To complete this section also adjusted the CombinedHeightSettigns to get something that looks good!
   * Now need to remove the Unity Assets from the project in GIT!
-* May also consider any changes so value\[x, y\] relates to cordinate (x, y) and Vector3(x, value\[x, y\], y)
+    * that was easier said than done!  Think it is now working, and added an "Ethan", but controls are funny
+  * Also added a bit of "sea" using a water effect.  I like it!  Now to add that to terrain chuncks.
+
+### The next stage
+
+#### Standard assets
+
+* The standard assets are not being kept up to date, so I may need to modify them and add them as my own assets and so clean up the add-ins
+* Doing the above, I may also add UMA and get some survival cloths, just thoughts for now
+
+#### Biomes
+
+* Need to think about generating and storing trees and grasses to the land.  May be look at mapping biomes in a chunk
+* Also need to think about springs and rivers and the way they modify the land
+* Thinking about modifying land - what about long shore drift and sand moving round the coast
+  * It can then form sand dunes on land
+  * It can also reveal stones, rocks and flints, and of course cover them up again
+  * Also pre-empts the flotsum and jetsum arriving on the coast and moving off
+  * and that then goes to adding waves (from the west) 
+  * and then we have to consider weather (rain and wind), oh and tides following the moon
+  * and then we have to consider the day / night cycle and how fast and what is it tied to for when we have multiple visitors
+
+#### Game start
+
 * Finally consider a find an island method, where we start at (0, 0) and go west in chunks till we find land, 
 and then back east 1 chunk and move west to find it's shore?  Just a thought.
+
+Further thinking on this (at least for now):
+* Sort out the "player":
+  * Give it a UI
+    * Add a switch between 1st and 3rd person
+    * Actually, if this is the only thing for now, add a switch key ('3' and '1'?)
+* Start the game (for now, so we can "see" it) in 1st person looking down from the west at max height and no gravity
+  * After the LOD=0 terrain chunk we are over is complete:
+    * Evaluate it
+      * Is it sea (all below sea level / low-tide) - add sea
+      * Is it no sea (all above sea level / high-tide) - never add sea
+      * Land locked (all way round the edge above sea level / high-tide) - may need lake water
+    * If we are sea then slide one chunk west and repeat
+  * If we are not just sea, then identify the coast
+    * Is this viable as an island?
+    * if not, move on ...
+    * Map the island edge (coast) - all "coast" areas get sea added
+    * What about "beach" and "cliffs" or "rocks"?
+* This is evolving, but how about an "Explorer" "Player" to start with:
+  * 1st person view port, no gravity
+  * 66" (1.68m) above "sea level" facing east and looking down a bit
+  * If terrain is sea then we can start looking, else jump back one chunk (west) and try again!
+  * Drift west (over the sea) until we have land below us (low tide?) 
+    * 1st coordinate east of us start of "beach"
+    * "Beach" is set of triangles with a coordinate between low and high tide
+    * Start to steal all connected triangles 
+      * by identifying each coord as low, high or beach
+      * "walk" from each beach coordinate to each neighbour clockwise until it becomes low or high until all are mapped
+    * Each triangle idetified is added to a mesh with a specific colour and removed from the terrain mesh
+
+### Back burner
+
+This is for things I might do, or were a way forward, but the priorities changed.
+
+* Consider any changes so value\[x, y\] relates to cordinate (x, y) and Vector3(x, value\[x, y\], y)
+
