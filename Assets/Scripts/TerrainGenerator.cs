@@ -15,7 +15,7 @@ public class TerrainGenerator : MonoBehaviour {
 	public HeightMapSettings heightMapSettings;
 	public TextureData textureSettings;
 
-	public Transform viewer;
+	public Transform viewer; 
 	public Material mapMaterial;
 
 	public GameObject seaPrefab;
@@ -130,6 +130,9 @@ public class TerrainGenerator : MonoBehaviour {
 		}
 	}
 
+	public void SetViewer(Transform transform){
+		viewer = transform;
+	}
 }
 
 [System.Serializable]
