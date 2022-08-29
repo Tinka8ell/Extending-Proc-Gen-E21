@@ -21,6 +21,9 @@ I am looking to create a "Survival" RPG based on generated islands.
    * Installed and working StarterAssets:
      * First Person Controller
      * Third Person Controller
+   * Also got third person replaced with an UMA!
+   * Now I really don't like the water - to shimmery - possible too detailed plain
+1. [Make the water nicer](#make-the-water-nicer)
 1. [The next stage](#the-next-stage)
    * Standard assets
    * Biomes
@@ -164,7 +167,23 @@ Jimmy Vegas, [Mini Unity Tutorial - How To Switch First Person & Third Person Vi
    * First Person Controller
    * Third Person Controller
 1. Create a "Player" using both and write a script to swap
+   * Sort of:  created a player with both and added an IAMViewer script to the transform objects of each
+   * Made that Player object the initial viewer so we have some terrain to land on
+   * Result it that the active one will take over as the viewer
 1. Add UMA skeleton etc. 
+   * After ages searchiong and trying lots of stuff, when back to 
+[UMA 101 - Part 2: Up and Running by Secret Anorak](https://www.youtube.com/watch?v=Wse9I72YJvc&t=600s)
+   * Added UMA_GLIB to the scene as it's a kind of prerequisite
+   * Going to the ThirdPerson PlayerArmature:
+     * Deleted Geometry and Skeleton children (after unpacking the Prefab)
+     * Added DynamicCharacterAvatar.cs script as a component to it
+   * And it just worked! Moves and is animated - Success!
+   * For convenience added a presets folder and a preset for the UMA, so I can quickly dress a new one
+
+### Make the water nicer
+
+*  Look at improving the look of the water - try changing the plane used in the prefab
+*  May be should make it on the fly to match the terrain chunk?
 
 ### The next stage
 
