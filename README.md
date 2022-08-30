@@ -24,6 +24,8 @@ I am looking to create a "Survival" RPG based on generated islands.
    * Also got third person replaced with an UMA!
    * Now I really don't like the water - to shimmery - possible too detailed plain
 1. [Make the water nicer](#make-the-water-nicer)
+   * Seems to difficult for me at the moment
+1. [Better animations](#better-animations)
 1. [The next stage](#the-next-stage)
    * Standard assets
    * Biomes
@@ -184,6 +186,16 @@ Jimmy Vegas, [Mini Unity Tutorial - How To Switch First Person & Third Person Vi
 
 *  Look at improving the look of the water - try changing the plane used in the prefab
 *  May be should make it on the fly to match the terrain chunk?
+* Couldn't get my head around Mesh and how to edit / create a more simple plane mesh,
+so not going to try for now
+* I did discover that my Sea Prefab as using the night material so I now have a Day and Night Sea prefabs
+  * Difficult to tell the difference to be honest!
+* I really don't like the stiff robot like motion of the StarterAssets Third Person Controller
+  * Should I look at adding other / better animations?
+
+### Better animations
+
+Start looking at other anmations so my UMA does not look like a robot!
 
 ### The next stage
 
