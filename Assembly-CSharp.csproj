@@ -746,6 +746,22 @@
       <Project>{ad7b9b59-3dea-797e-903d-f201cb8e6770}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
+    <ProjectReference Include="UMA_Examples_Editor.csproj">
+      <Project>{3c6b085c-85e8-90e1-cff4-5b1b9cd31e56}</Project>
+      <Name>UMA_Examples_Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UMA_Content.csproj">
+      <Project>{4da9db42-82ac-f760-1f9b-f254b9174f9c}</Project>
+      <Name>UMA_Content</Name>
+    </ProjectReference>
+    <ProjectReference Include="UMA_Examples.csproj">
+      <Project>{867b398b-158d-b73d-d738-09899387be05}</Project>
+      <Name>UMA_Examples</Name>
+    </ProjectReference>
+    <ProjectReference Include="UMA_Core.csproj">
+      <Project>{b95717e0-15fb-9c06-8465-55d95607b6bf}</Project>
+      <Name>UMA_Core</Name>
+    </ProjectReference>
     <ProjectReference Include="MainSripts.csproj">
       <Project>{2bec1d11-d7d4-037a-8779-f991d2aaccc3}</Project>
       <Name>MainSripts</Name>
@@ -753,22 +769,6 @@
     <ProjectReference Include="Addressable_Editor.csproj">
       <Project>{8f1cec60-c1b9-3a1b-6ecf-bddb1213ef9d}</Project>
       <Name>Addressable_Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UMA_Examples_Editor.csproj">
-      <Project>{3c6b085c-85e8-90e1-cff4-5b1b9cd31e56}</Project>
-      <Name>UMA_Examples_Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UMA_Examples.csproj">
-      <Project>{867b398b-158d-b73d-d738-09899387be05}</Project>
-      <Name>UMA_Examples</Name>
-    </ProjectReference>
-    <ProjectReference Include="UMA_Content.csproj">
-      <Project>{4da9db42-82ac-f760-1f9b-f254b9174f9c}</Project>
-      <Name>UMA_Content</Name>
-    </ProjectReference>
-    <ProjectReference Include="UMA_Core.csproj">
-      <Project>{b95717e0-15fb-9c06-8465-55d95607b6bf}</Project>
-      <Name>UMA_Core</Name>
     </ProjectReference>
     <ProjectReference Include="UMA_Core_Editor.csproj">
       <Project>{0c0aa878-6b17-edf7-e3a3-923e0a65db86}</Project>
