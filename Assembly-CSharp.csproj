@@ -43,9 +43,10 @@
      <Compile Include="Assets/StarterAssets/Mobile/Scripts/Utilities/MobileDisableAutoSwitchControls.cs" />
      <Compile Include="Assets/StarterAssets/Mobile/Scripts/VirtualInputs/UIVirtualJoystick.cs" />
      <Compile Include="Assets/StarterAssets/Mobile/Scripts/VirtualInputs/UIVirtualTouchZone.cs" />
-     <Compile Include="Assets/StarterAssets/ThirdPersonController/Scripts/BasicRigidBodyPush.cs" />
+     <Compile Include="Assets/StarterAssets/FirstPersonController/Scripts/BasicRigidBodyPush.cs" />
      <Compile Include="Assets/StarterAssets/TutorialInfo/Scripts/Readme.cs" />
      <Compile Include="Assets/StarterAssets/ThirdPersonController/Scripts/ThirdPersonController.cs" />
+     <Compile Include="Assets/InputControl/PlayerInput.cs" />
      <None Include="Assets/UMA/InternalDataStore/InGame/Resources/Shader/NormalShader.compute" />
      <None Include="Assets/StarterAssets/Environment/Shaders/Built-in_RP/Triplanar.shader" />
      <None Include="Assets/UMA/InternalDataStore/InGame/Resources/PlaceholderAssets/PlaceholderAssetsREADME.txt" />
