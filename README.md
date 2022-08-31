@@ -196,15 +196,24 @@ so not going to try for now
 ### Better animations
 
 Start looking at other anmations so my UMA does not look like a robot!
+* I already have the ["free" Basic Motions by Kevin Iglesias](https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271),
+but need to see how to integrate
+  * When I have the money I might consider the other packages: 
+    * [Basic Motions full version](http://assetstore.unity.com/packages/3d/animations/basic-motions-pro-pack-157744)
+    * [Animations Pack Mega Bundle](http://assetstore.unity.com/packages/3d/animations/mega-animations-pack-162341)
+* Might be an opportunity to understand the new input system and so replace the StarterAssets with my own
+* Also an opportunity to look into annimations
 
 ### The next stage
 
-This is my bucket of things I think of.
+This is my bucket of things I think of...
 
 #### Standard assets
 
-* The standard assets are not being kept up to date, so I may need to modify them and add them as my own assets and so clean up the add-ins
-* Doing the above, I may also add UMA and get some survival cloths, just thoughts for now
+* The Standard Assets are not being kept up to date, so I may need to modify them and add them as my own assets and so clean up the add-ins
+  * Started this process
+* I may also add UMA and get some survival cloths, just thoughts for now
+  * Added UMA and is working with StarterAssets
 
 #### Biomes
 
