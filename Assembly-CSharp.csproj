@@ -38,7 +38,7 @@
   <ItemGroup>
      <Compile Include="Assets/StarterAssets/Mobile/Scripts/VirtualInputs/UIVirtualButton.cs" />
      <Compile Include="Assets/StarterAssets/InputSystem/StarterAssetsInputs.cs" />
-     <Compile Include="Assets/InputControl/PlayerInputControl.cs" />
+     <Compile Include="Assets/Tinkabell/InputControl/PlayerInputControl.cs" />
      <Compile Include="Assets/StarterAssets/FirstPersonController/Scripts/FirstPersonController.cs" />
      <Compile Include="Assets/StarterAssets/Mobile/Scripts/CanvasInputs/UICanvasControllerInput.cs" />
      <Compile Include="Assets/StarterAssets/Mobile/Scripts/Utilities/MobileDisableAutoSwitchControls.cs" />
@@ -47,12 +47,30 @@
      <Compile Include="Assets/StarterAssets/FirstPersonController/Scripts/BasicRigidBodyPush.cs" />
      <Compile Include="Assets/StarterAssets/TutorialInfo/Scripts/Readme.cs" />
      <Compile Include="Assets/StarterAssets/ThirdPersonController/Scripts/ThirdPersonController.cs" />
+     <Compile Include="Assets/Devion Games/Inventory System/Examples/Particle Effects/ShurikenMagic/Scripts/SM_RandomScale.cs" />
+     <Compile Include="Assets/Devion Games/Inventory System/Examples/Particle Effects/ShurikenMagic/Scripts/SM_TrailFade.cs" />
+     <Compile Include="Assets/Devion Games/Inventory System/Examples/Particle Effects/ShurikenMagic/Scripts/SM_Rotate.cs" />
+     <Compile Include="Assets/Devion Games/Third Person Controller/Example/Particles/Impact/Scripts/AutoDestruct.cs" />
+     <Compile Include="Assets/Devion Games/Inventory System/Examples/Particle Effects/ShurikenMagic/Scripts/SM_AnimSpeedRandomizer.cs" />
+     <Compile Include="Assets/Devion Games/Inventory System/Examples/Particle Effects/ShurikenMagic/Scripts/SM_DestroyTimed.cs" />
+     <Compile Include="Assets/Devion Games/Triggers/Integrations/UI Widgets/Scripts/Runtime/YesNoDialog.cs" />
+     <Compile Include="Assets/Devion Games/Inventory System/Examples/Particle Effects/ShurikenMagic/Scripts/SM_PrefabGenerator.cs" />
+     <None Include="Assets/Devion Games/Standard Assets/Prototyping/Shaders/WorldCoordDiffuse.shader" />
+     <None Include="Assets/Devion Games/Inventory System/Changes.txt" />
+     <None Include="Assets/Devion Games/Triggers/Rename Action Info.txt" />
      <None Include="Assets/UMA/InternalDataStore/InGame/Resources/Shader/NormalShader.compute" />
+     <None Include="Assets/Devion Games/Triggers/Changes.txt" />
+     <None Include="Assets/Devion Games/Third Person Controller/Example/Particles/Impact/Shaders/Additive Alpha8.shader" />
      <None Include="Assets/StarterAssets/Environment/Shaders/Built-in_RP/Triplanar.shader" />
+     <None Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Water4/Sources/Shaders/FX-Water4.shader" />
+     <None Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Water4/Sources/Shaders/FX-SimpleWater4.shader" />
+     <None Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Sources/Shaders/FX-Water.shader" />
      <None Include="Assets/UMA/InternalDataStore/InGame/Resources/PlaceholderAssets/PlaceholderAssetsREADME.txt" />
      <None Include="Assets/StarterAssets/license.txt" />
      <None Include="Assets/UMA/InternalDataStore/AssetVersion.xml" />
      <None Include="Assets/UMA/Whats New in UMA.txt" />
+     <None Include="Assets/Devion Games/Third Person Controller/Changes.txt" />
+     <None Include="Assets/Devion Games/Stat System/Changes.txt" />
      <None Include="Assets/StarterAssets/Environment/Shaders/Built-in_RP/ArmatureShader.shader" />
     <Reference Include="UnityEngine">
         <HintPath>/home/tinka/Unity/Hub/Editor/2021.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -780,10 +798,6 @@
       <Project>{b95717e0-15fb-9c06-8465-55d95607b6bf}</Project>
       <Name>UMA_Core</Name>
     </ProjectReference>
-    <ProjectReference Include="MainSripts.csproj">
-      <Project>{2bec1d11-d7d4-037a-8779-f991d2aaccc3}</Project>
-      <Name>MainSripts</Name>
-    </ProjectReference>
     <ProjectReference Include="Addressable_Editor.csproj">
       <Project>{8f1cec60-c1b9-3a1b-6ecf-bddb1213ef9d}</Project>
       <Name>Addressable_Editor</Name>
@@ -795,6 +809,38 @@
     <ProjectReference Include="Unity.VisualScripting.State.csproj">
       <Project>{624a1825-d89b-438c-c439-bcafc0b3b133}</Project>
       <Name>Unity.VisualScripting.State</Name>
+    </ProjectReference>
+    <ProjectReference Include="MainSripts.csproj">
+      <Project>{2bec1d11-d7d4-037a-8779-f991d2aaccc3}</Project>
+      <Name>MainSripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="DevionGames.Triggers.csproj">
+      <Project>{9af513ed-efcf-755e-0137-1f4ce605b57c}</Project>
+      <Name>DevionGames.Triggers</Name>
+    </ProjectReference>
+    <ProjectReference Include="DevionGames.StatSystem.csproj">
+      <Project>{f28c10d2-73c2-3450-e467-d4f6aa8b2783}</Project>
+      <Name>DevionGames.StatSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="DevionGames.Utilities.csproj">
+      <Project>{a08023b0-7b64-941c-c8a2-f909447bd8d8}</Project>
+      <Name>DevionGames.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="DevionGames.ThirdPersonController.csproj">
+      <Project>{2ef15d6d-6bda-02be-a651-b2661e1b0bd6}</Project>
+      <Name>DevionGames.ThirdPersonController</Name>
+    </ProjectReference>
+    <ProjectReference Include="DevionGames.InventorySystem.csproj">
+      <Project>{39dbd732-f921-400e-6b57-0ff1d17faaa9}</Project>
+      <Name>DevionGames.InventorySystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="DevionGames.UIWidgets.csproj">
+      <Project>{517c7c5a-2af8-a3ce-97ee-220a5cb938b4}</Project>
+      <Name>DevionGames.UIWidgets</Name>
+    </ProjectReference>
+    <ProjectReference Include="DevionGames.Graphs.csproj">
+      <Project>{eda373f6-39dc-04a6-ae7d-8831f2d47481}</Project>
+      <Name>DevionGames.Graphs</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
