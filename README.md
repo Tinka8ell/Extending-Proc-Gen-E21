@@ -26,6 +26,8 @@ I am looking to create a "Survival" RPG based on generated islands.
 1. [Make the water nicer](#make-the-water-nicer)
    * Seems to difficult for me at the moment
 1. [Better animations](#better-animations)
+1. [Devion Inventory System](#devion-inventory-system)
+   * Try to get minimal working with UMA
 1. [The next stage](#the-next-stage)
    * Standard assets
    * Biomes
@@ -195,6 +197,48 @@ so not going to try for now
 
 ### Better animations
 
+Started looking at other anmations so my UMA does not look like a robot!
+* Got the StarterAssets to work with new input system
+* Want to replace Starter Assets and Standard Assets with the Devion Inventory System
+
+### Devion Inventory System
+
+* Import and get working Devion Inventory and 3rd person Controller with UMA
+
+### The next stage
+
+This is my bucket of things I think of...
+
+#### Clothing and Decoration
+
+* It would be good to play with the UMA clothing and make some ragged geens and top
+  * Get a relistic UMA character to play with
+  * Ideas on this would be to add a UMA character creation screen
+  * Thought on some evolving ideas ....
+    * Over time the character should get a little more tanned - they are now living outside
+    * If the character starts of flabby or scinny, then they get "fitter" as they exercise
+* Like to add "decoration" -  trees and grass and stuff (part of the Zenva 3D RPG initially)
+  * Over tiem use some of the free vegitation resources that I have found, but start with the simple ones
+  * Add a game memory system 
+    * Use Player Prefs to store and retrieve the initail decoration
+    * Generate (for a new island, etc) some random placing of stuff, and then save it
+      * Initial "biomes" idea would be to use heights to get % coverage of these decorations
+* Switch to the Devion version of the "water" (or my own) and make sure it allows my avatar to swim
+
+#### Inventory System
+
+* Since I last worked on this, I have been exploring free assets ...
+  * One of these is [Item & Inventory System](https://assetstore.unity.com/packages/tools/gui/item-inventory-system-45568)
+by [Devion Games](https://deviongames.com/)
+  * Unfortunately this has not been maintained for a while and is not that inuitive
+  * But it does seem to give a pretty good, clean and simple look inventory system
+  * As a bonus there is a third person player (he's a bit funny) with some extra animations
+* I'd like to replace the StartUp Asset 3rd person animator with the Devion games one
+* To go with this, temporarily, add the assets from the Zenva 3D RPG game I trained on
+* This should give a good active basics to see were I can go
+
+### Better animations
+
 Start looking at other anmations so my UMA does not look like a robot!
 * I already have the ["free" Basic Motions by Kevin Iglesias](https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271),
 but need to see how to integrate
@@ -203,10 +247,6 @@ but need to see how to integrate
     * [Animations Pack Mega Bundle](http://assetstore.unity.com/packages/3d/animations/mega-animations-pack-162341)
 * Might be an opportunity to understand the new input system and so replace the StarterAssets with my own
 * Also an opportunity to look into annimations
-
-### The next stage
-
-This is my bucket of things I think of...
 
 #### Standard assets
 
