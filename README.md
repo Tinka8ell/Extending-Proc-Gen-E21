@@ -27,13 +27,18 @@ I am looking to create a "Survival" RPG based on generated islands.
    * Seems to difficult for me at the moment
 1. [Better animations](#better-animations)
 1. [Devion Inventory System](#devion-inventory-system)
-   * Try to get minimal working with UMA
+   * Managed to get inventory working with UMA, but not got Devion 3rd Person Working
+1. [Back to Annimations]
+   * Lets try and extend Starter Assets 3rd P to Devion animations
+   * Also look at Getting UI to use new input manager
 1. [The next stage](#the-next-stage)
-   * Standard assets
-   * Biomes
-   * Game start
-   * Back burner
-
+   * [Clothing and Decoration](#clothing-and-decoration)
+   * [Inventory System](#inventory-system)
+   * [Better animations](#better-animations-1)
+   * [Standard assets](#standard-assets)
+   * [Biomes](#biomes)
+   * [Game start](#game-start)
+1. [Back burner](#back-burner)
 
 ## The details ...
 
@@ -204,6 +209,19 @@ Started looking at other anmations so my UMA does not look like a robot!
 ### Devion Inventory System
 
 * Import and get working Devion Inventory and 3rd person Controller with UMA
+* Ok, that did not go too well!
+  * The inventory system, I have working, ok without items, but ...
+  * The Devion 3rd person controller misbehaved
+    * Did not seem to cope with the ground, kind kept slipping
+    * Meant it would not move.  It turned, but not moved
+    * Put it on a plane, and it would move and walk off ok
+    * But falling off onto the real ground, went back to not moving
+    * Just found it not easy to debug what was wrong
+    * Still based around the old Input Manager
+  * Back to starter assets, but with inventory - result!
+* Now we need to extra annimations from Devion ...
+
+### Back to Annimations
 
 ### The next stage
 
@@ -237,7 +255,7 @@ by [Devion Games](https://deviongames.com/)
 * To go with this, temporarily, add the assets from the Zenva 3D RPG game I trained on
 * This should give a good active basics to see were I can go
 
-### Better animations
+#### Better animations
 
 Start looking at other anmations so my UMA does not look like a robot!
 * I already have the ["free" Basic Motions by Kevin Iglesias](https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271),
