@@ -38,6 +38,9 @@
   <ItemGroup>
      <Compile Include="Assets/StarterAssets/Mobile/Scripts/VirtualInputs/UIVirtualButton.cs" />
      <Compile Include="Assets/StarterAssets/InputSystem/StarterAssetsInputs.cs" />
+     <Compile Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Sources/Scripts/Water.cs" />
+     <Compile Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Water4/Sources/Scripts/SpecularLighting.cs" />
+     <Compile Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Water4/Sources/Scripts/MeshContainer.cs" />
      <Compile Include="Assets/Tinkabell/InputControl/PlayerInputControl.cs" />
      <Compile Include="Assets/Devion Games/Inventory System/Examples/Particle Effects/ShurikenMagic/Scripts/SM_AnimSpeedRandomizer.cs" />
      <Compile Include="Assets/Devion Games/Inventory System/Examples/Particle Effects/ShurikenMagic/Scripts/SM_DestroyTimed.cs" />
@@ -46,30 +49,38 @@
      <Compile Include="Assets/StarterAssets/Mobile/Scripts/CanvasInputs/UICanvasControllerInput.cs" />
      <Compile Include="Assets/StarterAssets/Mobile/Scripts/Utilities/MobileDisableAutoSwitchControls.cs" />
      <Compile Include="Assets/Devion Games/Inventory System/Examples/Particle Effects/ShurikenMagic/Scripts/SM_TrailFade.cs" />
+     <Compile Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Water4/Sources/Scripts/WaterTile.cs" />
      <Compile Include="Assets/Devion Games/Inventory System/Examples/Particle Effects/ShurikenMagic/Scripts/SM_Rotate.cs" />
      <Compile Include="Assets/Devion Games/Third Person Controller/Example/Particles/Impact/Scripts/AutoDestruct.cs" />
      <Compile Include="Assets/StarterAssets/Mobile/Scripts/VirtualInputs/UIVirtualJoystick.cs" />
      <Compile Include="Assets/StarterAssets/Mobile/Scripts/VirtualInputs/UIVirtualTouchZone.cs" />
      <Compile Include="Assets/Devion Games/Inventory System/Examples/Particle Effects/ShurikenMagic/Scripts/SM_RandomScale.cs" />
+     <Compile Include="Assets/Devion Games/Triggers/Integrations/UI Widgets/Scripts/Runtime/Show.cs" />
+     <Compile Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Water4/Sources/Scripts/Displace.cs" />
      <Compile Include="Assets/StarterAssets/FirstPersonController/Scripts/BasicRigidBodyPush.cs" />
      <Compile Include="Assets/StarterAssets/TutorialInfo/Scripts/Readme.cs" />
+     <Compile Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Water4/Sources/Scripts/PlanarReflection.cs" />
      <Compile Include="Assets/StarterAssets/ThirdPersonController/Scripts/ThirdPersonController.cs" />
+     <Compile Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Water4/Sources/Scripts/WaterBase.cs" />
+     <Compile Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Water4/Sources/Scripts/GerstnerDisplace.cs" />
      <Compile Include="Assets/Devion Games/Inventory System/Examples/Particle Effects/ShurikenMagic/Scripts/SM_PrefabGenerator.cs" />
      <None Include="Assets/Devion Games/Standard Assets/Prototyping/Shaders/WorldCoordDiffuse.shader" />
      <None Include="Assets/Devion Games/Inventory System/Changes.txt" />
+     <None Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Water4/Sources/Shaders/WaterInclude.cginc" />
+     <None Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Water4/Sources/Shaders/FX-Water4.shader" />
      <None Include="Assets/Devion Games/Triggers/Rename Action Info.txt" />
      <None Include="Assets/UMA/InternalDataStore/InGame/Resources/Shader/NormalShader.compute" />
      <None Include="Assets/Devion Games/Triggers/Changes.txt" />
      <None Include="Assets/Devion Games/Third Person Controller/Example/Particles/Impact/Shaders/Additive Alpha8.shader" />
      <None Include="Assets/StarterAssets/Environment/Shaders/Built-in_RP/Triplanar.shader" />
-     <None Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Water4/Sources/Shaders/FX-Water4.shader" />
-     <None Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Water4/Sources/Shaders/FX-SimpleWater4.shader" />
      <None Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Sources/Shaders/FX-Water.shader" />
      <None Include="Assets/UMA/InternalDataStore/InGame/Resources/PlaceholderAssets/PlaceholderAssetsREADME.txt" />
      <None Include="Assets/StarterAssets/license.txt" />
      <None Include="Assets/UMA/InternalDataStore/AssetVersion.xml" />
      <None Include="Assets/UMA/Whats New in UMA.txt" />
+     <None Include="Assets/Devion Games/Standard Assets/Water (Pro Only)/Water4/Sources/Shaders/FX-SimpleWater4.shader" />
      <None Include="Assets/Devion Games/Third Person Controller/Changes.txt" />
+     <None Include="Assets/Devion Games/UI Widgets/Changes.txt" />
      <None Include="Assets/Devion Games/Stat System/Changes.txt" />
      <None Include="Assets/StarterAssets/Environment/Shaders/Built-in_RP/ArmatureShader.shader" />
     <Reference Include="UnityEngine">
@@ -684,83 +695,27 @@
     <Reference Include="mscorlib">
         <HintPath>/home/tinka/Unity/Hub/Editor/2021.3.11f1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/mscorlib.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.VisualScripting.Flow.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VSCode.Editor">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core.Editor">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.VisualScripting.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State.Editor">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.VisualScripting.State.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InputSystem">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Services.Core">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.Services.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.VisualScripting.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Cinemachine">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Services.Core.Analytics">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.Services.Core.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.cinemachine.editor">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Shared.Editor">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Services.Core.Environments">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.Services.Core.Environments.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State">
-        <HintPath>/home/tinka/Zenva/Under Development/Extending Proc Gen E21/Library/ScriptAssemblies/Unity.VisualScripting.State.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{ad7b9b59-3dea-797e-903d-f201cb8e6770}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Flow.Editor.csproj">
+      <Project>{41917960-56c6-68d9-7ee7-cb751bae1242}</Project>
+      <Name>Unity.VisualScripting.Flow.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VSCode.Editor.csproj">
+      <Project>{3ba2fbcf-367c-ba8d-27d0-8a0a7b242f9a}</Project>
+      <Name>Unity.VSCode.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
+      <Project>{bb580cab-a3f7-2caf-4e53-dd60ad08d140}</Project>
+      <Name>Unity.TextMeshPro.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualStudio.Editor.csproj">
+      <Project>{e1d15d3f-6125-157c-9f97-211fda23a5d3}</Project>
+      <Name>Unity.VisualStudio.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UMA_Examples_Editor.csproj">
       <Project>{3c6b085c-85e8-90e1-cff4-5b1b9cd31e56}</Project>
@@ -770,17 +725,81 @@
       <Project>{eda373f6-39dc-04a6-ae7d-8831f2d47481}</Project>
       <Name>DevionGames.Graphs</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Timeline.csproj">
+      <Project>{74c6f1b2-7fac-a11f-9e5f-d81b680a7d7b}</Project>
+      <Name>Unity.Timeline</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Core.Editor.csproj">
+      <Project>{8e84e465-bbbd-9181-c9f6-bd23f064cc38}</Project>
+      <Name>Unity.VisualScripting.Core.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.TextMeshPro.csproj">
+      <Project>{15c476c3-07f1-f43a-7196-a58c8a9502c9}</Project>
+      <Name>Unity.TextMeshPro</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.State.Editor.csproj">
+      <Project>{2682c492-beac-b3e4-7afc-05570a0a3565}</Project>
+      <Name>Unity.VisualScripting.State.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj">
+      <Project>{df90f597-7b05-8247-55f3-8cb4e80df895}</Project>
+      <Name>Unity.VisualScripting.SettingsProvider.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="DevionGames.ThirdPersonController.csproj">
       <Project>{2ef15d6d-6bda-02be-a651-b2661e1b0bd6}</Project>
       <Name>DevionGames.ThirdPersonController</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Flow.csproj">
+      <Project>{176d16bb-17b9-82fd-0ae8-ab3db218bf7e}</Project>
+      <Name>Unity.VisualScripting.Flow</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{c0c818f7-e142-e675-f5ac-ba37716dea85}</Project>
+      <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.InputSystem.csproj">
+      <Project>{4cec7cdf-f44f-ab0d-85c7-3c1a1f531cb0}</Project>
+      <Name>Unity.InputSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Rider.Editor.csproj">
+      <Project>{4617d9ba-a264-eb5b-0dd5-dbefa56b3e1b}</Project>
+      <Name>Unity.Rider.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.PlasticSCM.Editor.csproj">
+      <Project>{685119c3-ca9f-d1bc-56aa-4d40deb3cd52}</Project>
+      <Name>Unity.PlasticSCM.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{5bafcc04-31ef-ea4d-3077-f3fbbdd1a560}</Project>
+      <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Services.Core.csproj">
+      <Project>{5f8b5451-aa71-f5d5-567f-1d2f2f6329d7}</Project>
+      <Name>Unity.Services.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Core.csproj">
+      <Project>{e293bec1-122c-2449-d156-c07389536acc}</Project>
+      <Name>Unity.VisualScripting.Core</Name>
     </ProjectReference>
     <ProjectReference Include="DevionGames.StatSystem.csproj">
       <Project>{f28c10d2-73c2-3450-e467-d4f6aa8b2783}</Project>
       <Name>DevionGames.StatSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="Cinemachine.csproj">
+      <Project>{22800aaf-3f64-7960-a793-07a18ccd33c8}</Project>
+      <Name>Cinemachine</Name>
+    </ProjectReference>
     <ProjectReference Include="DevionGames.Utilities.csproj">
       <Project>{a08023b0-7b64-941c-c8a2-f909447bd8d8}</Project>
       <Name>DevionGames.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Services.Core.Analytics.csproj">
+      <Project>{92d1c1ee-6fab-3ba8-c3ee-3f6630bbb502}</Project>
+      <Name>Unity.Services.Core.Analytics</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
+      <Project>{65415bc0-be91-50be-1e67-1d881cccdc00}</Project>
+      <Name>com.unity.cinemachine.editor</Name>
     </ProjectReference>
     <ProjectReference Include="UMA_Content.csproj">
       <Project>{4da9db42-82ac-f760-1f9b-f254b9174f9c}</Project>
@@ -790,13 +809,25 @@
       <Project>{9af513ed-efcf-755e-0137-1f4ce605b57c}</Project>
       <Name>DevionGames.Triggers</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Shared.Editor.csproj">
+      <Project>{c18336d5-bb92-ad52-c7b0-3ecacd98b2cf}</Project>
+      <Name>Unity.VisualScripting.Shared.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="DevionGames.InventorySystem.csproj">
       <Project>{39dbd732-f921-400e-6b57-0ff1d17faaa9}</Project>
       <Name>DevionGames.InventorySystem</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Services.Core.Environments.csproj">
+      <Project>{63d8ef1e-294e-cbbf-2d88-067da307e1f2}</Project>
+      <Name>Unity.Services.Core.Environments</Name>
+    </ProjectReference>
     <ProjectReference Include="UMA_Examples.csproj">
       <Project>{867b398b-158d-b73d-d738-09899387be05}</Project>
       <Name>UMA_Examples</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Timeline.Editor.csproj">
+      <Project>{9c470aa8-04e0-d810-c3af-c6863d4683dd}</Project>
+      <Name>Unity.Timeline.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UMA_Core.csproj">
       <Project>{b95717e0-15fb-9c06-8465-55d95607b6bf}</Project>
@@ -817,6 +848,10 @@
     <ProjectReference Include="UMA_Core_Editor.csproj">
       <Project>{0c0aa878-6b17-edf7-e3a3-923e0a65db86}</Project>
       <Name>UMA_Core_Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.State.csproj">
+      <Project>{624a1825-d89b-438c-c439-bcafc0b3b133}</Project>
+      <Name>Unity.VisualScripting.State</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
