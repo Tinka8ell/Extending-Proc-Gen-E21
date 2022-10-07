@@ -28,8 +28,8 @@ I am looking to create a "Survival" RPG based on generated islands.
 1. [Better animations](#better-animations)
 1. [Devion Inventory System](#devion-inventory-system)
    * Managed to get inventory working with UMA, but not got Devion 3rd Person Working
-1. [Back to Annimations]
-   * Lets try and extend Starter Assets 3rd P to Devion animations
+1. [Back to Annimations](#back-to-annimations)
+   * Lets try and extend Starter Assets 3rd Person to Devion animations
    * Also look at Getting UI to use new input manager
 1. [The next stage](#the-next-stage)
    * [Clothing and Decoration](#clothing-and-decoration)
@@ -222,6 +222,38 @@ Started looking at other anmations so my UMA does not look like a robot!
 * Now we need to extra annimations from Devion ...
 
 ### Back to Annimations
+
+* Well that was not as expected:
+  * Lets try and extend Starter Assets 3rd Person to Devion animations
+    * After lots of research and all else, did not get anywhere
+  * Also look at Getting UI to use new input manager
+    * Also much research, and I can see how it could be done, but
+      * there are lots of places where Input.Get... would need to be replaced
+      * there is so much tied into the Devion structure and MotionState and ...
+* Got the Devion 3rd Person Controller to work
+  * There was an issue with "falling" and resolved it by re-instating grounding -> stop motion
+  * Discovered that there were mutiple "attachements" the the default avatar rig
+* UMA-ified the Devion Default Avatar
+  * Replace the rig with the UMA one
+  * Added the Left and Right Hand Item slots
+  * Added the "face cam" to provide the icon picture for the stats UI as well
+  * Only thing that does not work correctly is the attachment of equipment
+    * Goes to the right place, but the orientation is all wrong, 
+    but that is common - got to re-watch the YouTube video on it.
+* Now I want to get the "look" right
+  * tatty cloths
+  * more realistic body (less muscular)
+  * Would be nice to add a create avatar scene to select features
+    * limit available features to "pale" and "unfit" options
+    * so during game time you get more fit and weathered ;-)
+    * may be consider starting as a child / teen and grow up during the game?
+* Also want to introduce "floppy sleep"
+  * When the game starts, you are flopped where you we last / start using rag-doll
+  * As you "wake up" you stand up (realistically)
+  * The idea is start of game (or if you get disconnected when in water / below high tide) you "survive" on a pallet
+  * Intention is that ideally you leave the game by sleeping on a bed
+  * but if not you just collapse (Avatar-like) where you are (last saved) and start from there
+* Also want to introduce the biomes and tides and day / night
 
 ### The next stage
 
