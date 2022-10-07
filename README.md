@@ -31,6 +31,8 @@ I am looking to create a "Survival" RPG based on generated islands.
 1. [Back to Annimations](#back-to-annimations)
    * Lets try and extend Starter Assets 3rd Person to Devion animations
    * Also look at Getting UI to use new input manager
+1. [Day and Night](#day--night--tides)
+   * Try and get day / night cycle working
 1. [The next stage](#the-next-stage)
    * [Clothing and Decoration](#clothing-and-decoration)
    * [Inventory System](#inventory-system)
@@ -255,9 +257,56 @@ Started looking at other anmations so my UMA does not look like a robot!
   * but if not you just collapse (Avatar-like) where you are (last saved) and start from there
 * Also want to introduce the biomes and tides and day / night
 
+### Day and Night
+
+* Initially just the day / night cycle from the Survival Game
+* Love to add tides - running at 12.5h (1h 25m) cycle time
+  * Consider adding Spring and Neap tides ...
+  * Consider effect of storm surge?
+* Love to add swim trigger
+  * concider swim is tiring
+  * treading water is slow recovery
+  * what happens when exhausted?
+
 ### The next stage
 
 This is my bucket of things I think of...
+
+#### Crate Avatar Scene
+
+* A start up scene, where we can select
+  * Body shape
+  * Hair style
+  * Face features?
+  * Initially where I can try out cloth sets
+* May be use the Previewer for the ground to look upon
+
+#### Floppy sleep
+
+* Enable exit
+  * Avatar is saved
+  * Avatar goes floppy
+* Enable start / restart
+  * Avatar is created from save
+  * Avatar goes floppy
+  * Camera switches on (may be blurry to start with)
+  * Avater stands up 
+
+#### Day / Night / Tides
+
+* Use Survival Game to provide the lighting / sky as a basis
+* Use clock (from day / night cycle) to adjust height of sea
+* Enable sea as trigger for the avatar to swim
+* Look at introducing the floating emulation code to create waves?
+* Add the ability for items to float and be caried by current
+
+#### Generate equipment from the Survival Game
+
+* this is more an exercide in the ease of building things
+* use the items from the game
+* create their prefabs and presence in the datase
+* include the building, fire and crafting table
+* look at "sleeping" on the bed!
 
 #### Clothing and Decoration
 
