@@ -260,6 +260,22 @@ Started looking at other anmations so my UMA does not look like a robot!
 ### Day and Night
 
 * Initially just the day / night cycle from the Survival Game
+  * Implemented, but has limitations
+    * There does not seem to be a moon as the SkyBox only uses one light source
+  * Found another system that also generates stars ...
+    * [ReCogMission Tutorial](https://www.youtube.com/watch?v=mPS_nRwh_dM)
+    * [ReCogMission Code](https://github.com/ReCogMission/FirstTutorials)
+    * Incoporated the DayNightController script with additions:
+      * Use computer time * speed to get game time
+        * Change Update() to be a coroutine, so we can reduce the number of updates per second!
+      * Initialise the sun driection using localEulerAngles, so we can put it in a box and turn it.
+        * The system works fine moving the sun from North to South, but we want to go East to West
+        * By mouning the "Sun" in a GameObject (EastWest), and rotating that object (0, -90, 0) we now go E-W!
+      * Modularised the motion and added moon with different cycle lenght
+      * Lighting is funny.  
+        * Some items glow in the dark (e.g. bushes and the ground) and others go black!
+        * Need to fix this and and night sky
+
 * Love to add tides - running at 12.5h (1h 25m) cycle time
   * Consider adding Spring and Neap tides ...
   * Consider effect of storm surge?
