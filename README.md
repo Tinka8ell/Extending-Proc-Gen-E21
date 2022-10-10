@@ -32,7 +32,10 @@ I am looking to create a "Survival" RPG based on generated islands.
    * Lets try and extend Starter Assets 3rd Person to Devion animations
    * Also look at Getting UI to use new input manager
 1. [Day and Night](#day--night--tides)
-   * Try and get day / night cycle working
+   * Got the day / night cycle working with tides
+1. [Time to Add Scenes](#time-to-add-scenes)
+   * Start Game
+   * Create Avatar
 1. [The next stage](#the-next-stage)
    * [Clothing and Decoration](#clothing-and-decoration)
    * [Inventory System](#inventory-system)
@@ -287,13 +290,10 @@ Started looking at other anmations so my UMA does not look like a robot!
         * the Tides class that that subscribes to the DayNightController.TideMovedEvent to control:
           * whatever it is on (SeaObject) raise and lower it by the tide movement
 
-* Love to add tides - running at 12.5h (1h 25m) cycle time
-  * Consider adding Spring and Neap tides ...
-  * Consider effect of storm surge?
-* Love to add swim trigger
-  * concider swim is tiring
-  * treading water is slow recovery
-  * what happens when exhausted?
+### Time to add scenes
+
+* Want to add Game Start Scene
+* Want to add an Avatar creator screen / combined with the save system
 
 ### The next stage
 
@@ -321,15 +321,22 @@ This is my bucket of things I think of...
 
 #### Day / Night / Tides
 
-* Use Survival Game to provide the lighting / sky as a basis
-* Use clock (from day / night cycle) to adjust height of sea
+* Use Survival Game to provide the lighting / sky as a basis - done
+* Use clock (from day / night cycle) to adjust height of sea - done
 * Enable sea as trigger for the avatar to swim
 * Look at introducing the floating emulation code to create waves?
 * Add the ability for items to float and be caried by current
+* Love to expand the tides - running at 12.5h (1h 25m) cycle time
+  * Consider adding Spring and Neap tides ...
+  * Consider effect of storm surge?
+* Love to add swim trigger
+  * concider swim as more tiring than walking
+  * treading water is slow recovery?
+  * what happens when exhausted?
 
 #### Generate equipment from the Survival Game
 
-* this is more an exercide in the ease of building things
+* this is more an exercise in the ease of building things
 * use the items from the game
 * create their prefabs and presence in the datase
 * include the building, fire and crafting table
