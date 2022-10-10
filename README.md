@@ -274,7 +274,18 @@ Started looking at other anmations so my UMA does not look like a robot!
       * Modularised the motion and added moon with different cycle lenght
       * Lighting is funny.  
         * Some items glow in the dark (e.g. bushes and the ground) and others go black!
-        * Need to fix this and and night sky
+        * Need to fix this
+      * Added the Sky at Night too
+        * Can't see the stars in the sky, but can reflected in the sea?
+      * Using pub / sub to notify ScatterMyStars when they have moved
+      * Expanced and reorged the classes to create: 
+        * a GameManager class to control time
+        * the DayNightController that subscribes to the GameManager.GameClockTickEvent to control: 
+          * the sun, 
+          * the moon and 
+          * the stars
+        * the Tides class that that subscribes to the DayNightController.TideMovedEvent to control:
+          * whatever it is on (SeaObject) raise and lower it by the tide movement
 
 * Love to add tides - running at 12.5h (1h 25m) cycle time
   * Consider adding Spring and Neap tides ...

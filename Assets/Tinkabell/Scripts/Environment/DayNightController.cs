@@ -27,21 +27,13 @@ using UnityEngine.Events;
 
 public class DayNightController : MonoBehaviour
 {
-	[Header("Time Control")]
-    [SerializeField] private float angleAtNoon;
-    [SerializeField] private Vector3 hourMinuteSecond = new Vector3(6f, 0f, 0f), hmsSunSet = new Vector3(18f, 0f, 0f);
-    [SerializeField] public float speed = 100;
-    [SerializeField] private float period = 1f; // period for environment changes
-    [SerializeField] public long days = 0;
-    //[NonSerialized] 
-    public float time;
-    
-    [Header("Other data")]
+    [Header("Sun")]
     [SerializeField] private LightInSky sunData;
-    [SerializeField] private LightInSky moonData;
-
-
+    [SerializeField] private Vector3 hmsSunSet = new Vector3(18f, 0f, 0f);
     [SerializeField] private Color fogColorDay = Color.grey, fogColorNight = Color.black;
+
+    [Header("Moon")]
+    [SerializeField] private LightInSky moonData;
 
     [Header("Stars")]
     [SerializeField] private Transform starsTransform;
@@ -53,17 +45,18 @@ public class DayNightController : MonoBehaviour
     private Color tintColor = new Color(1f, 1f, 1f, 1f);
     private Renderer rend;
     private long startTime;
-    public bool timeRunning = true;
 
     // constants
-    private static long seconsInDay = 24 * 60 * 60; // 86400;
-    private static float timeToDegrees =  360f / seconsInDay;
-    private static float halfDay = seconsInDay / 2;  // 43200;
-    private static float quarterDay = seconsInDay / 4;  // 21600;
-    private static float moonToSunRatio = HMS_to_Time(24, 50, 0) / seconsInDay; // how much slower the mmon is
+    private static float timeToDegrees =  360f / GameManager.wholeDay;
+    private static float moonToSunRatio = GameManager.HMS_to_Time(24, 50, 0) / GameManager.wholeDay; // how much slower the mmon is
 
     public UnityEvent<float> WorldSpunEvent;
     public UnityEvent<float> TideMovedEvent;
+
+    // internals
+    private float speed;
+    private long time;
+    private long days;
 
     void Start()
     {
@@ -82,89 +75,76 @@ public class DayNightController : MonoBehaviour
             starsTransform = stars.transform;
             rend = stars.GetComponent<Renderer>();
         }
-        
+
         // set up times
-        sunSet = HMS_to_Time(hmsSunSet);
-        timeLight = HMS_to_Time(hmsStarsLight);
-        timeExtinguish = HMS_to_Time(hmsStarsExtinguish);
+        sunSet = GameManager.HMS_to_Time(hmsSunSet);
+        timeLight = GameManager.HMS_to_Time(hmsStarsLight);
+        timeExtinguish = GameManager.HMS_to_Time(hmsStarsExtinguish);
 
         // claculate special times
-        sunRise = seconsInDay - sunSet;
-        sunDayRatio = (sunSet - sunRise) / halfDay;
+        sunRise = GameManager.wholeDay - sunSet;
+        sunDayRatio = (sunSet - sunRise) / GameManager.halfDay;
+        speed = GameManager.Instance.Speed;
         starsFadeInTime /= speed;
         starsFadeOutTime /= speed;
-        // fade = 0;
-        // prev_rotation = 0f;
-        // startTime = (long) DateTime.Now.Date.TimeOfDay.TotalSeconds; // set to the beginning of today!
 
-        startTime = (long) DateTime.Now.TimeOfDay.TotalSeconds; // set to now
-        float offset = HMS_to_Time(hourMinuteSecond) / speed;
-        startTime -= (long) offset; // move back so now appears as time set in editor
-        
-        StartCoroutine(SlowUpdate(1)); // start soon
+        GameManager.Instance.GameClockTickEvent.AddListener(WorldTurns);
     }
 
-    IEnumerator SlowUpdate(float delay)
-    {
-        yield return new WaitForSecondsRealtime(delay); // for first iteration
+    void WorldTurns(){
+        time = GameManager.Instance.Seconds;
+        days = GameManager.Instance.Days;
+        
+        rotation = (time - GameManager.quarterDay) * timeToDegrees;
 
-        while(timeRunning){
-            // update when we are
-            GetTime();
-            
-            rotation = (time - quarterDay) * timeToDegrees;
-            // Debug.LogFormat("Rotation: {0}, prev: {1}, delta: {2}", rotation, prev_rotation, (rotation - prev_rotation));
+        // do the sun
+        intensity = RotateLightInSky(sunData, rotation, prev_rotation);
 
-            // do the sun
-            intensity = RotateLightInSky(sunData, rotation, prev_rotation);
+        // do fog
+        RenderSettings.fogColor = Color.Lerp(fogColorNight, fogColorDay, intensity * intensity);
 
-            // do fog
-            RenderSettings.fogColor = Color.Lerp(fogColorNight, fogColorDay, intensity * intensity);
-
-            // do the stars
-            if (starsTransform != null) {
-                //spin round same axis as sun
-                starsTransform.Rotate(sunData.dir, rotation - prev_rotation);
-            }
-
-            float fade = 0f; // assume no stars (daytime
-            if (time > timeLight){
-                // after time to come out
-                fade = Math.Clamp((time - timeLight) / starsFadeInTime, 0f, 1f); 
-            }
-            else if (time < timeExtinguish){
-                // before time to go in
-                fade = Math.Clamp((timeExtinguish - time) / starsFadeOutTime, 0f, 1f); 
-            }
-            tintColor.a = fade;
-            if (rend != null) 
-                rend.material.SetColor("_TintColor", tintColor);
-            
-            WorldSpunEvent?.Invoke(rotation);
-
-            // do the moon
-            // convert rotation and days to moon rotation
-            float moonRotation = ConvertForMoon(rotation);
-            float moonPrevious = ConvertForMoon(prev_rotation);
-            RotateLightInSky(moonData, moonRotation, moonPrevious); // don't need the intensity
-
-            // prep for next iteration
-            prev_rotation = rotation;
-            yield return new WaitForSecondsRealtime(period); // so we can control how often things change
+        // do the stars
+        if (starsTransform != null) {
+            //spin round same axis as sun
+            starsTransform.Rotate(sunData.dir, rotation - prev_rotation);
         }
+
+        float fade = 0f; // assume no stars (daytime
+        if (time > timeLight){
+            // after time to come out
+            fade = Math.Clamp((time - timeLight) / starsFadeInTime, 0f, 1f); 
+        }
+        else if (time < timeExtinguish){
+            // before time to go in
+            fade = Math.Clamp((timeExtinguish - time) / starsFadeOutTime, 0f, 1f); 
+        }
+        tintColor.a = fade;
+        if (rend != null) 
+            rend.material.SetColor("_TintColor", tintColor);
+        
+        WorldSpunEvent?.Invoke(rotation);
+
+        // do the moon
+        // convert rotation and days to moon rotation
+        float moonRotation = ConvertForMoon(rotation);
+        float moonPrevious = ConvertForMoon(prev_rotation);
+        RotateLightInSky(moonData, moonRotation, moonPrevious); // don't need the intensity
+        TideMovedEvent?.Invoke(MathF.Sin(Mathf.Deg2Rad * moonRotation * 2)); // as two tides in a day
+
+        // prep for next iteration
+        prev_rotation = rotation;
     }
 
     private float RotateLightInSky (LightInSky lightInSky, float rotation, float prev_rotation){
         lightInSky.transform.Rotate(lightInSky.dir, rotation - prev_rotation);
 
         float intensity;
-        
         if (time < sunRise) intensity = lightInSky.intensityAtLowest * time / sunRise;
-        else if (time < 43200f) intensity = lightInSky.intensityAtLowest + (lightInSky.intensityAtHighest - lightInSky.intensityAtLowest) * (time - sunRise) / (43200f - sunRise);
-        else if (time < sunSet) intensity = lightInSky.intensityAtHighest - (lightInSky.intensityAtHighest - lightInSky.intensityAtLowest) * (time - 43200f) / (sunSet - 43200f);
-        else intensity = lightInSky.intensityAtLowest - (1f - lightInSky.intensityAtLowest) * (time - sunSet) / (86400f - sunSet);
+        else if (time < GameManager.halfDay) intensity = lightInSky.intensityAtLowest + (lightInSky.intensityAtHighest - lightInSky.intensityAtLowest) * (time - sunRise) / (GameManager.halfDay - sunRise);
+        else if (time < sunSet) intensity = lightInSky.intensityAtHighest - (lightInSky.intensityAtHighest - lightInSky.intensityAtLowest) * (time - GameManager.halfDay) / (sunSet - GameManager.halfDay);
+        else intensity = lightInSky.intensityAtLowest - (1f - lightInSky.intensityAtLowest) * (time - sunSet) / (GameManager.wholeDay - sunSet);
 
-        if (lightInSky.light != null) lightInSky.light.intensity = intensity;
+        lightInSky.light.intensity = intensity;
         return intensity;
     }
 
@@ -178,39 +158,6 @@ public class DayNightController : MonoBehaviour
         return rotation;
     }
 
-    private void GetTime(){
-        var now = DateTime.Now;
-        long currentTime = (long) now.TimeOfDay.TotalSeconds;
-        long lapseTime = currentTime - startTime; // how long since we started
-        long gameTime = lapseTime * (long) speed; // what is game time
-        days = gameTime / seconsInDay; // which daye we are
-        time = (float) (gameTime % seconsInDay); // game seconds in this day
-    }
-
-    private static float HMS_to_Time(Vector3 hms)
-    {
-        return HMS_to_Time(hms.x, hms.y, hms.z);
-    }
-
-    private static float HMS_to_Time(float hour, float minute, float second)
-    {
-        return 3600 * hour + 60 * minute + second;
-    }
-
-    private bool Time_Falls_Between(float currentTime, float startTime, float endTime)
-    {
-        if (startTime<endTime)
-        {
-            if (currentTime >= startTime && currentTime <= endTime) return true;
-            else return false;
-        }
-        else
-        {
-            if (currentTime < startTime && currentTime > endTime) return false;
-            else return true;
-        }
-        
-    }
 
 }
 
