@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /*
  * Taken from the sample code of ReCogMission, and heavily modified.
@@ -20,34 +21,36 @@ using UnityEngine;
  *       Added a dusk / dawn length about the sunrise and sunset
  *       Some items glow in the dark (e.g. bushes and the ground) and others go black!
  *       Want to modularise the motion so we can add moon with different cycle lenght
- *    Need to add the Sky at Night too.
+ *    Added the Sky at Night too, but can't see it!
+ *       Using pub / sub to notify ScatterMyStars when they have moved
  */
 
 public class DayNightController : MonoBehaviour
 {
-    [SerializeField] private Transform sunTransform;
-    [SerializeField] private Light sun;
+	[Header("Time Control")]
     [SerializeField] private float angleAtNoon;
     [SerializeField] private Vector3 hourMinuteSecond = new Vector3(6f, 0f, 0f), hmsSunSet = new Vector3(18f, 0f, 0f);
-    [SerializeField] public long days = 0;
     [SerializeField] public float speed = 100;
-    [SerializeField] private float intensityAtNoon = 1f, intensityAtSunSet = 0.5f;
-    [SerializeField] private Color fogColorDay = Color.grey, fogColorNight = Color.black;
-    [SerializeField] private Transform starsTransform;
-    [SerializeField] private Vector3 hmsStarsLight = new Vector3(19f, 30f, 0f), hmsStarsExtinguish = new Vector3(03f, 30f, 0f);
-    [SerializeField] private float starsFadeInTime = 7200f, starsFadeOutTime = 7200f;
-
     [SerializeField] private float period = 1f; // period for environment changes
+    [SerializeField] public long days = 0;
     //[NonSerialized] 
     public float time;
-
+    
+    [Header("Other data")]
     [SerializeField] private LightInSky sunData;
     [SerializeField] private LightInSky moonData;
 
 
-    private float intensity, rotation, prev_rotation = -1f, sunSet, sunRise, sunDayRatio, fade, timeLight, timeExtinguish;
-    private Color tintColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
-    private Vector3 dir;
+    [SerializeField] private Color fogColorDay = Color.grey, fogColorNight = Color.black;
+
+    [Header("Stars")]
+    [SerializeField] private Transform starsTransform;
+    [SerializeField] private Vector3 hmsStarsLight = new Vector3(19f, 30f, 0f), hmsStarsExtinguish = new Vector3(03f, 30f, 0f);
+    [SerializeField] private float starsFadeInTime = 7200f, starsFadeOutTime = 7200f;
+
+
+    private float intensity, rotation = 0f, prev_rotation = 0f, sunSet, sunRise, sunDayRatio, fade, timeLight, timeExtinguish;
+    private Color tintColor = new Color(1f, 1f, 1f, 1f);
     private Renderer rend;
     private long startTime;
     public bool timeRunning = true;
@@ -59,26 +62,44 @@ public class DayNightController : MonoBehaviour
     private static float quarterDay = seconsInDay / 4;  // 21600;
     private static float moonToSunRatio = HMS_to_Time(24, 50, 0) / seconsInDay; // how much slower the mmon is
 
+    public UnityEvent<float> WorldSpunEvent;
+    public UnityEvent<float> TideMovedEvent;
+
     void Start()
     {
-        if (starsTransform != null) 
-            rend = starsTransform?.GetComponent<ParticleSystem>().GetComponent<Renderer>();
-        time = HMS_to_Time(hourMinuteSecond);
+        var lights = FindObjectsOfType<Light>();
+        // set up sun
+        sunData.SetDir();
+        sunData.SetLight(lights, Vector3.zero);
+
+        // set up moon
+        moonData.SetDir();
+        moonData.SetLight(lights, Vector3.right * 180f);
+
+        // set up stars
+        if (starsTransform == null) {
+            var stars = GetComponent<ParticleSystem>();
+            starsTransform = stars.transform;
+            rend = stars.GetComponent<Renderer>();
+        }
+        
+        // set up times
         sunSet = HMS_to_Time(hmsSunSet);
-        sunRise = seconsInDay - sunSet;
-        sunDayRatio = (sunSet - sunRise) / halfDay;
-        dir = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angleAtNoon), Mathf.Sin(Mathf.Deg2Rad * angleAtNoon), 0f);
-        // dir = new Vector3(1f, 0f, 0f); 
-        starsFadeInTime /= speed;
-        starsFadeOutTime /= speed;
-        fade  = 0;
         timeLight = HMS_to_Time(hmsStarsLight);
         timeExtinguish = HMS_to_Time(hmsStarsExtinguish);
 
-        // initialise the previous position
-        sunTransform.localEulerAngles = Vector3.zero; // may be ? eulerAngles
-        prev_rotation = 0f;
-        startTime = (long) DateTime.Now.Date.TimeOfDay.TotalSeconds; // set to the beginning of today!
+        // claculate special times
+        sunRise = seconsInDay - sunSet;
+        sunDayRatio = (sunSet - sunRise) / halfDay;
+        starsFadeInTime /= speed;
+        starsFadeOutTime /= speed;
+        // fade = 0;
+        // prev_rotation = 0f;
+        // startTime = (long) DateTime.Now.Date.TimeOfDay.TotalSeconds; // set to the beginning of today!
+
+        startTime = (long) DateTime.Now.TimeOfDay.TotalSeconds; // set to now
+        float offset = HMS_to_Time(hourMinuteSecond) / speed;
+        startTime -= (long) offset; // move back so now appears as time set in editor
         
         StartCoroutine(SlowUpdate(1)); // start soon
     }
@@ -97,31 +118,35 @@ public class DayNightController : MonoBehaviour
             // do the sun
             intensity = RotateLightInSky(sunData, rotation, prev_rotation);
 
-            // do the moon
-            // convert rotation and days to moon rotation
-            float moonRotation = ConvertForMoon(rotation);
-            float moonPrevious = ConvertForMoon(prev_rotation);
-            intensity = RotateLightInSky(moonData, moonRotation, moonPrevious);
-
-            // do the stars
-            if (starsTransform != null) 
-                starsTransform.Rotate(dir, rotation - prev_rotation);
-
+            // do fog
             RenderSettings.fogColor = Color.Lerp(fogColorNight, fogColorDay, intensity * intensity);
 
-            if (Time_Falls_Between(time, timeLight, timeExtinguish))
-            {
-                fade += Time.deltaTime / starsFadeInTime;
-                if (fade > 1f) fade = 1f;
+            // do the stars
+            if (starsTransform != null) {
+                //spin round same axis as sun
+                starsTransform.Rotate(sunData.dir, rotation - prev_rotation);
             }
-            else
-            {
-                fade -= Time.deltaTime / starsFadeOutTime;
-                if (fade < 0f) fade = 0f;
+
+            float fade = 0f; // assume no stars (daytime
+            if (time > timeLight){
+                // after time to come out
+                fade = Math.Clamp((time - timeLight) / starsFadeInTime, 0f, 1f); 
+            }
+            else if (time < timeExtinguish){
+                // before time to go in
+                fade = Math.Clamp((timeExtinguish - time) / starsFadeOutTime, 0f, 1f); 
             }
             tintColor.a = fade;
             if (rend != null) 
                 rend.material.SetColor("_TintColor", tintColor);
+            
+            WorldSpunEvent?.Invoke(rotation);
+
+            // do the moon
+            // convert rotation and days to moon rotation
+            float moonRotation = ConvertForMoon(rotation);
+            float moonPrevious = ConvertForMoon(prev_rotation);
+            RotateLightInSky(moonData, moonRotation, moonPrevious); // don't need the intensity
 
             // prep for next iteration
             prev_rotation = rotation;
@@ -130,13 +155,14 @@ public class DayNightController : MonoBehaviour
     }
 
     private float RotateLightInSky (LightInSky lightInSky, float rotation, float prev_rotation){
-        lightInSky.transform.Rotate(dir, rotation - prev_rotation);
+        lightInSky.transform.Rotate(lightInSky.dir, rotation - prev_rotation);
 
         float intensity;
-        if (time < sunRise) intensity = intensityAtSunSet * time / sunRise;
-        else if (time < 43200f) intensity = intensityAtSunSet + (intensityAtNoon - intensityAtSunSet) * (time - sunRise) / (43200f - sunRise);
-        else if (time < sunSet) intensity = intensityAtNoon - (intensityAtNoon - intensityAtSunSet) * (time - 43200f) / (sunSet - 43200f);
-        else intensity = intensityAtSunSet - (1f - intensityAtSunSet) * (time - sunSet) / (86400f - sunSet);
+        
+        if (time < sunRise) intensity = lightInSky.intensityAtLowest * time / sunRise;
+        else if (time < 43200f) intensity = lightInSky.intensityAtLowest + (lightInSky.intensityAtHighest - lightInSky.intensityAtLowest) * (time - sunRise) / (43200f - sunRise);
+        else if (time < sunSet) intensity = lightInSky.intensityAtHighest - (lightInSky.intensityAtHighest - lightInSky.intensityAtLowest) * (time - 43200f) / (sunSet - 43200f);
+        else intensity = lightInSky.intensityAtLowest - (1f - lightInSky.intensityAtLowest) * (time - sunSet) / (86400f - sunSet);
 
         if (lightInSky.light != null) lightInSky.light.intensity = intensity;
         return intensity;
@@ -191,9 +217,28 @@ public class DayNightController : MonoBehaviour
 [Serializable]
 public class LightInSky{
 
-    public Transform transform;
+    public string name = "Sun";
     public Light light;
+    public Transform transform;
     public float angleFromHighest;
+    [NonSerialized] public Vector3 dir; // calculated from angleFromHighest
     public float intensityAtHighest = 1f, intensityAtLowest = 0.5f;
-    public Color fogColorUp = Color.grey, fogColorDown = Color.black;
+
+    public void SetDir(){
+        float angle = Mathf.Deg2Rad * angleFromHighest;
+        dir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f);
+    }
+
+    public void SetLight(Light[] lights, Vector3 startDir){
+        if (light == null){
+            light = Array.Find(lights, light => light.name.StartsWith(name));
+            transform = light.transform;
+        }
+        if (transform == null){
+            transform = light.transform;
+        }
+        // initialise the previous position
+        transform.localEulerAngles = startDir; // may be ? eulerAngles
+    }
+
 }

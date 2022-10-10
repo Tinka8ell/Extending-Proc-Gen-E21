@@ -60,6 +60,7 @@
      <Compile Include="Assets/Devion Games/Inventory System/Examples/Particle Effects/ShurikenMagic/Scripts/SM_PrefabGenerator.cs" />
      <None Include="Assets/Devion Games/Standard Assets/Prototyping/Shaders/WorldCoordDiffuse.shader" />
      <None Include="Assets/Devion Games/Inventory System/Changes.txt" />
+     <None Include="Assets/Tinkabell/Materials/StarShader.shader" />
      <None Include="Assets/Devion Games/Triggers/Rename Action Info.txt" />
      <None Include="Assets/UMA/InternalDataStore/InGame/Resources/Shader/NormalShader.compute" />
      <None Include="Assets/Devion Games/Triggers/Changes.txt" />
@@ -734,6 +735,10 @@
     <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj">
       <Project>{df90f597-7b05-8247-55f3-8cb4e80df895}</Project>
       <Name>Unity.VisualScripting.SettingsProvider.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.2D.Sprite.Editor.csproj">
+      <Project>{8e686c7b-27ca-1b9b-d852-3ba23b850b68}</Project>
+      <Name>Unity.2D.Sprite.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="DevionGames.ThirdPersonController.csproj">
       <Project>{2ef15d6d-6bda-02be-a651-b2661e1b0bd6}</Project>
