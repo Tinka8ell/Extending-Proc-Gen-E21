@@ -293,7 +293,18 @@ Started looking at other anmations so my UMA does not look like a robot!
 ### Time to add scenes
 
 * Want to add Game Start Scene
-* Want to add an Avatar creator screen / combined with the save system
+  * Initial screen:
+    * Use a simple (unmoving main Camera), pointing east at:
+    * Generate Terrain for a known scene as background
+    * Modify the "Menu" UI to create "Start" menu
+      * add an extra "New" button
+      * change "LoadSave" into just "Load"
+    * Make the initial GameManager the "player" location for the MapGenerator
+  * To do:
+    * Need to make the "X" into the "Exit" action
+    * Need to get close on "Options" (and possibly "Load") to return to "Start" menu
+    * Wire up the "Load" and "New" buttons (new go to New Screne)
+  * Want to add an Avatar creator screen / combined with the save system
 
 ### The next stage
 

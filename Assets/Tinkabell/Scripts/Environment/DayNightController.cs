@@ -88,6 +88,12 @@ public class DayNightController : MonoBehaviour
         starsFadeInTime /= speed;
         starsFadeOutTime /= speed;
 
+        // extinguish stars before we start
+        tintColor.a = 0;
+        if (rend != null) 
+            rend.material.SetColor("_TintColor", tintColor);
+
+        // Start main (slow loop)
         GameManager.Instance.GameClockTickEvent.AddListener(WorldTurns);
     }
 
