@@ -142,14 +142,16 @@ public class DayNightController : MonoBehaviour
     }
 
     private float RotateLightInSky (LightInSky lightInSky, float rotation, float prev_rotation){
+        float intensity = -1;
+        if (!lightInSky.transform) return intensity;
         lightInSky.transform.Rotate(lightInSky.dir, rotation - prev_rotation);
 
-        float intensity;
         if (time < sunRise) intensity = lightInSky.intensityAtLowest * time / sunRise;
         else if (time < GameManager.halfDay) intensity = lightInSky.intensityAtLowest + (lightInSky.intensityAtHighest - lightInSky.intensityAtLowest) * (time - sunRise) / (GameManager.halfDay - sunRise);
         else if (time < sunSet) intensity = lightInSky.intensityAtHighest - (lightInSky.intensityAtHighest - lightInSky.intensityAtLowest) * (time - GameManager.halfDay) / (sunSet - GameManager.halfDay);
         else intensity = lightInSky.intensityAtLowest - (1f - lightInSky.intensityAtLowest) * (time - sunSet) / (GameManager.wholeDay - sunSet);
 
+        if (!lightInSky.light) return intensity;
         lightInSky.light.intensity = intensity;
         return intensity;
     }

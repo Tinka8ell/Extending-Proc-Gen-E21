@@ -305,6 +305,9 @@ Started looking at other anmations so my UMA does not look like a robot!
     * Wired up the "New" button to go to the New Screne (Avatar Creator Scene)
   * Added an Avatar creator screen
     * Initially just a clone of the UMA sample screen
+  * Added world load and save
+    * Just associating a name with HeightmapSettings
+    * Added links from GameManger through TerrainGenerator to HightMapSettings
   * To do:
     * Design the Game load and save and new
       * The world
@@ -322,6 +325,7 @@ Started looking at other anmations so my UMA does not look like a robot!
         * When was it last seen
         * Is that per chunck, per island?
       * The avatar
+        * Need to associate Player with World and World Instance
         * Where and when and inventory
         * What about camp stores?
       * The current time - what is our base (temp and long term)
