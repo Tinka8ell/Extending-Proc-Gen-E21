@@ -11,6 +11,8 @@ public class TerrainGenerator : MonoBehaviour {
 	public int colliderLODIndex;
 	public LODInfo[] detailLevels;
 
+	public string WorldName = "Default";
+
 	public MeshSettings meshSettings;
 	public HeightMapSettings heightMapSettings;
 	public TextureData textureSettings;
@@ -28,6 +30,19 @@ public class TerrainGenerator : MonoBehaviour {
 
 	Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
 	List<TerrainChunk> visibleTerrainChunks = new List<TerrainChunk>();
+
+	/* Awake
+	 * Load the HeightMapSettings, for this world
+	 */
+	void Awake(){
+		if (heightMapSettings == null){
+			GameManager gameManager = GameManager.Instance;
+			WorldName = gameManager.WorldName;
+			Debug.Log("Loading world '" + WorldName + "'heightMapSettings");
+			heightMapSettings = new HeightMapSettings();
+			heightMapSettings.Load(WorldName);
+		}
+	}
 
 	/* On Start of the Terrain Generator:
 	 * Set up mapMaterial using textureSettings and heightMapSettings min and max Height

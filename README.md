@@ -300,11 +300,32 @@ Started looking at other anmations so my UMA does not look like a robot!
       * add an extra "New" button
       * change "LoadSave" into just "Load"
     * Make the initial GameManager the "player" location for the MapGenerator
+    * The "X" does the "Exit" action
+    * Close on "Options" and "Load" to return to "Start" menu properly
+    * Wired up the "New" button to go to the New Screne (Avatar Creator Scene)
+  * Added an Avatar creator screen
+    * Initially just a clone of the UMA sample screen
   * To do:
-    * Need to make the "X" into the "Exit" action
-    * Need to get close on "Options" (and possibly "Load") to return to "Start" menu
-    * Wire up the "Load" and "New" buttons (new go to New Screne)
-  * Want to add an Avatar creator screen / combined with the save system
+    * Design the Game load and save and new
+      * The world
+        * Is defined by:
+          * MeshSettings - fixed by game
+          * TextureData - fixed by game
+          * HeightMapSettings 
+            * could be changed to give new world type
+            * needs to be serialisable and so loadable 
+            * will need a Design Scene, pobabaly using the Preview GameObject with a load and save option
+        * What state
+          * Record regenerate data per chunk, with a when (see below)
+          * Do we need to remember the spaces outside of the island?  (All Sea Chunks)
+          * What happens if we manage to get to a new island?
+        * When was it last seen
+        * Is that per chunck, per island?
+      * The avatar
+        * Where and when and inventory
+        * What about camp stores?
+      * The current time - what is our base (temp and long term)
+    * Wire up the "Load" button, one the above it sorted
 
 ### The next stage
 

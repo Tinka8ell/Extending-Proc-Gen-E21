@@ -43,6 +43,7 @@
      <Compile Include="Assets/Devion Games/Inventory System/Examples/Particle Effects/ShurikenMagic/Scripts/SM_DestroyTimed.cs" />
      <Compile Include="Assets/Devion Games/Triggers/Integrations/UI Widgets/Scripts/Runtime/YesNoDialog.cs" />
      <Compile Include="Assets/StarterAssets/FirstPersonController/Scripts/FirstPersonController.cs" />
+     <Compile Include="Assets/Tinkabell/Scenes/SceneChanger.cs" />
      <Compile Include="Assets/StarterAssets/Mobile/Scripts/CanvasInputs/UICanvasControllerInput.cs" />
      <Compile Include="Assets/ReCogMission/ScatterMyStars.cs" />
      <Compile Include="Assets/StarterAssets/Mobile/Scripts/Utilities/MobileDisableAutoSwitchControls.cs" />

@@ -9,14 +9,20 @@ public class GameManager : MonoBehaviour
     public UnityEvent GameClockTickEvent;
     public bool stillAlive;
 
+    public string WorldName = "Default";
+
     [Header("Time of day control")]
-    [SerializeField] private Vector3 gameStartTime = new Vector3(6f, 0f, 0f);
+    public DateTime baseTime = new DateTime(2022, 12, 1);  // then the game started (invented?)
+    public Vector3 gameStartTime = new Vector3(6f, 0f, 0f); // temp to offset now from real time
     private long startTime; // actual base time to calcualte from
-    [SerializeField] private long period = 1; // period for environment changes - may be a minute in real life
-    private long speed = 100; // how much faster game time is than lapse time
+    public long period = 1; // period for environment changes - may be a minute in real life
+    public long speed = 100; // how much faster game time is than lapse time
     public long Speed{
         get{
             return speed;
+        }
+        set {
+            speed = value;
         }
     }
     [SerializeField] private long time; // number of seconds of this day
