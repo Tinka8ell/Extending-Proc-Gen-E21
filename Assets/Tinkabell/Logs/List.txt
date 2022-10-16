@@ -1,0 +1,166 @@
+path, type, name, display, slot, race
+Assets/UMA/Content/Contrib/F_Shoes/FemaleTallShoes_Black.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleTallShoes_Black, High Tops - Black, Feet, HumanFemale
+Assets/UMA/Content/Contrib/F_Shoes/FemaleTallShoes_Black.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleTallShoes_Black, High Tops - Black, Feet, HumanFemaleDCS
+Assets/UMA/Content/Contrib/F_Shoes/FemaleTallShoes_Black.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleTallShoes_Black, High Tops - Black, Feet, HumanFemaleHighPoly
+Assets/UMA/Content/Contrib/F_Shoes/FemaleTallShoes_Turquoise.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleTallShoes_Turquoise, High Tops - Turquoise, Feet, HumanFemale
+Assets/UMA/Content/Contrib/F_Shoes/FemaleTallShoes_Turquoise.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleTallShoes_Turquoise, High Tops - Turquoise, Feet, HumanFemaleDCS
+Assets/UMA/Content/Contrib/F_Shoes/FemaleTallShoes_Turquoise.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleTallShoes_Turquoise, High Tops - Turquoise, Feet, HumanFemaleHighPoly
+Assets/UMA/Content/Contrib/F_Shoes/FemaleTallShoes_White.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleTallShoes_White, High Tops - White, Feet, HumanFemale
+Assets/UMA/Content/Contrib/F_Shoes/FemaleTallShoes_White.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleTallShoes_White, High Tops - White, Feet, HumanFemaleDCS
+Assets/UMA/Content/Contrib/F_Shoes/FemaleTallShoes_White.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleTallShoes_White, High Tops - White, Feet, HumanFemaleHighPoly
+Assets/UMA/Content/Contrib/FemaleLongHair/FemaleLongHair_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleLongHair_Recipe, FemaleLongHair, Hair, HumanFemale
+Assets/UMA/Content/Contrib/FemaleLongHair/FemaleLongHair_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleLongHair_Recipe, FemaleLongHair, Hair, HumanFemaleDCS
+Assets/UMA/Content/Contrib/FemalePonyTail/FemalePonyTail_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemalePonyTail_Recipe, FemalePonyTail, Hair, HumanFemale
+Assets/UMA/Content/Contrib/FemalePonyTail/FemalePonyTail_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemalePonyTail_Recipe, FemalePonyTail, Hair, HumanFemaleDCS
+Assets/UMA/Content/Contrib/FemaleSportPants/FemaleSportPants_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleSportPants_Recipe, FemaleSportPants, Legs, HumanFemale
+Assets/UMA/Content/Contrib/FemaleSportPants/FemaleSportPants_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleSportPants_Recipe, FemaleSportPants, Legs, HumanFemaleDCS
+Assets/UMA/Content/Contrib/FemaleTankTop/FemaleTankTop_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleTankTop_Recipe, FemaleTankTop, Chest, HumanFemale
+Assets/UMA/Content/Contrib/FemaleTankTop/FemaleTankTop_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleTankTop_Recipe, FemaleTankTop, Chest, HumanFemaleDCS
+Assets/UMA/Content/Contrib/Male_ShavedHead/ShavedHead.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ShavedHead, Buzzcut, Hair, HumanMale
+Assets/UMA/Content/Contrib/Male_ShavedHead/ShavedHead.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ShavedHead, Buzzcut, Hair, HumanMaleDCS
+Assets/UMA/Content/Contrib/Male_ShavedHead/ShavedHead.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ShavedHead, Buzzcut, Hair, HumanMaleHighPoly
+Assets/UMA/Content/Contrib/Male_TallShoes/TallShoes_Black_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, TallShoes_Black_Recipe, Tall Shoes Black, Feet, HumanMale
+Assets/UMA/Content/Contrib/Male_TallShoes/TallShoes_Black_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, TallShoes_Black_Recipe, Tall Shoes Black, Feet, HumanMaleDCS
+Assets/UMA/Content/Contrib/Male_TallShoes/TallShoes_Black_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, TallShoes_Black_Recipe, Tall Shoes Black, Feet, HumanMaleHighPoly
+Assets/UMA/Content/Contrib/Male_TallShoes/TallShoes_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, TallShoes_Recipe, Tall Shoes, Feet, HumanMale
+Assets/UMA/Content/Contrib/Male_TallShoes/TallShoes_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, TallShoes_Recipe, Tall Shoes, Feet, HumanMaleDCS
+Assets/UMA/Content/Contrib/Male_TallShoes/TallShoes_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, TallShoes_Recipe, Tall Shoes, Feet, HumanMaleHighPoly
+Assets/UMA/Content/Contrib/MaleHairSlick01/MaleHairSlick01_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleHairSlick01_Recipe, HairX, Hair, HumanMale
+Assets/UMA/Content/Contrib/MaleHoodie/MaleHoodie_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleHoodie_Recipe, MaleHoodie, Chest, HumanMale
+Assets/UMA/Content/Contrib/MaleHoodie/MaleHoodie_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleHoodie_Recipe, MaleHoodie, Chest, HumanMaleDCS
+Assets/UMA/Content/Contrib/MaleShortHair/MaleShortHair_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleShortHair_Recipe, MaleShortHair, Hair, HumanMale
+Assets/UMA/Content/Contrib/MaleShortHair/MaleShortHair_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleShortHair_Recipe, MaleShortHair, Hair, HumanMaleDCS
+Assets/UMA/Content/Contrib/MaleSweatPants/MaleSweatPants_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleSweatPants_Recipe, MaleSweatPants, Legs, HumanMale
+Assets/UMA/Content/Contrib/MaleSweatPants/MaleSweatPants_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleSweatPants_Recipe, MaleSweatPants, Legs, HumanMaleDCS
+Assets/UMA/Content/Contrib/Milcut/MilCut.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MilCut, Military Cut, Hair, HumanMale
+Assets/UMA/Content/Contrib/Milcut/MilCut.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MilCut, Military Cut, Hair, HumanMaleDCS
+Assets/UMA/Content/Contrib/Milcut/MilCut.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MilCut, Military Cut, Hair, HumanMaleHighPoly
+Assets/UMA/Content/Core/HumanFemale/Recipes/Wardrobe Recipes/HumanFemale/FemaleHandsMid.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleHandsMid, , Hands, HumanFemale
+Assets/UMA/Content/Core/HumanFemale/Recipes/Wardrobe Recipes/HumanFemale/FemaleHandsMid.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleHandsMid, , Hands, HumanFemaleDCS
+Assets/UMA/Content/Core/HumanFemale/Recipes/Wardrobe Recipes/HumanFemale/FemaleSwappedFace.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleSwappedFace, Swapped face, Face, HumanFemaleDCS
+Assets/UMA/Content/Core/HumanMale/Recipes/WardrobeRecipes/MaleHandsMid.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleHandsMid, Hands high quality, Hands, HumanMaleDCS
+Assets/UMA/Content/Core/HumanMale/Recipes/WardrobeRecipes/MaleHandsMid.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleHandsMid, Hands high quality, Hands, HumanMale
+Assets/UMA/Content/Core/HumanMale/Recipes/WardrobeRecipes/MaleLowPolyHead.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleLowPolyHead, Low Poly Head, AlternateHead, HumanMale
+Assets/UMA/Content/Core/HumanMale/Recipes/WardrobeRecipes/MaleSmoothSkin.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleSmoothSkin, Smooth, Complexion, HumanMale
+Assets/UMA/Content/Core/HumanMale/Recipes/WardrobeRecipes/MaleSmoothSkin.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleSmoothSkin, Smooth, Complexion, HumanMaleDCS
+Assets/UMA/Content/Core/HumanMale/Recipes/WardrobeRecipes/MaleSmoothSkin.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleSmoothSkin, Smooth, Complexion, HumanMaleLegacy
+Assets/UMA/Content/Core/HumanMale/Recipes/WardrobeRecipes/MaleSmoothSkin.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleSmoothSkin, Smooth, Complexion, HumanMaleHighPoly
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleHair1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleHair1, Hair 1, Hair, HumanFemaleDCS
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleHair1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleHair1, Hair 1, Hair, HumanFemale
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleHair2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleHair2, Hair 2, Hair, HumanFemaleDCS
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleHair2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleHair2, Hair 2, Hair, HumanFemale
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleHair3.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleHair3, Hair 3, Hair, HumanFemale
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleHair3.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleHair3, Hair 3, Hair, HumanFemaleDCS
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemalePants1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemalePants1, Pants 1, Legs, HumanFemaleDCS
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemalePants1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemalePants1, Pants 1, Legs, HumanFemale
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemalePants2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemalePants2, Pants 2, Legs, HumanFemaleDCS
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemalePants2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemalePants2, Pants 2, Legs, HumanFemale
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleShirt1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleShirt1, Shirt 1, Chest, HumanFemaleDCS
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleShirt1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleShirt1, Shirt 1, Chest, HumanFemale
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleShirt2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleShirt2, Shirt 2, Chest, HumanFemaleDCS
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleShirt2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleShirt2, Shirt 2, Chest, HumanFemale
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleShirt3.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleShirt3, Shirt 3, Chest, HumanFemaleDCS
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleShirt3.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleShirt3, Shirt 3, Chest, HumanFemale
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleShirt4.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleShirt4, Shirt 4, Chest, HumanFemaleDCS
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleShirt4.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleShirt4, Shirt 4, Chest, HumanFemale
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleUndies.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleUndies, Undies, Underwear, HumanFemaleDCS
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleUndies.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleUndies, Undies, Underwear, HumanFemale
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleUndies2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleUndies2, Ladies Intimate Wear, Underwear, HumanFemaleDCS
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanFemale/FemaleUndies2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleUndies2, Ladies Intimate Wear, Underwear, HumanFemale
+Assets/UMA/Content/Example/HumanFemale/Recipes/WardrobeRecipes/HumanGirl/GirlShirt1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, GirlShirt1, Shirt 5, Chest, HumanGirl
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleBeard1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleBeard1, Devilish Goatee, Beard, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleBeard1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleBeard1, Devilish Goatee, Beard, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleBeard2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleBeard2, Bums Beard, Beard, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleBeard2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleBeard2, Bums Beard, Beard, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleBeard3.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleBeard3, Manly Beard, Beard, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleBeard3.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleBeard3, Manly Beard, Beard, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleBrow01.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleBrow01, Brow 1, Eyebrows, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleBrow01.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleBrow01, Brow 1, Eyebrows, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleBrow02.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleBrow02, Brow 2, Eyebrows, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleBrow02.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleBrow02, Brow 2, Eyebrows, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleBrowHR.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleBrowHR, High-Res Brows, Eyebrows, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleBrowHR.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleBrowHR, High-Res Brows, Eyebrows, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleBrowHR2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleBrowHR2, High-Res Brows 2, Eyebrows, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleBrowHR2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleBrowHR2, High-Res Brows 2, Eyebrows, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleEye1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleEye1, Alligator Eyes, Eyes, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleEye1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleEye1, Alligator Eyes, Eyes, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleEye2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleEye2, Alligator Eyes Alt Test, Eyes, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleEye2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleEye2, Alligator Eyes Alt Test, Eyes, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleEye3.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleEye3, Cat Eyes, Eyes, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleEye3.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleEye3, Cat Eyes, Eyes, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleEye4.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleEye4, Cat Eyes Alt, Eyes, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleEye4.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleEye4, Cat Eyes Alt, Eyes, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleEye5.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleEye5, large Eyes, Eyes, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleEye5.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleEye5, large Eyes, Eyes, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleFace Old.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleFace Old, Old Face, Face, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleFace Old.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleFace Old, Old Face, Face, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleGloves.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleGloves, Gloves of Hammer, Hands, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleGloves.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleGloves, Gloves of Hammer, Hands, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleHair1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleHair1, The Rebel, Hair, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleHair1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleHair1, The Rebel, Hair, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleHair2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleHair2, The Pompadour, Hair, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleHair2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleHair2, The Pompadour, Hair, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleHair3.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleHair3, The Middle-Ager, Hair, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleHair3.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleHair3, The Middle-Ager, Hair, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleJeans 1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleJeans 1, Old Jeans, Legs, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleJeans 1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleJeans 1, Old Jeans, Legs, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleJeans.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleJeans, Jeans, Legs, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleJeans.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleJeans, Jeans, Legs, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MalePants.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MalePants, WrappedPants, Legs, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MalePants.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MalePants, WrappedPants, Legs, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleRobe Hood.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleRobe Hood, Mystic Robe Hood, Helmet, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleRobe Hood.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleRobe Hood, Mystic Robe Hood, Helmet, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleRobe Shoes.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleRobe Shoes, Mystic Robe Shoes, Feet, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleRobe Shoes.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleRobe Shoes, Mystic Robe Shoes, Feet, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleRobe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleRobe, Mystic Robe, Chest, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleRobe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleRobe, Mystic Robe, Chest, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleShirt1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleShirt1, Shirt 1, Chest, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleShirt1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleShirt1, Shirt 1, Chest, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleShirt2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleShirt2, Shirt 2, Chest, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleShirt2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleShirt2, Shirt 2, Chest, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleShirt3.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleShirt3, Shirt 3, Chest, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleShirt3.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleShirt3, Shirt 3, Chest, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleShorts1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleShorts1, Shorts, Legs, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleShorts1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleShorts1, Shorts, Legs, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleShorts2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleShorts2, Irresistable Underwear, Legs, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleShorts2.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleShorts2, Irresistable Underwear, Legs, HumanMaleDCS
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleUnderwear.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleUnderwear, Default Underwear, Underwear, HumanMale
+Assets/UMA/Content/Example/HumanMale/Recipes/WardrobeRecipes/MaleUnderwear.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleUnderwear, Default Underwear, Underwear, HumanMaleDCS
+Assets/UMA/Examples/Blendshape Examples/Assets/Recipe/BlendShapeRecipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, BlendShapeRecipe, , Ears, HumanMaleDCS
+Assets/UMA/Examples/Blendshape Examples/Assets/Recipe/BlendShapeRecipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, BlendShapeRecipe, , Ears, HumanMale
+Assets/UMA/Examples/BonePoseSets/OverweightMale.asset, UMA.CharacterSystem.UMAWardrobeRecipe, OverweightMale, OverweightMale, Physique, HumanMale
+Assets/UMA/Examples/BonePoseSets/TrollHead.asset, UMA.CharacterSystem.UMAWardrobeRecipe, TrollHead, TrollFace, Face, HumanMale
+Assets/UMA/Examples/DNAConverterController Examples/Assets/Recipes/WardrobeRecipes/AlienHeadMorph.asset, UMA.CharacterSystem.UMAWardrobeRecipe, AlienHeadMorph, , Face, HumanMale
+Assets/UMA/Examples/DNAConverterController Examples/Assets/Recipes/WardrobeRecipes/AlienHeadMorph.asset, UMA.CharacterSystem.UMAWardrobeRecipe, AlienHeadMorph, , Face, HumanMaleDCS
+Assets/UMA/Examples/DNAConverterController Examples/Assets/Recipes/WardrobeRecipes/AlienHeadMorph.asset, UMA.CharacterSystem.UMAWardrobeRecipe, AlienHeadMorph, , Face, DNAConverterControllerExampleRace
+Assets/UMA/Examples/DNAConverterController Examples/Assets/Recipes/WardrobeRecipes/ElfEarsMorph.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ElfEarsMorph, , Ears, HumanMaleDCS
+Assets/UMA/Examples/DNAConverterController Examples/Assets/Recipes/WardrobeRecipes/ElfEarsMorph.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ElfEarsMorph, , Ears, HumanMale
+Assets/UMA/Examples/DNAConverterController Examples/Assets/Recipes/WardrobeRecipes/ElfEarsMorph.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ElfEarsMorph, , Ears, DNAConverterControllerExampleRace
+Assets/UMA/Examples/DNAConverterController Examples/Assets/Recipes/WardrobeRecipes/MakeMeFatJeans.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MakeMeFatJeans, MakeMeFatJeans, Legs, HumanMaleDCS
+Assets/UMA/Examples/DNAConverterController Examples/Assets/Recipes/WardrobeRecipes/MakeMeFatJeans.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MakeMeFatJeans, MakeMeFatJeans, Legs, HumanMale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/ToonFemale/Wardrobe1/Recipes/FemaleDancer1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleDancer1, , FullOutfit, ToonFemale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/ToonFemale/Wardrobe1/Recipes/ToonCropTShirt1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ToonCropTShirt1, , Chest, ToonFemale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/ToonFemale/Wardrobe1/Recipes/ToonFemaleUnderwear1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ToonFemaleUnderwear1, , Underwear, ToonFemale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/ToonFemale/Wardrobe1/Recipes/ToonHair1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ToonHair1, , Hair, ToonFemale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/ToonFemale/Wardrobe1/Recipes/ToonHotPants1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ToonHotPants1, , Legs, ToonFemale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/ToonFemale/Wardrobe2/Recipes/FemaleStarDancer1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, FemaleStarDancer1, , FullOutfit, ToonFemale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/ToonFemale/Wardrobe2/Recipes/ToonCapriPants1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ToonCapriPants1, , Legs, ToonFemale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/ToonFemale/Wardrobe2/Recipes/ToonFancyFlats1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ToonFancyFlats1, , Feet, ToonFemale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/ToonFemale/Wardrobe2/Recipes/ToonHalterNeck1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ToonHalterNeck1, , Chest, ToonFemale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/ToonShared/Wardrobe1/Recipes/ToonSneakers1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ToonSneakers1, , Feet, ToonFemale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/ToonShared/Wardrobe1/Recipes/ToonSneakers1.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ToonSneakers1, , Feet, ToonMale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/UnityChallengerArmorSet/Recipes/MaleChallengerBoots.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleChallengerBoots, , Feet, HumanMaleDCS
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/UnityChallengerArmorSet/Recipes/MaleChallengerBoots.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleChallengerBoots, , Feet, HumanMale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/UnityChallengerArmorSet/Recipes/MaleChallengerGloves.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleChallengerGloves, , Hands, HumanMaleDCS
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/UnityChallengerArmorSet/Recipes/MaleChallengerGloves.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleChallengerGloves, , Hands, HumanMale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/UnityChallengerArmorSet/Recipes/MaleChallengerShouderPads.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleChallengerShouderPads, , Shoulders, HumanMaleDCS
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/UnityChallengerArmorSet/Recipes/MaleChallengerShouderPads.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleChallengerShouderPads, , Shoulders, HumanMale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/UnityChallengerArmorSet/Recipes/MaleChallengerTorso.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleChallengerTorso, , Chest, HumanMaleDCS
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/UnityChallengerArmorSet/Recipes/MaleChallengerTorso.asset, UMA.CharacterSystem.UMAWardrobeRecipe, MaleChallengerTorso, , Chest, HumanMale
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/DemoAssetBundles/Werewolf/Wardrobe1/Recipes/WerewolfTShirt.asset, UMA.CharacterSystem.UMAWardrobeRecipe, WerewolfTShirt, , Chest, Werewolf
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/SkyCar/Recipes/AntennaRecipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, AntennaRecipe, Antenna, Antenna, SkyCar
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/SkyCar/Recipes/SpoilerRecipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, SpoilerRecipe, Spoiler, Spoiler, SkyCar
+Assets/UMA/Examples/DynamicCharacterSystem Examples/Assets/SkyCar/Recipes/StripesRecipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, StripesRecipe, Stripes, BodyOverlay, SkyCar
+Assets/UMA/Examples/Physics Examples/Assets/Recipe/ClothRobeRecipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ClothRobeRecipe, , Chest, HumanMale
+Assets/UMA/Examples/Physics Examples/Assets/Recipe/ClothRobeRecipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, ClothRobeRecipe, , Chest, HumanMaleDCS
+Assets/UMA/Examples/Physics Examples/Assets/Slots/BoneyTail/BoneyTail_Recipe.asset, UMA.CharacterSystem.UMAWardrobeRecipe, BoneyTail_Recipe, BoneyTail, Hair, HumanFemale

@@ -75,6 +75,7 @@
      <None Include="Assets/Devion Games/UI Widgets/Changes.txt" />
      <None Include="Assets/Devion Games/Stat System/Changes.txt" />
      <None Include="Assets/StarterAssets/Environment/Shaders/Built-in_RP/ArmatureShader.shader" />
+     <None Include="Assets/Tinkabell/Logs/List.txt" />
     <Reference Include="UnityEngine">
         <HintPath>/home/tinka/Unity/Hub/Editor/2021.3.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
