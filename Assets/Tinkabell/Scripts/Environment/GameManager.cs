@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using DevionGames.UIWidgets;
 
 public class GameManager : MonoBehaviour
 {
@@ -62,6 +63,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public GameObject StoryBox;
+    private UIWidget welcome;
+    public bool CompletedIntro = false;
+    public bool DoneMenu = false;
+
     void Awake(){
         if (singleton == null){
             singleton = gameObject; // we are the one
@@ -84,6 +90,38 @@ public class GameManager : MonoBehaviour
         // start periodic clock tick
         stillAlive = true;
         StartCoroutine(GameClockTick(1)); // start soon
+
+        StartGame();
+    }
+
+    private void StartGame(){
+        if (!CompletedIntro){
+            RunIntro();
+        }
+        if (CompletedIntro && !DoneMenu){
+            OpenMenu();
+        }
+        if (DoneMenu){
+            Debug.Log("Done menu, so load game");
+            // load the game?
+        }
+    }
+
+    private void RunIntro(){
+        Debug.Log("Running Intro");
+        welcome = WidgetUtility.Find<UIWidget>("WelcomeScreen");
+        welcome.Show();
+    }
+
+    private void NextPage(){
+        Debug.Log("Intro Second page");
+    }
+
+    private void OpenMenu(){
+        Debug.Log("Opening Menu");
+        CompletedIntro = true;
+        UIWidget menu = WidgetUtility.Find<UIWidget>("Start Menu");
+        menu.Show();
     }
 
     IEnumerator GameClockTick(float delay)
