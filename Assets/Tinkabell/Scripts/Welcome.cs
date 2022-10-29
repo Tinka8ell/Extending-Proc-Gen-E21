@@ -8,6 +8,8 @@ public class Welcome : MonoBehaviour
     public Text text;
     public Button next;
     public Button previous;
+    public Button skip;
+    public Button cont;
     public int page = 0;
     public List<string> pages;
 
@@ -46,8 +48,12 @@ public class Welcome : MonoBehaviour
             text.text = pages[page].Replace("\\n", "\n");
             // enable previous
             previous.gameObject.SetActive(page > 0);
+            bool isLastPage = page < pages.Count - 1;
             // enable next
-            next.gameObject.SetActive(page < pages.Count - 1);
+            next.gameObject.SetActive(isLastPage);
+            // switch between skip and continue
+            cont.gameObject.SetActive(!isLastPage);
+            skip.gameObject.SetActive(isLastPage);
         }
     }
 }

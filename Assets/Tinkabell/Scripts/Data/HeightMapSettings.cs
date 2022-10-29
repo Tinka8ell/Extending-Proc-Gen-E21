@@ -15,9 +15,11 @@ public class HeightMapSettings : UpdatableData {
 	public float height {
 		get {
 			float total = 0f;
-			for (int index = 0; index < weightedNoiseSettings.Length; index ++){
-				if (weightedNoiseSettings[index].noiseSettings != null){
-					total += weightedNoiseSettings[index].heightMultiplier;
+			if (weightedNoiseSettings != null){
+				for (int index = 0; index < weightedNoiseSettings.Length; index ++){
+					if (weightedNoiseSettings[index].noiseSettings != null){
+						total += weightedNoiseSettings[index].heightMultiplier;
+					}
 				}
 			}
 			return total;
@@ -44,21 +46,35 @@ public class HeightMapSettings : UpdatableData {
 	public void Load(){
 		string key = WorldName + WorldKey;
         if(!PlayerPrefs.HasKey(key)){
-            Debug.LogError("Can't find the world: " + key);
+            Debug.Log("Can't find the world: " + key);
 			return;
 		}
-        HeightMapSettingsSaveData data = JsonUtility.FromJson<HeightMapSettingsSaveData>(PlayerPrefs.GetString(key));
-		
+		string json = PlayerPrefs.GetString(key);
+		Debug.Log("Retrieved json: " + json);
+        HeightMapSettingsSaveData data = JsonUtility.FromJson<HeightMapSettingsSaveData>(json);
 		int length = data.weightedNoiseSettings.Length;
+		Debug.Log("contains " + length + " WeightedNoiseSettings");
 		weightedNoiseSettings =  new WeightedNoiseSettings[length];
 		System.Array.Copy(data.weightedNoiseSettings, weightedNoiseSettings, length);
-
-		length = data.keys.Length;
-		Keyframe[] keys = new Keyframe[length];
-		for (int i = 0; i < length; i++){
-			keys[i] = new Keyframe(data.keys[i][0], data.keys[i][1], data.keys[i][2], data.keys[i][3], data.keys[i][4], data.keys[i][5]);
+		if (data.keys == null || data.keys.keyFrames == null){ // AnimationCurve is missing
+			Debug.Log("no AnimationCurve, so failing!");
+			weightedNoiseSettings = null;
+			PlayerPrefs.DeleteKey(key); // clear out bad key
+		} else { // get the AnimationCurve
+			length = data.keys.keyFrames.Length;
+			Debug.Log("contains " + length + " Keyframe keys");
+			Keyframe[] keys = new Keyframe[length];
+			for (int i = 0; i < length; i++){
+				keys[i] = new Keyframe(
+					data.keys.keyFrames[i].keys[0], 
+					data.keys.keyFrames[i].keys[1], 
+					data.keys.keyFrames[i].keys[2], 
+					data.keys.keyFrames[i].keys[3], 
+					data.keys.keyFrames[i].keys[4], 
+					data.keys.keyFrames[i].keys[5]);
+			}
+			heightCurve = new AnimationCurve(keys);
 		}
-		heightCurve = new AnimationCurve(keys);
 	}
 
 	public void SaveAs(string name){
@@ -75,15 +91,24 @@ public class HeightMapSettings : UpdatableData {
 
 		Keyframe[] keys = heightCurve.keys;
 		length = keys.Length;
+		data.keys = new KeyFrames(length);
 		for (int i = 0; i < length; i++){
-			data.keys[i] = new float[]{keys[i].time, keys[i].value, keys[i].inTangent, keys[i].outTangent, keys[i].inWeight, keys[i].outWeight};
+			data.keys.keyFrames[i] = new Keys(new float[]{
+			   keys[i].time,
+			   keys[i].value,
+			   keys[i].inTangent,
+			   keys[i].outTangent,
+			   keys[i].inWeight,
+			   keys[i].outWeight
+			});
 		}
 
         // convert the save data object to a string
-        string rawData = JsonUtility.ToJson(data);
+        string json = JsonUtility.ToJson(data, true);
+		Debug.Log("Saving json: " + json);
 
         // save it to our PlayerPrefs
-        PlayerPrefs.SetString(key, rawData);
+        PlayerPrefs.SetString(key, json);
 	}
 
 	#if UNITY_EDITOR
@@ -108,10 +133,29 @@ public class WeightedNoiseSettings {
 }
 
 [System.Serializable]
+public class Keys {
+	public float[] keys;
+	public Keys(int length){
+		keys = new float[length];
+	}
+	public Keys(float[] keys){
+		this.keys = keys;
+	}
+}
+
+[System.Serializable]
+public class KeyFrames {
+	public Keys[] keyFrames;
+	public KeyFrames(int length){
+		keyFrames = new Keys[length];
+	}
+}
+
+[System.Serializable]
 public class HeightMapSettingsSaveData {
 	public WeightedNoiseSettings[] weightedNoiseSettings;
 
 	// Animation Curve
-	public float[][] keys;
+	public KeyFrames keys;
 }
 

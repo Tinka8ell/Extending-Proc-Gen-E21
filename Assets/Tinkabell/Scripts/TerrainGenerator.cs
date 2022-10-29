@@ -35,12 +35,21 @@ public class TerrainGenerator : MonoBehaviour {
 	 * Load the HeightMapSettings, for this world
 	 */
 	void Awake(){
-		if (heightMapSettings == null){
-			GameManager gameManager = GameManager.Instance;
+		GameManager gameManager = GameManager.Instance;
+		if (heightMapSettings == null){ // starting a new world
 			WorldName = gameManager.WorldName;
-			Debug.Log("Loading world '" + WorldName + "'heightMapSettings");
-			heightMapSettings = new HeightMapSettings();
+			Debug.Log("Loading world '" + WorldName + "' heightMapSettings");
+			heightMapSettings = (HeightMapSettings) ScriptableObject.CreateInstance("HeightMapSettings");
 			heightMapSettings.Load(WorldName);
+		} else { // starting game, so prep world system if not there
+			gameManager.WorldName = WorldName;
+			Debug.Log("Checking world '" + WorldName + "' exists");
+			HeightMapSettings defaultWorld = (HeightMapSettings) ScriptableObject.CreateInstance("HeightMapSettings");
+			defaultWorld.Load(WorldName);
+			if (defaultWorld.height == 0){ // no settings out there
+				Debug.Log(WorldName + " is missing so creating");
+				heightMapSettings.SaveAs(WorldName);  // create the default
+			}
 		}
 	}
 
@@ -50,6 +59,7 @@ public class TerrainGenerator : MonoBehaviour {
 	 * Initialise the visible chunks
 	 */
 	void Start() {
+		Debug.Log("TerrainGenerator is starting up");
 
 	 	// Set up mapMaterial using textureSettings and heightMapSettings min and max Height
 		textureSettings.ApplyToMaterial (mapMaterial);
