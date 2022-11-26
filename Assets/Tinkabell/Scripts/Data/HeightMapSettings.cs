@@ -4,7 +4,7 @@ using System.Collections;
 [CreateAssetMenu()]
 public class HeightMapSettings : UpdatableData {
 
-	public static string WorldKey = ".World";
+	public static string WorldKey = "World";
 
 	public string WorldName = "Default";
 
@@ -38,18 +38,27 @@ public class HeightMapSettings : UpdatableData {
 		}
 	}
 
+	private Repository _repository;
+	private Repository repository{
+		get{
+			if (_repository == null){
+				_repository = GameManager.Instance.repository;
+			}
+			return _repository;
+		}
+	}
+
 	public void Load(string name){
 		WorldName = name;
 		Load();
 	}
 
 	public void Load(){
-		string key = WorldName + WorldKey;
-        if(!PlayerPrefs.HasKey(key)){
-            Debug.Log("Can't find the world: " + key);
+		string json = repository.GetJson(WorldKey, WorldName);
+        if(json == null || json.Length == 0){
+            Debug.Log("Can't find the world: " + WorldKey + "." + WorldName);
 			return;
 		}
-		string json = PlayerPrefs.GetString(key);
 		Debug.Log("Retrieved json: " + json);
         HeightMapSettingsSaveData data = JsonUtility.FromJson<HeightMapSettingsSaveData>(json);
 		int length = data.weightedNoiseSettings.Length;
@@ -59,7 +68,7 @@ public class HeightMapSettings : UpdatableData {
 		if (data.keys == null || data.keys.keyFrames == null){ // AnimationCurve is missing
 			Debug.Log("no AnimationCurve, so failing!");
 			weightedNoiseSettings = null;
-			PlayerPrefs.DeleteKey(key); // clear out bad key
+			repository.Remove(WorldKey, WorldName); // clear out bad key
 		} else { // get the AnimationCurve
 			length = data.keys.keyFrames.Length;
 			Debug.Log("contains " + length + " Keyframe keys");
@@ -83,7 +92,6 @@ public class HeightMapSettings : UpdatableData {
 	}
 
 	public void Save(){
-		string key = WorldName + WorldKey;
         HeightMapSettingsSaveData data = new HeightMapSettingsSaveData();
 		int length = weightedNoiseSettings.Length;
 		data.weightedNoiseSettings =  new WeightedNoiseSettings[length];
@@ -108,7 +116,7 @@ public class HeightMapSettings : UpdatableData {
 		Debug.Log("Saving json: " + json);
 
         // save it to our PlayerPrefs
-        PlayerPrefs.SetString(key, json);
+		repository.SetJson(WorldKey, WorldName, json);
 	}
 
 	#if UNITY_EDITOR

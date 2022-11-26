@@ -63,6 +63,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public Repository repository = new Repository();
+
     public GameObject StoryBox;
     private UIWidget welcome;
     public bool CompletedIntro = false;
