@@ -1,0 +1,23 @@
+- Fixed alchemy window
+- Imroved Third Person Camera presets
+- Integrated camera preset option to UI Widgets
+- Removed utility option from pickers
+- Added accept null option to CategoryPicker
+- Interuptable layer index in Animator Controller can be any now (was only index = 1 possible)
+- Spin Button option in FocusTarget
+- Inherit distance option when switching between camera presets
+- ItemPicker, CategoryPicker, EquipmentPicker, RarityPicker is used by default, no need to add an attribute to targets. 
+- Removed Window Name field from CheckSkill.
+- Added Crafting Recipe tab in editor. This replaces the crafting options in item editor. 
+- Crafting Recipe field in Item, if null item is not craftable.
+- Added warnings if there is a null reference restriction.
+- Fixed problems with ThirdParty-Assets that also have a class named ItemDatabase.
+- Sort in UI Manager
+- Refill for ItemGenerator
+- Callbacks were not called, when autosave disabled and saved data was availible.
+- Fixed attack animation when placing items to ground.
+- Warning info for ItemGenerator when there are no items in list.
+- Integrated auto equip for tools like in New World. You can convert it back as it was, see Anvil and Hammer as an example.
+- Updated how item information is displayed in slots. To display item information, you do not reference UI components to the slot anymore. You add a corresponding ItemView compoent as a child.
+- Prefabs and Prefab Variants for slots.
+- New Save/Load Menu (Save, Load, Delete, Overwrite data)
