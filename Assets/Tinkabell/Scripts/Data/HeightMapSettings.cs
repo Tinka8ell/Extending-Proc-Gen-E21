@@ -122,11 +122,15 @@ public class HeightMapSettings : UpdatableData {
 	#if UNITY_EDITOR
 
 	protected override void OnValidate() {
+		if(weightedNoiseSettings == null){
+			Debug.LogWarning("Validating HeightMapSettings, but weightedNoiseSettings is null");
+		} else {
 			for (int index = 0; index < weightedNoiseSettings.Length; index ++){
 				if (weightedNoiseSettings[index].noiseSettings != null){
 					weightedNoiseSettings[index].noiseSettings.ValidateValues ();
 				}
 			}
+		}
 		base.OnValidate ();
 	}
 	#endif
