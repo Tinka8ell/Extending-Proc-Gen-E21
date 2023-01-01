@@ -250,7 +250,10 @@ namespace DevionGames.UIWidgets
 				m_CurrentVisibleWidgets.Add(this);
 
 				if (this.m_FocusPlayer && !this.m_IsLocked)
-					this.m_CameraController.SendMessage("Focus", true, SendMessageOptions.DontRequireReceiver);
+					if (m_CameraController != null)
+					{
+						this.m_CameraController.SendMessage("Focus", true, SendMessageOptions.DontRequireReceiver);
+					}
 
 				if ( m_CurrentVisibleWidgets.Count == 1)
 				{
@@ -288,7 +291,10 @@ namespace DevionGames.UIWidgets
 				m_CurrentVisibleWidgets.Remove(this);
 
 				if(m_CurrentVisibleWidgets.Find(x=>x.m_FocusPlayer) == null)
-					this.m_CameraController.SendMessage("Focus", false, SendMessageOptions.DontRequireReceiver);
+					if (this.m_CameraController != null)
+					{
+						this.m_CameraController.SendMessage("Focus", false, SendMessageOptions.DontRequireReceiver);
+					}
 
 				if (m_CurrentVisibleWidgets.Count == 0) {
 
