@@ -67,17 +67,40 @@ public class GameManager : MonoBehaviour
 
     public GameObject StoryBox;
     private UIWidget welcome;
-    public bool CompletedIntro = false;
-    public bool DoneMenu = false;
+    public UIWidget Welcome {
+        get
+        {
+            if (welcome == null){
+                Debug.LogError("Welcome is not set!");
+            }
+            return welcome;
+        }
+    }
+    public UIWidget startMenu;
+    public UIWidget StartMenu {
+        get
+        {
+            if (startMenu == null){
+                Debug.LogError("Start Menu is not set!");
+            }
+            return startMenu;
+        }
+    }
+    public GameState gameState = new GameState(false);
 
     void Awake(){
+        Debug.Log("GameManager Awake");
         if (singleton == null){
+            Debug.Log("GameManager: we are the One!");
             singleton = gameObject; // we are the one
             DontDestroyOnLoad(gameObject); // and we are going nowhere
             instance = this;
         } else {
+            Debug.Log("GameManager: we are not the one.");
             DestroyImmediate(gameObject); // we only want one!
         }
+        Debug.Log("Getting GameState");
+        loadGameState();
     }
 
 
@@ -97,33 +120,44 @@ public class GameManager : MonoBehaviour
     }
 
     private void StartGame(){
-        if (!CompletedIntro){
+        if (welcome == null){
+            welcome = WidgetUtility.Find<UIWidget>("Welcome Screen");
+            if (welcome == null){
+                Debug.LogError("Cannot find the Welcome Screen");
+            }
+        }
+        if (startMenu == null){
+            startMenu = WidgetUtility.Find<UIWidget>("Start Menu");
+            if (startMenu == null){
+                Debug.LogError("Cannot find the StartMenu");
+            }
+        }
+        if (!gameState.CompletedIntro){
             RunIntro();
         }
-        if (CompletedIntro && !DoneMenu){
+        if (gameState.CompletedIntro && !gameState.DoneMenu){
             OpenMenu();
         }
-        if (DoneMenu){
-            Debug.Log("Done menu, so load game");
+        if (gameState.DoneMenu){
+            Debug.LogWarning("Done menu, so load game");
             // load the game?
         }
     }
 
-    private void RunIntro(){
+    public void RunIntro(){
         Debug.Log("Running Intro");
-        welcome = WidgetUtility.Find<UIWidget>("WelcomeScreen");
-        welcome.Show();
+        gameState.CompletedIntro = false;
+        saveGameState();
+        StartMenu.Close();
+        Welcome.Show();
     }
 
-    private void NextPage(){
-        Debug.Log("Intro Second page");
-    }
-
-    private void OpenMenu(){
+    public void OpenMenu(){
         Debug.Log("Opening Menu");
-        CompletedIntro = true;
-        UIWidget menu = WidgetUtility.Find<UIWidget>("Start Menu");
-        menu.Show();
+        gameState.CompletedIntro = true;
+        saveGameState();
+        Welcome.Close();
+        StartMenu.Show();
     }
 
     IEnumerator GameClockTick(float delay)
@@ -153,4 +187,34 @@ public class GameManager : MonoBehaviour
         return 3600 * hour + 60 * minute + second;
     }
 
+    private void saveGameState(){
+        string json = JsonUtility.ToJson(gameState, true);
+		Debug.Log("Saving GameState: " + json);
+
+        // save it to our PlayerPrefs
+		repository.SetJson("GameState", json);
+    }
+
+    private void loadGameState(){
+		string json = repository.GetJson("GameState");
+        if(json == null || json.Length == 0){
+            Debug.Log("Can't find the GameState!");
+            saveGameState(); // ensure there is one next time!
+			return;
+		}
+		Debug.Log("Retrieved GameState: " + json);
+        gameState = JsonUtility.FromJson<GameState>(json);
+    }
+}
+
+[System.Serializable]
+public struct GameState {
+    public bool CompletedIntro;
+    public bool DoneMenu;
+
+    public GameState(bool initial)
+    {
+        CompletedIntro = initial;
+        DoneMenu = initial;
+    }
 }

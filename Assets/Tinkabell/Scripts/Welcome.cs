@@ -39,7 +39,7 @@ public class Welcome : MonoBehaviour
         ShowPage();
     }
 
-    void ShowPage()
+    private void ShowPage()
     {
         if (text == null){
             Debug.LogWarning("Welcome.ShowPage() called without a text field!");
@@ -56,4 +56,15 @@ public class Welcome : MonoBehaviour
             skip.gameObject.SetActive(isLastPage);
         }
     }
+
+    public void ClosePage()
+    {
+        GameManager.Instance.OpenMenu();
+    }
+
+    public void RestartStory()
+    {
+        GameManager.Instance.RunIntro();
+    }
+
 }
