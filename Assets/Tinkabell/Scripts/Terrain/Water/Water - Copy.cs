@@ -4,7 +4,6 @@ using UnityEngine;
 
 /*
  * This is copied from the StandardAssets which are not being maintained at current Unity levels
- */
 
 [ExecuteInEditMode] // Make water live-update even when not in play mode
 public class Water : MonoBehaviour
@@ -402,3 +401,4 @@ public class Water : MonoBehaviour
         reflectionMat.m33 = 1F;
     }
 }
+ */
