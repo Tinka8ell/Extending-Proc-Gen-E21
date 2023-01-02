@@ -4,8 +4,6 @@ using System.Collections;
 [CreateAssetMenu()]
 public class HeightMapSettings : UpdatableData {
 
-	public static string WorldKey = "World";
-
 	public string WorldName = "Default";
 
 	public WeightedNoiseSettings[] weightedNoiseSettings;
@@ -44,21 +42,21 @@ public class HeightMapSettings : UpdatableData {
 	}
 
 	public void Load(){
-		string json = Repository.GetJson(WorldKey, WorldName);
-        if(json == null || json.Length == 0){
-            Debug.Log("Can't find the world: " + WorldKey + "." + WorldName);
+        HeightMapSettingsSaveData data = Repository.Load<HeightMapSettingsSaveData>(WorldName, Repository.WorldKey, new HeightMapSettingsSaveData());
+		if (data.weightedNoiseSettings == null || data.weightedNoiseSettings.Length == 0){
+            Debug.Log("Can't find the world: " + Repository.WorldKey + "." + WorldName);
 			return;
 		}
-		Debug.Log("Retrieved json: " + json);
-        HeightMapSettingsSaveData data = JsonUtility.FromJson<HeightMapSettingsSaveData>(json);
 		int length = data.weightedNoiseSettings.Length;
 		Debug.Log("contains " + length + " WeightedNoiseSettings");
 		weightedNoiseSettings =  new WeightedNoiseSettings[length];
 		System.Array.Copy(data.weightedNoiseSettings, weightedNoiseSettings, length);
+		/*
+
 		if (data.keys == null || data.keys.keyFrames == null){ // AnimationCurve is missing
 			Debug.Log("no AnimationCurve, so failing!");
 			weightedNoiseSettings = null;
-			Repository.Remove(WorldKey, WorldName); // clear out bad key
+			Repository.Remove(WorldName, Repository.WorldKey); // clear out bad key
 		} else { // get the AnimationCurve
 			length = data.keys.keyFrames.Length;
 			Debug.Log("contains " + length + " Keyframe keys");
@@ -74,6 +72,8 @@ public class HeightMapSettings : UpdatableData {
 			}
 			heightCurve = new AnimationCurve(keys);
 		}
+		*/
+		heightCurve = data.heightCurve;
 	}
 
 	public void SaveAs(string name){
@@ -87,6 +87,8 @@ public class HeightMapSettings : UpdatableData {
 		data.weightedNoiseSettings =  new WeightedNoiseSettings[length];
 		System.Array.Copy(weightedNoiseSettings, data.weightedNoiseSettings, length);
 
+		data.heightCurve = heightCurve;
+		/*
 		Keyframe[] keys = heightCurve.keys;
 		length = keys.Length;
 		data.keys = new KeyFrames(length);
@@ -100,13 +102,8 @@ public class HeightMapSettings : UpdatableData {
 			   keys[i].outWeight
 			});
 		}
-
-        // convert the save data object to a string
-        string json = JsonUtility.ToJson(data, true);
-		Debug.Log("Saving json: " + json);
-
-        // save it to our PlayerPrefs
-		Repository.SetJson(WorldKey, WorldName, json);
+		*/
+		Repository.Save(WorldName, Repository.WorldKey, data);
 	}
 
 	#if UNITY_EDITOR
@@ -158,6 +155,7 @@ public class HeightMapSettingsSaveData {
 	public WeightedNoiseSettings[] weightedNoiseSettings;
 
 	// Animation Curve
-	public KeyFrames keys;
+	public AnimationCurve heightCurve;
+	//public KeyFrames keys;
 }
 

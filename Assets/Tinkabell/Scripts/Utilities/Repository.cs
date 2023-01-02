@@ -22,6 +22,7 @@ public class Repository
 {
     public static string GameKey = "TheLevelling";
 	public static string GameState = CombineKeys("GameState");
+	public static string WorldKey = CombineKeys("World");
 
     private static string CombineKeys(string key, string parent = null){
         if (parent == null){
