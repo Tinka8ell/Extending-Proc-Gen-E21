@@ -38,23 +38,13 @@ public class HeightMapSettings : UpdatableData {
 		}
 	}
 
-	private Repository _repository;
-	private Repository repository{
-		get{
-			if (_repository == null){
-				_repository = GameManager.Instance.repository;
-			}
-			return _repository;
-		}
-	}
-
 	public void Load(string name){
 		WorldName = name;
 		Load();
 	}
 
 	public void Load(){
-		string json = repository.GetJson(WorldKey, WorldName);
+		string json = Repository.GetJson(WorldKey, WorldName);
         if(json == null || json.Length == 0){
             Debug.Log("Can't find the world: " + WorldKey + "." + WorldName);
 			return;
@@ -68,7 +58,7 @@ public class HeightMapSettings : UpdatableData {
 		if (data.keys == null || data.keys.keyFrames == null){ // AnimationCurve is missing
 			Debug.Log("no AnimationCurve, so failing!");
 			weightedNoiseSettings = null;
-			repository.Remove(WorldKey, WorldName); // clear out bad key
+			Repository.Remove(WorldKey, WorldName); // clear out bad key
 		} else { // get the AnimationCurve
 			length = data.keys.keyFrames.Length;
 			Debug.Log("contains " + length + " Keyframe keys");
@@ -116,7 +106,7 @@ public class HeightMapSettings : UpdatableData {
 		Debug.Log("Saving json: " + json);
 
         // save it to our PlayerPrefs
-		repository.SetJson(WorldKey, WorldName, json);
+		Repository.SetJson(WorldKey, WorldName, json);
 	}
 
 	#if UNITY_EDITOR

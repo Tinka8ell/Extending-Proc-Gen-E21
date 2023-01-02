@@ -63,9 +63,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public Repository repository = new Repository();
-
-    public GameObject StoryBox;
     private UIWidget welcome;
     public UIWidget Welcome {
         get
@@ -100,7 +97,7 @@ public class GameManager : MonoBehaviour
             DestroyImmediate(gameObject); // we only want one!
         }
         Debug.Log("Getting GameState");
-        loadGameState();
+        gameState = Repository.Load<GameState>(Repository.GameState, gameState);
     }
 
 
@@ -188,23 +185,9 @@ public class GameManager : MonoBehaviour
     }
 
     private void saveGameState(){
-        string json = JsonUtility.ToJson(gameState, true);
-		Debug.Log("Saving GameState: " + json);
-
-        // save it to our PlayerPrefs
-		repository.SetJson("GameState", json);
+		Repository.Save(Repository.GameState, gameState);
     }
 
-    private void loadGameState(){
-		string json = repository.GetJson("GameState");
-        if(json == null || json.Length == 0){
-            Debug.Log("Can't find the GameState!");
-            saveGameState(); // ensure there is one next time!
-			return;
-		}
-		Debug.Log("Retrieved GameState: " + json);
-        gameState = JsonUtility.FromJson<GameState>(json);
-    }
 }
 
 [System.Serializable]

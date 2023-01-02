@@ -21,33 +21,70 @@ using UnityEngine;
 public class Repository 
 {
     public static string GameKey = "TheLevelling";
+	public static string GameState = CombineKeys("GameState");
 
-    private string CombineKeys(string parent, string key){
+    private static string CombineKeys(string key, string parent = null){
+        if (parent == null){
+            parent = GameKey;
+        }
         return parent + "." + key;
     }
 
-    public string GetJson(string parent, string key){
-        return GetJson(CombineKeys(parent, key));
+    public static string GetJson(string key, string parent){
+        return GetJson(CombineKeys(key, parent));
     }
 
-    public void SetJson(string parent, string key, string json){
-        SetJson(CombineKeys(parent, key), json);
+    public static void SetJson(string key, string parent, string json){
+        SetJson(CombineKeys(key, parent), json);
     }
 
-    public void Remove(string parent, string key){
-        Remove(CombineKeys(parent, key));
+    public static void Remove(string key, string parent){
+        Remove(CombineKeys(key, parent));
     }
 
-    public string GetJson(string key){
+    public static string GetJson(string key){
         return PlayerPrefs.GetString(key);
     }
 
-    public void SetJson(string key, string json){
+    public static void SetJson(string key, string json){
         PlayerPrefs.SetString(key, json);
     }
 
-    public void Remove(string key){
+    public static void Remove(string key){
         PlayerPrefs.DeleteKey(key);
     }
 
+    public static void Save(string key, string parent, object serializable){
+        Save(CombineKeys(key, parent), serializable);
+    }
+
+    public static T Load<T>(string key, string parent, object backup = null){
+        return Load<T>(CombineKeys(key, parent), backup);
+    }
+
+    public static void Save(string key, object serializable){
+        string json = JsonUtility.ToJson(serializable, true);
+		Debug.Log("Saving " + key + ": " + json);
+
+        // save it to our PlayerPrefs
+		SetJson(key, json);
+    }
+
+    public static T Load<T>(string key, object backup = null){
+        T value;
+		string json = GetJson(key);
+        if(json == null || json.Length == 0){
+            Debug.Log("Can't find the " + key + "!");
+            value = (T) backup;
+            if (backup != null){
+                Debug.Log("Using backup value for " + key + "!");
+                Save(key, value); // ensure there is one next time!
+            }
+		}
+        else {
+    		Debug.Log("Retrieved " + key + ": " + json);
+            value = JsonUtility.FromJson<T>(json);
+        }
+        return value;
+    }
 }
