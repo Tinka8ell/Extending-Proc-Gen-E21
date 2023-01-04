@@ -4,7 +4,7 @@ using UnityEngine;
 using UMA;
 using UMA.CharacterSystem;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class CharacterCreator : MonoBehaviour
 {
@@ -13,8 +13,9 @@ public class CharacterCreator : MonoBehaviour
     public Slider bellySlider;
     public ImageColorPicker skinTones;
     public ImageColorPicker hairColours;
+    public GameObject keyInputField;
 
-    public List<string> hairTypes;
+    private List<string> hairTypes;
     private int hairType;
 
     private Dictionary<string, DnaSetter> dna;
@@ -106,13 +107,23 @@ public class CharacterCreator : MonoBehaviour
     }
 
     public void SaveRecipe(){
+        string key = keyInputField.GetComponent<TMP_InputField>().text;
+        if (key.Length == 0){
+            key = "Player";
+        }
         string recipe = avatar.GetCurrentRecipe();
-        Repository.Save("Player", recipe);
+        Debug.Log("Saving receipe(" + key + "): " + recipe);
+        Repository.SaveString(key, recipe);
     }
 
     public void LoadRecipe(){
-        string recipe = Repository.Load<string>("Player", "{}");
+        string key = keyInputField.GetComponent<TMP_InputField>().text;
+        if (key.Length == 0){
+            key = "Player";
+        }
+        string recipe = Repository.LoadString(key, "{}");
         avatar.ClearSlots();
+        Debug.Log("Loading receipe(" + key + "): " + recipe);
         avatar.LoadFromRecipeString(recipe);
     }
 

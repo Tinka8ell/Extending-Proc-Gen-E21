@@ -55,12 +55,19 @@ public class Repository
         PlayerPrefs.DeleteKey(key);
     }
 
-    public static void Save(string key, string parent, object serializable){
-        Save(CombineKeys(key, parent), serializable);
+    public static void SaveString(string key, string parent, string serialized){
+        SaveString(CombineKeys(key, parent), serialized);
     }
 
-    public static T Load<T>(string key, string parent, object backup = null){
-        return Load<T>(CombineKeys(key, parent), backup);
+    public static void SaveString(string key, string serialized){
+		Debug.Log("Saving " + key + ": " + serialized);
+
+        // save it to our PlayerPrefs
+		SetJson(key, serialized);
+    }
+
+    public static void Save(string key, string parent, object serializable){
+        Save(CombineKeys(key, parent), serializable);
     }
 
     public static void Save(string key, object serializable){
@@ -69,6 +76,34 @@ public class Repository
 
         // save it to our PlayerPrefs
 		SetJson(key, json);
+    }
+
+    public static string LoadString(string key, string parent, string backup = ""){
+        string newKey = CombineKeys(key, parent);
+        Debug.Log("Loading from key " + newKey);
+        return LoadString(newKey, backup);
+    }
+
+    public static string LoadString(string key, string backup = ""){
+		string value = GetJson(key);
+        if(value == null || value.Length == 0){
+            Debug.Log("Can't find the " + key + "!");
+            value = backup;
+            if (backup != null){
+                Debug.Log("Using backup value for " + key + "!");
+                SaveString(key, value); // ensure there is one next time!
+            }
+		}
+        else {
+    		Debug.Log("Retrieved " + key + ": " + value);
+        }
+        return value;
+    }
+
+    public static T Load<T>(string key, string parent, object backup = null){
+        string newKey = CombineKeys(key, parent);
+        Debug.Log("Loading from key " + newKey);
+        return Load<T>(newKey, backup);
     }
 
     public static T Load<T>(string key, object backup = null){
