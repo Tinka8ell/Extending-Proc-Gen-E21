@@ -9,6 +9,7 @@ using TMPro;
 public class CharacterCreator : MonoBehaviour
 {
     public DynamicCharacterAvatar avatar;
+    public GameObject player;
     public Slider heightSlider;
     public Slider bellySlider;
     public ImageColorPicker skinTones;
@@ -39,18 +40,22 @@ public class CharacterCreator : MonoBehaviour
 
     void OnEnable(){
         avatar.CharacterUpdated.AddListener(Updated);
+        /*
         heightSlider.onValueChanged.AddListener(ChangeHeight);
         bellySlider.onValueChanged.AddListener(ChangeBelly);
         skinTones.OnColorPicked.AddListener(ChangeSkinColour);
         hairColours.OnColorPicked.AddListener(ChangeHairColour);
+        */
     }
 
     void OnDisable(){
         avatar.CharacterUpdated.RemoveListener(Updated);
+        /*
         heightSlider.onValueChanged.RemoveListener(ChangeHeight);
         bellySlider.onValueChanged.RemoveListener(ChangeBelly);
         skinTones.OnColorPicked.RemoveListener(ChangeSkinColour);
         hairColours.OnColorPicked.RemoveListener(ChangeHairColour);
+        */
     }
 
     void Updated(UMAData dqata){
@@ -59,11 +64,13 @@ public class CharacterCreator : MonoBehaviour
             hairTypes = maleHairTypes;
         else 
             hairTypes = femaleHairTypes;
+        /*
         heightSlider.value = dna["height"].Get();
         bellySlider.value = dna["belly"].Get();
         string hairString = avatar.GetWardrobeItemName("Hair");
         hairType = hairTypes.FindIndex(s => s == hairString);
         hairType = Mathf.Clamp(hairType, 0, hairTypes.Count - 1);
+        */
     }
 
     public void SwitchGender(bool male){
@@ -71,6 +78,7 @@ public class CharacterCreator : MonoBehaviour
             avatar.ChangeRace(MALE);
         else if (!male && avatar.activeRace.name != FEMALE)
             avatar.ChangeRace(FEMALE);
+        player.SetActive(true);     
     }
 
     public void ChangeHeight(float value){

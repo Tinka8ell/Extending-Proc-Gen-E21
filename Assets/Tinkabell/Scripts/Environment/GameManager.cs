@@ -85,6 +85,8 @@ public class GameManager : MonoBehaviour
     }
     public GameState gameState = new GameState(false);
 
+    public GameObject player;
+
     void Awake(){
         Debug.Log("GameManager Awake");
         if (singleton == null){
@@ -117,6 +119,8 @@ public class GameManager : MonoBehaviour
     }
 
     private void StartGame(){
+        // start with player invisible!
+        player.SetActive(false);
         if (welcome == null){
             welcome = WidgetUtility.Find<UIWidget>("Welcome Screen");
             if (welcome == null){
