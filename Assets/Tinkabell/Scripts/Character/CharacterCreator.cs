@@ -8,8 +8,8 @@ using TMPro;
 
 public class CharacterCreator : MonoBehaviour
 {
-    public DynamicCharacterAvatar avatar;
-    public GameObject player;
+    private DynamicCharacterAvatar avatar;
+    private GameObject player;
     public Slider heightSlider;
     public Slider bellySlider;
     public ImageColorPicker skinTones;
@@ -26,7 +26,10 @@ public class CharacterCreator : MonoBehaviour
     private List<string> maleHairTypes = new List<string>();
     private List<string> femaleHairTypes = new List<string>();
 
+
+
     void Awake(){
+        Debug.Log("Avatar Awake");
         maleHairTypes.Add("None");
         maleHairTypes.Add("MaleHair1");
         maleHairTypes.Add("MaleHair2");
@@ -38,24 +41,35 @@ public class CharacterCreator : MonoBehaviour
         femaleHairTypes.Add("FemaleHair3");
     }
 
+    void Start(){
+        player = GameManager.Instance.player;
+        avatar = player.GetComponent<DynamicCharacterAvatar>();
+    }
+
     void OnEnable(){
-        avatar.CharacterUpdated.AddListener(Updated);
-        /*
+        Debug.Log("Avatar OnEnable");
+        if (avatar == null){
+            Debug.LogWarning("Avatar was not set when CharacterCreator enabled");
+        } else {
+            avatar.CharacterUpdated.AddListener(Updated);
+        }
         heightSlider.onValueChanged.AddListener(ChangeHeight);
-        bellySlider.onValueChanged.AddListener(ChangeBelly);
+        // bellySlider.onValueChanged.AddListener(ChangeBelly);
         skinTones.OnColorPicked.AddListener(ChangeSkinColour);
         hairColours.OnColorPicked.AddListener(ChangeHairColour);
-        */
     }
 
     void OnDisable(){
-        avatar.CharacterUpdated.RemoveListener(Updated);
-        /*
+        Debug.Log("Avatar OnDisable");
+        if (avatar == null){
+            Debug.LogWarning("Avatar was not set when CharacterCreator disabled");
+        } else {
+            avatar.CharacterUpdated.RemoveListener(Updated);
+        }
         heightSlider.onValueChanged.RemoveListener(ChangeHeight);
-        bellySlider.onValueChanged.RemoveListener(ChangeBelly);
+        // bellySlider.onValueChanged.RemoveListener(ChangeBelly);
         skinTones.OnColorPicked.RemoveListener(ChangeSkinColour);
         hairColours.OnColorPicked.RemoveListener(ChangeHairColour);
-        */
     }
 
     void Updated(UMAData dqata){
@@ -64,13 +78,11 @@ public class CharacterCreator : MonoBehaviour
             hairTypes = maleHairTypes;
         else 
             hairTypes = femaleHairTypes;
-        /*
         heightSlider.value = dna["height"].Get();
         bellySlider.value = dna["belly"].Get();
         string hairString = avatar.GetWardrobeItemName("Hair");
         hairType = hairTypes.FindIndex(s => s == hairString);
         hairType = Mathf.Clamp(hairType, 0, hairTypes.Count - 1);
-        */
     }
 
     public void SwitchGender(bool male){
@@ -92,6 +104,7 @@ public class CharacterCreator : MonoBehaviour
     }
 
     public void ChangeSkinColour(Color colour){
+        Debug.Log("Avatar ChangeSkinColour: " + colour);
         avatar.SetColor("Skin", colour);
         avatar.UpdateColors(true);
     }
@@ -110,6 +123,7 @@ public class CharacterCreator : MonoBehaviour
     }
 
     public void ChangeHairColour(Color colour){
+        Debug.Log("Avatar ChangeHairColour: " + colour);
         avatar.SetColor("Hair", colour);
         avatar.UpdateColors(true);
     }
@@ -119,9 +133,13 @@ public class CharacterCreator : MonoBehaviour
         if (key.Length == 0){
             key = "Player";
         }
+        SaveRecipe(key);
+    }
+
+    public void SaveRecipe(string key){
         string recipe = avatar.GetCurrentRecipe();
         Debug.Log("Saving receipe(" + key + "): " + recipe);
-        Repository.SaveString(key, recipe);
+        Repository.SaveString(Repository.PlayerKey, key, recipe);
     }
 
     public void LoadRecipe(){
@@ -129,7 +147,11 @@ public class CharacterCreator : MonoBehaviour
         if (key.Length == 0){
             key = "Player";
         }
-        string recipe = Repository.LoadString(key, "{}");
+        LoadRecipe(key);
+    }
+
+    public void LoadRecipe(string key){
+        string recipe = Repository.LoadString(Repository.PlayerKey, key, "{}");
         avatar.ClearSlots();
         Debug.Log("Loading receipe(" + key + "): " + recipe);
         avatar.LoadFromRecipeString(recipe);

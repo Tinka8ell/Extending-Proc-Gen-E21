@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
             return welcome;
         }
     }
-    public UIWidget startMenu;
+    private UIWidget startMenu;
     public UIWidget StartMenu {
         get
         {

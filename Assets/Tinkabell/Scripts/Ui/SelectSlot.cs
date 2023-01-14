@@ -15,6 +15,7 @@ public class SelectSlot : MonoBehaviour, IPointerUpHandler
         string key = GetComponentInChildren<Text>().text;
         DialogBox dialogBox = InventoryManager.UI.dialogBox;
 
+        /*
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             ContextMenu menu = InventoryManager.UI.contextMenu;
@@ -42,17 +43,15 @@ public class SelectSlot : MonoBehaviour, IPointerUpHandler
                     InventoryManager.Delete(key);
                     DestroyImmediate(gameObject);
                 }, "Yes", "No");
-
-
-                
             });
             menu.Show();
-        }else {
+        } else {
+        */
             dialogBox.Show("Load", "Are you sure you want to load this save? ", null, (int result) => { 
                 if (result != 0) return;
                 InventoryManager.Load(key);
             }, "Yes", "No");
             
-        }
+        // }
     }
 }

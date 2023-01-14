@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class SelectMenu : UIWidget
 {
@@ -30,6 +31,9 @@ public class SelectMenu : UIWidget
     [SerializeField]
     protected string selectKey;
 
+    public UnityEvent<string> PlayerUpdated;
+    public UnityEvent<string> WorldUpdated;
+
     private void Start()
     {
         if (selectKey == null || selectKey.Length ==0){
@@ -40,7 +44,8 @@ public class SelectMenu : UIWidget
 
     private void UpdateStates()
     {
-        List<SelectSlot> slots = this.slotParent.GetComponentsInChildren<SelectSlot>().ToList();
+        List<SelectSlot> slots = 
+            this.slotParent.GetComponentsInChildren<SelectSlot>().ToList();
         slots.Remove(this.slotPrefab);
         for (int i = 0; i < slots.Count; i++)
         {
@@ -57,7 +62,7 @@ public class SelectMenu : UIWidget
                 keys.Add("Default");
                 keys.Add("Small Islands");
                 keys.Add("Big Islands");
-            } else if (selectKey.Equals("UMAKeys")){
+            } else if (selectKey.Equals("PlayerKeys")){
                 keys.Add("Simple Simon");
                 keys.Add("Plain Jane");
             }
@@ -68,11 +73,6 @@ public class SelectMenu : UIWidget
             string key = keys[i];
             SelectSlot slot = CreateSlot(key);
         }
-    }
-
-    public void Save()
-    {
-
     }
 
     public SelectSlot CreateSlot(string name)

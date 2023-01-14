@@ -23,12 +23,51 @@ public class Repository
     public static string GameKey = "TheLevelling";
 	public static string GameState = CombineKeys("GameState");
 	public static string WorldKey = CombineKeys("World");
+	public static string PlayerKey = CombineKeys("Player");
 
     private static string CombineKeys(string key, string parent = null){
         if (parent == null){
             parent = GameKey;
         }
         return parent + "." + key;
+    }
+
+    private static string GetParent(string key){
+        int lastDot = key.LastIndexOf('.'); 
+        return key.Substring(0, lastDot);
+    }
+
+    private static void AddKey(string key){
+        string parent = GetParent(key);
+        string subKey = key.Substring(parent.Length + 1);
+        List<string> list = ListKeys(parent);
+        if (!list.Contains(key)){
+            list.Add(subKey);
+            SetKeys(parent, list);
+        }
+        return;
+    }
+
+    private static void RemoveKey(string key){
+        string parent = GetParent(key);
+        string subKey = key.Substring(parent.Length + 1);
+        List<string> list = ListKeys(parent);
+        if (list.Contains(key)){
+            list.Remove(subKey);
+            SetKeys(parent, list);
+        }
+        return;
+    }
+
+    private static void SetKeys(string parent, List<string> list){
+        string keys = string.Join('.', list);
+        PlayerPrefs.SetString(parent, keys);
+        return;
+    }
+
+    public static List<string> ListKeys(string parent){
+        string keys = PlayerPrefs.GetString(parent);
+        return new List<string>(keys.Split(';'));
     }
 
     public static string GetJson(string key, string parent){
@@ -48,11 +87,13 @@ public class Repository
     }
 
     public static void SetJson(string key, string json){
+        AddKey(key);
         PlayerPrefs.SetString(key, json);
     }
 
     public static void Remove(string key){
         PlayerPrefs.DeleteKey(key);
+        RemoveKey(key);
     }
 
     public static void SaveString(string key, string parent, string serialized){
