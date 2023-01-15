@@ -9,7 +9,7 @@ public class UITree : MonoBehaviour
     public UITree[] children;
     public bool disableWhenChildEnabled;
 
-    public static bool DebugUITree;
+    public static bool DebugUITree = false;
     
     public void enableChild(int index){
         DebugUITreeLog(name + " asked to enable child: " + index);

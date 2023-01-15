@@ -9,7 +9,31 @@ using TMPro;
 public class CharacterCreator : MonoBehaviour
 {
     private DynamicCharacterAvatar avatar;
+    public DynamicCharacterAvatar Avatar {
+        get
+        {
+            if (avatar == null){
+                avatar = Player.GetComponent<DynamicCharacterAvatar>();
+                if (avatar == null){
+                    Debug.LogError("Avata is not set able to be set from Player!");
+                }
+            }
+            return avatar;
+        }
+    }
     private GameObject player;
+    public GameObject Player {
+        get
+        {
+            if (player == null){
+                player = GameManager.Instance.player;
+                if (player == null){
+                    Debug.LogError("Player is not set in GameManager!");
+                }
+            }
+            return player;
+        }
+    }
     public Slider heightSlider;
     public Slider bellySlider;
     public ImageColorPicker skinTones;
@@ -41,17 +65,12 @@ public class CharacterCreator : MonoBehaviour
         femaleHairTypes.Add("FemaleHair3");
     }
 
-    void Start(){
-        player = GameManager.Instance.player;
-        avatar = player.GetComponent<DynamicCharacterAvatar>();
-    }
-
     void OnEnable(){
         Debug.Log("Avatar OnEnable");
-        if (avatar == null){
+        if (Avatar == null){
             Debug.LogWarning("Avatar was not set when CharacterCreator enabled");
         } else {
-            avatar.CharacterUpdated.AddListener(Updated);
+            Avatar.CharacterUpdated.AddListener(Updated);
         }
         heightSlider.onValueChanged.AddListener(ChangeHeight);
         // bellySlider.onValueChanged.AddListener(ChangeBelly);
@@ -61,10 +80,10 @@ public class CharacterCreator : MonoBehaviour
 
     void OnDisable(){
         Debug.Log("Avatar OnDisable");
-        if (avatar == null){
+        if (Avatar == null){
             Debug.LogWarning("Avatar was not set when CharacterCreator disabled");
         } else {
-            avatar.CharacterUpdated.RemoveListener(Updated);
+            Avatar.CharacterUpdated.RemoveListener(Updated);
         }
         heightSlider.onValueChanged.RemoveListener(ChangeHeight);
         // bellySlider.onValueChanged.RemoveListener(ChangeBelly);
@@ -73,40 +92,40 @@ public class CharacterCreator : MonoBehaviour
     }
 
     void Updated(UMAData dqata){
-        dna = avatar.GetDNA();
-        if (avatar.activeRace.name == MALE)
+        dna = Avatar.GetDNA();
+        if (Avatar.activeRace.name == MALE)
             hairTypes = maleHairTypes;
         else 
             hairTypes = femaleHairTypes;
         heightSlider.value = dna["height"].Get();
         bellySlider.value = dna["belly"].Get();
-        string hairString = avatar.GetWardrobeItemName("Hair");
+        string hairString = Avatar.GetWardrobeItemName("Hair");
         hairType = hairTypes.FindIndex(s => s == hairString);
         hairType = Mathf.Clamp(hairType, 0, hairTypes.Count - 1);
     }
 
     public void SwitchGender(bool male){
-        if (male && avatar.activeRace.name != MALE)
-            avatar.ChangeRace(MALE);
-        else if (!male && avatar.activeRace.name != FEMALE)
-            avatar.ChangeRace(FEMALE);
-        player.SetActive(true);     
+        if (male && Avatar.activeRace.name != MALE)
+            Avatar.ChangeRace(MALE);
+        else if (!male && Avatar.activeRace.name != FEMALE)
+            Avatar.ChangeRace(FEMALE);
+        Player.SetActive(true);
     }
 
     public void ChangeHeight(float value){
         dna["height"].Set(value);
-        avatar.BuildCharacter();
+        Avatar.BuildCharacter();
     }
 
     public void ChangeBelly(float value){
         dna["belly"].Set(value);
-        avatar.BuildCharacter();
+        Avatar.BuildCharacter();
     }
 
     public void ChangeSkinColour(Color colour){
         Debug.Log("Avatar ChangeSkinColour: " + colour);
-        avatar.SetColor("Skin", colour);
-        avatar.UpdateColors(true);
+        Avatar.SetColor("Skin", colour);
+        Avatar.UpdateColors(true);
     }
 
     public void ChangeHair(bool plus){
@@ -116,16 +135,16 @@ public class CharacterCreator : MonoBehaviour
             hairType --;
         hairType = Mathf.Clamp(hairType, 0, hairTypes.Count - 1);
         if (hairType == 0)
-            avatar.ClearSlot("Hair");
+            Avatar.ClearSlot("Hair");
         else
-            avatar.SetSlot("Hair", hairTypes[hairType]);
-        avatar.BuildCharacter();
+            Avatar.SetSlot("Hair", hairTypes[hairType]);
+        Avatar.BuildCharacter();
     }
 
     public void ChangeHairColour(Color colour){
         Debug.Log("Avatar ChangeHairColour: " + colour);
-        avatar.SetColor("Hair", colour);
-        avatar.UpdateColors(true);
+        Avatar.SetColor("Hair", colour);
+        Avatar.UpdateColors(true);
     }
 
     public void SaveRecipe(){
@@ -137,7 +156,7 @@ public class CharacterCreator : MonoBehaviour
     }
 
     public void SaveRecipe(string key){
-        string recipe = avatar.GetCurrentRecipe();
+        string recipe = Avatar.GetCurrentRecipe();
         Debug.Log("Saving receipe(" + key + "): " + recipe);
         Repository.SaveString(Repository.PlayerKey, key, recipe);
     }
@@ -152,9 +171,10 @@ public class CharacterCreator : MonoBehaviour
 
     public void LoadRecipe(string key){
         string recipe = Repository.LoadString(Repository.PlayerKey, key, "{}");
-        avatar.ClearSlots();
+        Avatar.ClearSlots();
         Debug.Log("Loading receipe(" + key + "): " + recipe);
-        avatar.LoadFromRecipeString(recipe);
+        Avatar.LoadFromRecipeString(recipe);
+        Player.SetActive(true);
     }
 
 }

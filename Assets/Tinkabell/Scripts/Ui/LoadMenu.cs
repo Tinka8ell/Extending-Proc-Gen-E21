@@ -7,16 +7,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class SelectMenu : UIWidget
+public class LoadMenu : UIWidget
 {
     [Header("Reference")]
     [Tooltip("The parent transform of slots.")]
     [SerializeField]
     protected Transform slotParent;
 
-    [Tooltip("The slot prefab. This game object should contain the SelectSlot component.")]
+    [Tooltip("The slot prefab. This game object should contain the LoadSlot component.")]
     [SerializeField]
-    protected SelectSlot slotPrefab;
+    protected LoadSlot slotPrefab;
 
     [Tooltip("The select key. This key used to list items in PlayPrefs.")]
     [SerializeField]
@@ -36,8 +36,8 @@ public class SelectMenu : UIWidget
     private void UpdateStates()
     {
         Debug.Log("UpdateStates() - clearing old slots");
-        List<SelectSlot> slots = 
-            this.slotParent.GetComponentsInChildren<SelectSlot>().ToList();
+        List<LoadSlot> slots = 
+            this.slotParent.GetComponentsInChildren<LoadSlot>().ToList();
         slots.Remove(this.slotPrefab);
         for (int i = 0; i < slots.Count; i++)
         {
@@ -45,7 +45,7 @@ public class SelectMenu : UIWidget
         }
 
         Debug.Log("UpdateStates() - getting keys");
-        List<string> keys = Repository.ListKeys(Repository.GameKey, selectKey);
+        List<string> keys = new List<string>();//Repository.ListKeys(Repository.GameKey, selectKey);
         // keys.Reverse();
         Debug.Log("UpdateStates() - got " + keys.Count + " keys");
 
@@ -75,6 +75,7 @@ public class SelectMenu : UIWidget
         {
             GameObject go = (GameObject)Instantiate(this.slotPrefab.gameObject);
             Text text = go.GetComponentInChildren<Text>();
+            Debug.Log("CreateSlot(" + name + "): got text: " + text.text);
             text.text = name;
             go.SetActive(true);
             go.transform.SetParent(this.slotParent, false);

@@ -65,6 +65,10 @@ public class Repository
         return;
     }
 
+    public static List<string> ListKeys(string key, string parent){
+        return ListKeys(CombineKeys(key, parent));
+    }
+
     public static List<string> ListKeys(string parent){
         string keys = PlayerPrefs.GetString(parent);
         return new List<string>(keys.Split(';'));
