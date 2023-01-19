@@ -5,6 +5,7 @@ using UMA;
 using UMA.CharacterSystem;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public class CharacterCreator : MonoBehaviour
 {
@@ -50,6 +51,7 @@ public class CharacterCreator : MonoBehaviour
     private List<string> maleHairTypes = new List<string>();
     private List<string> femaleHairTypes = new List<string>();
 
+    public UnityEvent<string> NameChangedEvent;
 
 
     void Awake(){
@@ -66,7 +68,7 @@ public class CharacterCreator : MonoBehaviour
     }
 
     void OnEnable(){
-        Debug.Log("Avatar OnEnable");
+        Debug.Log("CharacterCreator OnEnable");
         if (Avatar == null){
             Debug.LogWarning("Avatar was not set when CharacterCreator enabled");
         } else {
@@ -79,7 +81,7 @@ public class CharacterCreator : MonoBehaviour
     }
 
     void OnDisable(){
-        Debug.Log("Avatar OnDisable");
+        Debug.Log("CharacterCreator OnDisable");
         if (Avatar == null){
             Debug.LogWarning("Avatar was not set when CharacterCreator disabled");
         } else {
@@ -148,33 +150,60 @@ public class CharacterCreator : MonoBehaviour
     }
 
     public void SaveRecipe(){
-        string key = keyInputField.GetComponent<TMP_InputField>().text;
+        string key = GameManager.Instance.PlayerName;
+        Debug.Log("SaveRecipe() using: " + key);
         if (key.Length == 0){
             key = "Player";
+            Debug.Log("SaveRecipe() overriding to: " + key);
         }
         SaveRecipe(key);
     }
 
+    public void SaveInputNamedRecipe(){
+        string key = keyInputField.GetComponent<TMP_InputField>().text;
+        Debug.Log("SaveInputNamedRecipe() using: " + key);
+        SaveRecipe(key);
+    }
+
     public void SaveRecipe(string key){
+        Debug.LogWarning("SaveRecipe(" + key + ") <<<<<<<=======");
+        UpdatePlayerName(key);
         string recipe = Avatar.GetCurrentRecipe();
         Debug.Log("Saving receipe(" + key + "): " + recipe);
         Repository.SaveString(Repository.PlayerKey, key, recipe);
     }
 
     public void LoadRecipe(){
-        string key = keyInputField.GetComponent<TMP_InputField>().text;
+        string key = GameManager.Instance.PlayerName;
+        Debug.Log("LoadRecipe() using: " + key);
         if (key.Length == 0){
-            key = "Player";
+            key = "Player!";
+            Debug.Log("LoadRecipe() overriding to: " + key);
         }
         LoadRecipe(key);
     }
-
+/*
+    public void NameChange(){
+        string name = keyInputField.GetComponent<TMP_InputField>().text;
+        NameChangedEvent?.Invoke(name); 
+    }
+*/
     public void LoadRecipe(string key){
+        Debug.LogWarning("LoadRecipe(" + key + ") <<<<<<<=======");
+        UpdatePlayerName(key);
         string recipe = Repository.LoadString(Repository.PlayerKey, key, "{}");
         Avatar.ClearSlots();
         Debug.Log("Loading receipe(" + key + "): " + recipe);
         Avatar.LoadFromRecipeString(recipe);
         Player.SetActive(true);
     }
+
+    private void UpdatePlayerName(string name){
+        Debug.Log("CharacterCreator: UpdatePlayerName(" + name + ")");
+        GameManager.Instance.PlayerName=name;
+        keyInputField.GetComponent<TMP_InputField>().SetTextWithoutNotify(GameManager.Instance.PlayerName);
+    }
+
+
 
 }

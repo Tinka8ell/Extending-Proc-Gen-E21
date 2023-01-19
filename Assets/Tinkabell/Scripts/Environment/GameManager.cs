@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public bool stillAlive;
 
     public string WorldName = "Default";
+    public string PlayerName = "";
 
     [Header("Time of day control")]
     public DateTime baseTime = new DateTime(2022, 12, 1);  // then the game started (invented?)

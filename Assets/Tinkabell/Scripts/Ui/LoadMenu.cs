@@ -27,9 +27,15 @@ public class LoadMenu : UIWidget
 
     private void Start()
     {
+        Debug.Log("UpdateStates() - Start");
         if (selectKey == null || selectKey.Length ==0){
             selectKey = "DefaultKey";
         }
+        UpdateStates();
+    }
+
+    void OnEnable(){
+        Debug.Log("UpdateStates() - onEnable");
         UpdateStates();
     }
 
