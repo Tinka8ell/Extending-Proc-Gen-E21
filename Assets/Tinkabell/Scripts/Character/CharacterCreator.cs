@@ -182,12 +182,7 @@ public class CharacterCreator : MonoBehaviour
         }
         LoadRecipe(key);
     }
-/*
-    public void NameChange(){
-        string name = keyInputField.GetComponent<TMP_InputField>().text;
-        NameChangedEvent?.Invoke(name); 
-    }
-*/
+
     public void LoadRecipe(string key){
         Debug.LogWarning("LoadRecipe(" + key + ") <<<<<<<=======");
         UpdatePlayerName(key);

@@ -42,7 +42,11 @@ public class HeightMapSettings : UpdatableData {
 	}
 
 	public void Load(){
-        HeightMapSettingsSaveData data = Repository.Load<HeightMapSettingsSaveData>(WorldName, Repository.WorldKey, new HeightMapSettingsSaveData());
+        HeightMapSettingsSaveData data = Repository.Load<HeightMapSettingsSaveData>(
+			Repository.WorldKey, 
+			WorldName, 
+			new HeightMapSettingsSaveData()
+			);
 		if (data.weightedNoiseSettings == null || data.weightedNoiseSettings.Length == 0){
             Debug.Log("Can't find the world: " + Repository.WorldKey + "." + WorldName);
 			return;
@@ -51,28 +55,6 @@ public class HeightMapSettings : UpdatableData {
 		Debug.Log("contains " + length + " WeightedNoiseSettings");
 		weightedNoiseSettings =  new WeightedNoiseSettings[length];
 		System.Array.Copy(data.weightedNoiseSettings, weightedNoiseSettings, length);
-		/*
-
-		if (data.keys == null || data.keys.keyFrames == null){ // AnimationCurve is missing
-			Debug.Log("no AnimationCurve, so failing!");
-			weightedNoiseSettings = null;
-			Repository.Remove(WorldName, Repository.WorldKey); // clear out bad key
-		} else { // get the AnimationCurve
-			length = data.keys.keyFrames.Length;
-			Debug.Log("contains " + length + " Keyframe keys");
-			Keyframe[] keys = new Keyframe[length];
-			for (int i = 0; i < length; i++){
-				keys[i] = new Keyframe(
-					data.keys.keyFrames[i].keys[0], 
-					data.keys.keyFrames[i].keys[1], 
-					data.keys.keyFrames[i].keys[2], 
-					data.keys.keyFrames[i].keys[3], 
-					data.keys.keyFrames[i].keys[4], 
-					data.keys.keyFrames[i].keys[5]);
-			}
-			heightCurve = new AnimationCurve(keys);
-		}
-		*/
 		heightCurve = data.heightCurve;
 	}
 
@@ -88,22 +70,7 @@ public class HeightMapSettings : UpdatableData {
 		System.Array.Copy(weightedNoiseSettings, data.weightedNoiseSettings, length);
 
 		data.heightCurve = heightCurve;
-		/*
-		Keyframe[] keys = heightCurve.keys;
-		length = keys.Length;
-		data.keys = new KeyFrames(length);
-		for (int i = 0; i < length; i++){
-			data.keys.keyFrames[i] = new Keys(new float[]{
-			   keys[i].time,
-			   keys[i].value,
-			   keys[i].inTangent,
-			   keys[i].outTangent,
-			   keys[i].inWeight,
-			   keys[i].outWeight
-			});
-		}
-		*/
-		Repository.Save(WorldName, Repository.WorldKey, data);
+		Repository.Save(Repository.WorldKey, WorldName, data);
 	}
 
 	#if UNITY_EDITOR

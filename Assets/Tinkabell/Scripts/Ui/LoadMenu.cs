@@ -50,13 +50,19 @@ public class LoadMenu : UIWidget
             DestroyImmediate(slots[i].gameObject);
         }
 
-        Debug.Log("UpdateStates() - getting keys");
-        List<string> keys = new List<string>();//Repository.ListKeys(Repository.GameKey, selectKey);
-        // keys.Reverse();
+        string parent = Repository.GameKey;
+        if (selectKey.Equals("WorldKeys")){
+            parent = Repository.WorldKey;
+        } else if (selectKey.Equals("PlayerKeys")){
+            parent = Repository.PlayerKey;
+        }
+        Debug.Log("UpdateStates() - getting keys for " + parent);
+        List<string> keys = Repository.ListKeys(parent);
         Debug.Log("UpdateStates() - got " + keys.Count + " keys");
 
         if (keys.Count == 0){
             // temporarily add some defaults for testing
+            Debug.LogWarning("UpdateStates() - got " + keys.Count + " keys, so using defaults");
             if (selectKey.Equals("WorldKeys")){
                 keys.Add("Default");
                 keys.Add("Small Islands");

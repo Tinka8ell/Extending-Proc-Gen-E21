@@ -25,111 +25,28 @@ public class Repository
 	public static string WorldKey = CombineKeys("World");
 	public static string PlayerKey = CombineKeys("Player");
 
-    private static string CombineKeys(string key, string parent = null){
-        if (parent == null){
-            parent = GameKey;
-        }
-        return parent + "." + key;
-    }
-
-    private static string GetParent(string key){
-        int lastDot = key.LastIndexOf('.'); 
-        return key.Substring(0, lastDot);
-    }
-
-    private static void AddKey(string key){
-        string parent = GetParent(key);
-        string subKey = key.Substring(parent.Length + 1);
-        List<string> list = ListKeys(parent);
-        if (!list.Contains(key)){
-            list.Add(subKey);
-            SetKeys(parent, list);
-        }
-        return;
-    }
-
-    private static void RemoveKey(string key){
-        string parent = GetParent(key);
-        string subKey = key.Substring(parent.Length + 1);
-        List<string> list = ListKeys(parent);
-        if (list.Contains(key)){
-            list.Remove(subKey);
-            SetKeys(parent, list);
-        }
-        return;
-    }
-
-    private static void SetKeys(string parent, List<string> list){
-        string keys = string.Join('.', list);
-        PlayerPrefs.SetString(parent, keys);
-        return;
-    }
-
-    public static List<string> ListKeys(string key, string parent){
-        return ListKeys(CombineKeys(key, parent));
-    }
+    // Load and Save String Data - e.g. character data
 
     public static List<string> ListKeys(string parent){
-        string keys = PlayerPrefs.GetString(parent);
-        return new List<string>(keys.Split(';'));
+        return ListSubKeysOfParent(parent);
     }
 
-    public static string GetJson(string key, string parent){
-        return GetJson(CombineKeys(key, parent));
-    }
-
-    public static void SetJson(string key, string parent, string json){
-        SetJson(CombineKeys(key, parent), json);
-    }
-
-    public static void Remove(string key, string parent){
-        Remove(CombineKeys(key, parent));
-    }
-
-    public static string GetJson(string key){
-        return PlayerPrefs.GetString(key);
-    }
-
-    public static void SetJson(string key, string json){
-        AddKey(key);
-        PlayerPrefs.SetString(key, json);
-    }
-
-    public static void Remove(string key){
-        PlayerPrefs.DeleteKey(key);
-        RemoveKey(key);
-    }
-
-    public static void SaveString(string key, string parent, string serialized){
+    public static void SaveString(string parent, string key, string serialized){
         SaveString(CombineKeys(key, parent), serialized);
     }
 
-    public static void SaveString(string key, string serialized){
+    private static void SaveString(string key, string serialized){
 		Debug.Log("Saving " + key + ": " + serialized);
-
-        // save it to our PlayerPrefs
 		SetJson(key, serialized);
     }
 
-    public static void Save(string key, string parent, object serializable){
-        Save(CombineKeys(key, parent), serializable);
-    }
-
-    public static void Save(string key, object serializable){
-        string json = JsonUtility.ToJson(serializable, true);
-		Debug.Log("Saving " + key + ": " + json);
-
-        // save it to our PlayerPrefs
-		SetJson(key, json);
-    }
-
-    public static string LoadString(string key, string parent, string backup = ""){
+    public static string LoadString(string parent, string key, string backup = ""){
         string newKey = CombineKeys(key, parent);
         Debug.Log("Loading from key " + newKey);
         return LoadString(newKey, backup);
     }
 
-    public static string LoadString(string key, string backup = ""){
+    private static string LoadString(string key, string backup = ""){
 		string value = GetJson(key);
         if(value == null || value.Length == 0){
             Debug.Log("Can't find the " + key + "!");
@@ -143,6 +60,20 @@ public class Repository
     		Debug.Log("Retrieved " + key + ": " + value);
         }
         return value;
+    }
+
+    // Save and Load data - e.g. HeightMaps, GameData
+    // Either keyed - parent.key
+    // Or singleton - parent (as the "key")
+
+    public static void Save(string parent, string key, object serializable){
+        Save(CombineKeys(key, parent), serializable);
+    }
+
+    public static void Save(string key, object serializable){
+        string json = JsonUtility.ToJson(serializable, true);
+		Debug.Log("Saving " + key + ": " + json);
+		SetJson(key, json);
     }
 
     public static T Load<T>(string key, string parent, object backup = null){
@@ -168,4 +99,119 @@ public class Repository
         }
         return value;
     }
+
+    // keyed data?
+
+    public static string GetJson(string key){
+        return GetStringFromPlayerPrefs(key);
+    }
+
+    public static void SetJson(string key, string json){
+        AddNewKey(key);
+        SetStringFromPlayerPrefs(key, json);
+    }
+
+    public static void RemoveData(string key, string parent){
+        RemoveData(CombineKeys(key, parent));
+    }
+
+    public static void RemoveData(string key){
+        DeleteStringFromPlayerDefs(key);
+        RemoveSubKey(key);
+    }
+
+    // utilities
+
+    private static void AddNewKey(string key){
+        string parent = GetParent(key);
+        if (parent.Length > 0){
+            string oldKey = key.Substring(parent.Length + 1);
+            List<string> list = ListSubKeysOfParent(parent);
+            if (!list.Contains(oldKey)){
+                list.Add(oldKey);
+                SetSubKeyList(parent, list);
+            }
+            AddNewKey(parent);
+        }
+        return;
+    }
+
+    private static void RemoveSubKey(string key){
+        string parent = GetParent(key);
+        if (parent.Length > 0){
+            string subKey = key.Substring(parent.Length + 1);
+            List<string> list = ListSubKeysOfParent(parent);
+            if (list.Contains(subKey)){
+                list.Remove(subKey);
+                SetSubKeyList(parent, list);
+            }
+            if (list.Count == 0){
+                RemoveKeyFromParent(parent);
+            }
+        }
+        return;
+    }
+
+    private static string CombineKeys(string key, string parent = null){
+        if (parent == null){
+            parent = GameKey;
+        }
+        return parent + "." + key;
+    }
+
+    private static string GetParent(string key){
+        int lastDot = key.LastIndexOf('.'); 
+        if (lastDot < 0){
+            return ""; // no parent
+        }
+        return key.Substring(0, lastDot);
+    }
+
+    private static void RemoveKeyFromParent(string key){
+        DeleteStringFromPlayerDefs(key);
+        RemoveSubKey(key);
+    }
+
+    private static void SetSubKeyList(string parent, List<string> list){
+        string keys = string.Join(';', list);
+        SetStringFromPlayerPrefs(parent, keys);
+        return;
+    }
+
+    private static List<string> ListSubKeysOfParent(string parent){
+        string keys = GetStringFromPlayerPrefs(parent);
+        Debug.Log("ListSubKeysFromParent(" + parent + "): " + keys);
+        List<string> list = new List<string>(keys.Split(';'));
+        list.RemoveAll((string item) => item.Length == 0);
+        foreach (string item in list){
+            Debug.Log("Item found: '" + item + "'");
+        }
+        return list;
+    }
+
+    private static string GetStringFromPlayerPrefs(string key){
+        string value = PlayerPrefs.GetString(key);
+        Debug.Log("GetStringFromPlayerPrefs(" + key + "): '" + value + "'");
+        return value;
+    }
+
+    private static void SetStringFromPlayerPrefs(string key, string value){
+        Debug.Log("SetStringFromPlayerPrefs(" + key + ", '" + value + "')");
+        PlayerPrefs.SetString(key, value);
+    }
+
+    private static void DeleteStringFromPlayerDefs(string key){
+        PlayerPrefs.DeleteKey(key);
+    }
+
+    ////////// dead code //////////
+    private static string XGetJson(string key, string parent){
+        return GetJson(CombineKeys(key, parent));
+    }
+
+    private static void XSetJson(string key, string parent, string json){
+        SetJson(CombineKeys(key, parent), json);
+    }
+
+
 }

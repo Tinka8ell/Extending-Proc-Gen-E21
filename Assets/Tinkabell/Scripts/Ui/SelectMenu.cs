@@ -45,8 +45,7 @@ public class SelectMenu : UIWidget
         }
 
         Debug.Log("UpdateStates() - getting keys");
-        List<string> keys = Repository.ListKeys(Repository.GameKey, selectKey);
-        // keys.Reverse();
+        List<string> keys = Repository.ListKeys(selectKey);
         Debug.Log("UpdateStates() - got " + keys.Count + " keys");
 
         if (keys.Count == 0){
