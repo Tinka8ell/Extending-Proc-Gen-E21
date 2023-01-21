@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class TerrainChunk {
 	
@@ -211,6 +212,16 @@ public class TerrainChunk {
 		return meshObject.activeSelf;
 	}
 
+    internal void DestroyChunk()
+    {
+		Debug.Log("Destroying game objects for this chunk");
+        if(seaObject){
+			GameObject.Destroy(seaObject);
+		}
+        if(meshObject){
+			GameObject.Destroy(meshObject);
+		}
+    }
 }
 
 class LODMesh {

@@ -7,6 +7,8 @@ using DevionGames.UIWidgets;
 
 public class GameManager : MonoBehaviour
 {
+    public static bool DebugGameManager = false;
+    
     public UnityEvent GameClockTickEvent;
     public bool stillAlive;
 
@@ -89,17 +91,17 @@ public class GameManager : MonoBehaviour
     public GameObject player;
 
     void Awake(){
-        Debug.Log("GameManager Awake");
+        DebugGameManagerLog("GameManager Awake");
         if (singleton == null){
-            Debug.Log("GameManager: we are the One!");
+            DebugGameManagerLog("GameManager: we are the One!");
             singleton = gameObject; // we are the one
             DontDestroyOnLoad(gameObject); // and we are going nowhere
             instance = this;
         } else {
-            Debug.Log("GameManager: we are not the one.");
+            DebugGameManagerLog("GameManager: we are not the one.");
             DestroyImmediate(gameObject); // we only want one!
         }
-        Debug.Log("Getting GameState");
+        DebugGameManagerLog("Getting GameState");
         gameState = Repository.Load<GameState>(Repository.GameState, gameState);
     }
 
@@ -141,13 +143,13 @@ public class GameManager : MonoBehaviour
             OpenMenu();
         }
         if (gameState.DoneMenu){
-            Debug.LogWarning("Done menu, so load game");
+            Debug.Log("Done menu, so load game");
             // load the game?
         }
     }
 
     public void RunIntro(){
-        Debug.Log("Running Intro");
+        DebugGameManagerLog("Running Intro");
         gameState.CompletedIntro = false;
         saveGameState();
         StartMenu.Close();
@@ -155,7 +157,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void OpenMenu(){
-        Debug.Log("Opening Menu");
+        DebugGameManagerLog("Opening Menu");
         gameState.CompletedIntro = true;
         saveGameState();
         Welcome.Close();
@@ -191,6 +193,11 @@ public class GameManager : MonoBehaviour
 
     private void saveGameState(){
 		Repository.Save(Repository.GameState, gameState);
+    }
+
+    private static void DebugGameManagerLog(string message){
+        if (DebugGameManager)
+            Debug.Log(message);
     }
 
 }

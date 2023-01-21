@@ -20,6 +20,8 @@ using UnityEngine;
 [System.Serializable]
 public class Repository 
 {
+    public static bool DebugRepository = true;
+    
     public static string GameKey = "TheLevelling";
 	public static string GameState = CombineKeys("GameState");
 	public static string WorldKey = CombineKeys("World");
@@ -36,28 +38,28 @@ public class Repository
     }
 
     private static void SaveString(string key, string serialized){
-		Debug.Log("Saving " + key + ": " + serialized);
+		DebugRepositoryLog("Saving " + key + ": " + serialized);
 		SetJson(key, serialized);
     }
 
     public static string LoadString(string parent, string key, string backup = ""){
         string newKey = CombineKeys(key, parent);
-        Debug.Log("Loading from key " + newKey);
+        DebugRepositoryLog("Loading from key " + newKey);
         return LoadString(newKey, backup);
     }
 
     private static string LoadString(string key, string backup = ""){
 		string value = GetJson(key);
         if(value == null || value.Length == 0){
-            Debug.Log("Can't find the " + key + "!");
+            DebugRepositoryLog("Can't find the " + key + "!");
             value = backup;
             if (backup != null){
-                Debug.Log("Using backup value for " + key + "!");
+                DebugRepositoryLog("Using backup value for " + key + "!");
                 SaveString(key, value); // ensure there is one next time!
             }
 		}
         else {
-    		Debug.Log("Retrieved " + key + ": " + value);
+    		DebugRepositoryLog("Retrieved " + key + ": " + value);
         }
         return value;
     }
@@ -72,13 +74,13 @@ public class Repository
 
     public static void Save(string key, object serializable){
         string json = JsonUtility.ToJson(serializable, true);
-		Debug.Log("Saving " + key + ": " + json);
+		DebugRepositoryLog("Saving " + key + ": " + json);
 		SetJson(key, json);
     }
 
     public static T Load<T>(string key, string parent, object backup = null){
         string newKey = CombineKeys(key, parent);
-        Debug.Log("Loading from key " + newKey);
+        DebugRepositoryLog("Loading from key " + newKey);
         return Load<T>(newKey, backup);
     }
 
@@ -86,15 +88,15 @@ public class Repository
         T value;
 		string json = GetJson(key);
         if(json == null || json.Length == 0){
-            Debug.Log("Can't find the " + key + "!");
+            DebugRepositoryLog("Can't find the " + key + "!");
             value = (T) backup;
             if (backup != null){
-                Debug.Log("Using backup value for " + key + "!");
+                DebugRepositoryLog("Using backup value for " + key + "!");
                 Save(key, value); // ensure there is one next time!
             }
 		}
         else {
-    		Debug.Log("Retrieved " + key + ": " + json);
+    		DebugRepositoryLog("Retrieved " + key + ": " + json);
             value = JsonUtility.FromJson<T>(json);
         }
         return value;
@@ -180,23 +182,23 @@ public class Repository
 
     private static List<string> ListSubKeysOfParent(string parent){
         string keys = GetStringFromPlayerPrefs(parent);
-        Debug.Log("ListSubKeysFromParent(" + parent + "): " + keys);
+        DebugRepositoryLog("ListSubKeysFromParent(" + parent + "): " + keys);
         List<string> list = new List<string>(keys.Split(';'));
         list.RemoveAll((string item) => item.Length == 0);
         foreach (string item in list){
-            Debug.Log("Item found: '" + item + "'");
+            DebugRepositoryLog("Item found: '" + item + "'");
         }
         return list;
     }
 
     private static string GetStringFromPlayerPrefs(string key){
         string value = PlayerPrefs.GetString(key);
-        Debug.Log("GetStringFromPlayerPrefs(" + key + "): '" + value + "'");
+        DebugRepositoryLog("GetStringFromPlayerPrefs(" + key + "): '" + value + "'");
         return value;
     }
 
     private static void SetStringFromPlayerPrefs(string key, string value){
-        Debug.Log("SetStringFromPlayerPrefs(" + key + ", '" + value + "')");
+        DebugRepositoryLog("SetStringFromPlayerPrefs(" + key + ", '" + value + "')");
         PlayerPrefs.SetString(key, value);
     }
 
@@ -213,5 +215,9 @@ public class Repository
         SetJson(CombineKeys(key, parent), json);
     }
 
+    private static void DebugRepositoryLog(string message){
+        if (DebugRepository)
+            Debug.Log(message);
+    }
 
 }

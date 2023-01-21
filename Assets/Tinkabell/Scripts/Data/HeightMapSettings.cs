@@ -42,20 +42,24 @@ public class HeightMapSettings : UpdatableData {
 	}
 
 	public void Load(){
+		Debug.Log(
+			"Load HeightMapSettingsData from: parent: " + Repository.WorldKey +
+			", World Name: " + WorldName);
         HeightMapSettingsSaveData data = Repository.Load<HeightMapSettingsSaveData>(
 			Repository.WorldKey, 
 			WorldName, 
 			new HeightMapSettingsSaveData()
 			);
 		if (data.weightedNoiseSettings == null || data.weightedNoiseSettings.Length == 0){
-            Debug.Log("Can't find the world: " + Repository.WorldKey + "." + WorldName);
+            Debug.LogWarning("Can't find the world: " + Repository.WorldKey + "." + WorldName);
 			return;
 		}
 		int length = data.weightedNoiseSettings.Length;
-		Debug.Log("contains " + length + " WeightedNoiseSettings");
+		Debug.Log("And it contains " + length + " WeightedNoiseSettings");
 		weightedNoiseSettings =  new WeightedNoiseSettings[length];
 		System.Array.Copy(data.weightedNoiseSettings, weightedNoiseSettings, length);
 		heightCurve = data.heightCurve;
+		Debug.Log("And HeightMapSettings have height: " + height);
 	}
 
 	public void SaveAs(string name){

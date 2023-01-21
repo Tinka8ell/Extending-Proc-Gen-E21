@@ -38,16 +38,15 @@ public class TerrainGenerator : MonoBehaviour {
 		GameManager gameManager = GameManager.Instance;
 		if (heightMapSettings == null){ // starting a new world
 			WorldName = gameManager.WorldName;
-			Debug.Log("Loading world '" + WorldName + "' heightMapSettings");
-			heightMapSettings = (HeightMapSettings) ScriptableObject.CreateInstance("HeightMapSettings");
-			heightMapSettings.Load(WorldName);
+			Debug.Log("Starting terrain from new, so loading world '" + WorldName + "' heightMapSettings");
+			LoadNewWorld(GameManager.Instance.WorldName);
 		} else { // starting game, so prep world system if not there
+			Debug.Log("Awakening terrain, so checking world '" + WorldName + "' exists");
 			gameManager.WorldName = WorldName;
-			Debug.Log("Checking world '" + WorldName + "' exists");
 			HeightMapSettings defaultWorld = (HeightMapSettings) ScriptableObject.CreateInstance("HeightMapSettings");
 			defaultWorld.Load(WorldName);
-			if (defaultWorld.height == 0){ // no settings out there
-				Debug.Log(WorldName + " is missing so creating");
+			if (defaultWorld == null || defaultWorld.height == 0){ // no settings out there
+				Debug.Log("It is missing so creating from ourselves");
 				heightMapSettings.SaveAs(WorldName);  // create the default
 			}
 		}
@@ -60,7 +59,11 @@ public class TerrainGenerator : MonoBehaviour {
 	 */
 	void Start() {
 		Debug.Log("TerrainGenerator is starting up");
-
+		if (heightMapSettings == null || heightMapSettings.height == 0){ 
+			// no settings out there!
+			Debug.LogError(WorldName + " is missing so aborting!");
+			Application.Quit();
+		}
 	 	// Set up mapMaterial using textureSettings and heightMapSettings min and max Height
 		textureSettings.ApplyToMaterial (mapMaterial);
 		textureSettings.UpdateMeshHeights (mapMaterial, heightMapSettings.minHeight, heightMapSettings.maxHeight);
@@ -158,6 +161,29 @@ public class TerrainGenerator : MonoBehaviour {
 	public void SetViewer(Transform transform){
 		viewer = transform;
 	}
+
+	private void LoadNewWorld(string name){
+		string oldName = GameManager.Instance.WorldName;
+		GameManager.Instance.WorldName = name;
+		Debug.Log("Loading new world '" + name + "' heightMapSettings");
+		HeightMapSettings newHeightMapSettings = (HeightMapSettings) ScriptableObject.CreateInstance("HeightMapSettings");
+		newHeightMapSettings.Load(name);
+		if (newHeightMapSettings.height == 0){ // no settings out there
+			Debug.LogWarning("HeightMapSettings: '" + name + "' is missing so resetting");
+			GameManager.Instance.WorldName = oldName;
+		} else {
+			heightMapSettings = newHeightMapSettings;
+			// Reset any existing chunks
+			Debug.Log("Destroying any exisitng chunks");
+			foreach (var item in terrainChunkDictionary)
+			{
+				item.Value.DestroyChunk();
+				terrainChunkDictionary.Remove((item.Key));
+			}
+			visibleTerrainChunks = new List<TerrainChunk>();
+		}
+	}
+
 }
 
 [System.Serializable]

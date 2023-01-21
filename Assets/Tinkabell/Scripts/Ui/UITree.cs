@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class UITree : MonoBehaviour
 {
-    // public string name = "Unset";
+    public static bool DebugUITree = false;
+    
     public UITree parent;
     public UITree[] children;
     public bool disableWhenChildEnabled;
 
-    public static bool DebugUITree = false;
-    
     public void enableChild(int index){
         DebugUITreeLog(name + " asked to enable child: " + index);
         for( int i = 0; i < children.Length; i++){
@@ -61,7 +60,7 @@ public class UITree : MonoBehaviour
         }
     }
 
-    private void DebugUITreeLog(string message){
+    private static void DebugUITreeLog(string message){
         if (DebugUITree)
             Debug.Log(message);
     }
