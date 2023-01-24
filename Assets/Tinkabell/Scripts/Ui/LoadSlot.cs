@@ -28,10 +28,10 @@ public class LoadSlot : MonoBehaviour, IPointerUpHandler
             if (result != 0) return;
             if (characterCreator != null){
                 characterCreator.LoadRecipe(key);
-                parentInTree.enable();
             } else if (terrainGenerator != null){
-                // TODO: what do we do with a new "world"
+                terrainGenerator.LoadNewWorld(key);
             }
+            parentInTree.enable();
         }, "Yes", "No");
     }
 }

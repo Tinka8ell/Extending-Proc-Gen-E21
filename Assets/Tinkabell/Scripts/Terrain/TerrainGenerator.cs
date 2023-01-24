@@ -39,7 +39,7 @@ public class TerrainGenerator : MonoBehaviour {
 		if (heightMapSettings == null){ // starting a new world
 			WorldName = gameManager.WorldName;
 			Debug.Log("Starting terrain from new, so loading world '" + WorldName + "' heightMapSettings");
-			LoadNewWorld(GameManager.Instance.WorldName);
+			LoadNewWorld();
 		} else { // starting game, so prep world system if not there
 			Debug.Log("Awakening terrain, so checking world '" + WorldName + "' exists");
 			gameManager.WorldName = WorldName;
@@ -74,7 +74,7 @@ public class TerrainGenerator : MonoBehaviour {
 		chunksVisibleInViewDst = Mathf.RoundToInt(maxViewDst / meshWorldSize); 
 
 		// Initialise the visible chunks
-		UpdateVisibleChunks ();
+		UpdateVisibleChunks();
 	}
 
 	/* On each frame:
@@ -162,7 +162,11 @@ public class TerrainGenerator : MonoBehaviour {
 		viewer = transform;
 	}
 
-	private void LoadNewWorld(string name){
+	private void LoadNewWorld(){
+		LoadNewWorld(GameManager.Instance.WorldName, false);
+	}
+
+	public void LoadNewWorld(string name, bool updateVisisbleChunks=true){
 		string oldName = GameManager.Instance.WorldName;
 		GameManager.Instance.WorldName = name;
 		Debug.Log("Loading new world '" + name + "' heightMapSettings");
@@ -174,13 +178,18 @@ public class TerrainGenerator : MonoBehaviour {
 		} else {
 			heightMapSettings = newHeightMapSettings;
 			// Reset any existing chunks
-			Debug.Log("Destroying any exisitng chunks");
+			Debug.Log("Destroying " + terrainChunkDictionary.Count + " exisitng chunks");
 			foreach (var item in terrainChunkDictionary)
 			{
 				item.Value.DestroyChunk();
-				terrainChunkDictionary.Remove((item.Key));
 			}
+			terrainChunkDictionary.Clear();
 			visibleTerrainChunks = new List<TerrainChunk>();
+			if(updateVisisbleChunks){
+        		// Initialise the visible chunks
+				Debug.Log("Updating visible chunks");
+		        UpdateVisibleChunks();
+			}
 		}
 	}
 

@@ -20,7 +20,7 @@ using UnityEngine;
 [System.Serializable]
 public class Repository 
 {
-    public static bool DebugRepository = true;
+    public static bool DebugRepository = false;
     
     public static string GameKey = "TheLevelling";
 	public static string GameState = CombineKeys("GameState");
@@ -74,13 +74,13 @@ public class Repository
 
     public static void Save(string key, object serializable){
         string json = JsonUtility.ToJson(serializable, true);
-		DebugRepositoryLog("Saving " + key + ": " + json);
+		DebugRepositoryLog("===> Saving to key " + key + ": " + json);
 		SetJson(key, json);
     }
 
-    public static T Load<T>(string key, string parent, object backup = null){
+    public static T Load<T>(string parent, string key, object backup = null){
         string newKey = CombineKeys(key, parent);
-        DebugRepositoryLog("Loading from key " + newKey);
+        DebugRepositoryLog("<=== Loading from key " + newKey);
         return Load<T>(newKey, backup);
     }
 

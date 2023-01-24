@@ -9,6 +9,8 @@ using UnityEngine.Events;
 
 public class LoadMenu : UIWidget
 {
+    public static bool DebugLoadMenu = false;
+
     [Header("Reference")]
     [Tooltip("The parent transform of slots.")]
     [SerializeField]
@@ -27,7 +29,7 @@ public class LoadMenu : UIWidget
 
     private void Start()
     {
-        Debug.Log("UpdateStates() - Start");
+        DebugLoadMenuLog("UpdateStates() - Start");
         if (selectKey == null || selectKey.Length ==0){
             selectKey = "DefaultKey";
         }
@@ -35,13 +37,13 @@ public class LoadMenu : UIWidget
     }
 
     void OnEnable(){
-        Debug.Log("UpdateStates() - onEnable");
+        DebugLoadMenuLog("UpdateStates() - onEnable");
         UpdateStates();
     }
 
     private void UpdateStates()
     {
-        Debug.Log("UpdateStates() - clearing old slots");
+        DebugLoadMenuLog("UpdateStates() - clearing old slots");
         List<LoadSlot> slots = 
             this.slotParent.GetComponentsInChildren<LoadSlot>().ToList();
         slots.Remove(this.slotPrefab);
@@ -56,9 +58,9 @@ public class LoadMenu : UIWidget
         } else if (selectKey.Equals("PlayerKeys")){
             parent = Repository.PlayerKey;
         }
-        Debug.Log("UpdateStates() - getting keys for " + parent);
+        DebugLoadMenuLog("UpdateStates() - getting keys for " + parent);
         List<string> keys = Repository.ListKeys(parent);
-        Debug.Log("UpdateStates() - got " + keys.Count + " keys");
+        DebugLoadMenuLog("UpdateStates() - got " + keys.Count + " keys");
 
         if (keys.Count == 0){
             // temporarily add some defaults for testing
@@ -82,12 +84,12 @@ public class LoadMenu : UIWidget
 
     public SelectSlot CreateSlot(string name)
     {
-        Debug.Log("CreateSlot(" + name + "): " + (this.slotPrefab != null) + ", " + (this.slotParent != null));
+        DebugLoadMenuLog("CreateSlot(" + name + "): " + (this.slotPrefab != null) + ", " + (this.slotParent != null));
         if (this.slotPrefab != null && this.slotParent != null)
         {
             GameObject go = (GameObject)Instantiate(this.slotPrefab.gameObject);
             Text text = go.GetComponentInChildren<Text>();
-            Debug.Log("CreateSlot(" + name + "): got text: " + text.text);
+            DebugLoadMenuLog("CreateSlot(" + name + "): got text: " + text.text);
             text.text = name;
             go.SetActive(true);
             go.transform.SetParent(this.slotParent, false);
@@ -95,5 +97,11 @@ public class LoadMenu : UIWidget
         }
         return null;
     }
+
+    private static void DebugLoadMenuLog(string message){
+        if (DebugLoadMenu)
+            Debug.Log(message);
+    }
+
 }
 

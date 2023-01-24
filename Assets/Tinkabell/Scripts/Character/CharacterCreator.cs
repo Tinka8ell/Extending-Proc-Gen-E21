@@ -9,6 +9,8 @@ using UnityEngine.Events;
 
 public class CharacterCreator : MonoBehaviour
 {
+    public static bool DebugCharacterCreator = false;
+    
     private DynamicCharacterAvatar avatar;
     public DynamicCharacterAvatar Avatar {
         get
@@ -55,7 +57,7 @@ public class CharacterCreator : MonoBehaviour
 
 
     void Awake(){
-        Debug.Log("Avatar Awake");
+        DebugCharacterCreatorLog("Avatar Awake");
         maleHairTypes.Add("None");
         maleHairTypes.Add("MaleHair1");
         maleHairTypes.Add("MaleHair2");
@@ -68,7 +70,7 @@ public class CharacterCreator : MonoBehaviour
     }
 
     void OnEnable(){
-        Debug.Log("CharacterCreator OnEnable");
+        DebugCharacterCreatorLog("CharacterCreator OnEnable");
         if (Avatar == null){
             Debug.LogWarning("Avatar was not set when CharacterCreator enabled");
         } else {
@@ -81,7 +83,7 @@ public class CharacterCreator : MonoBehaviour
     }
 
     void OnDisable(){
-        Debug.Log("CharacterCreator OnDisable");
+        DebugCharacterCreatorLog("CharacterCreator OnDisable");
         if (Avatar == null){
             Debug.LogWarning("Avatar was not set when CharacterCreator disabled");
         } else {
@@ -125,7 +127,7 @@ public class CharacterCreator : MonoBehaviour
     }
 
     public void ChangeSkinColour(Color colour){
-        Debug.Log("Avatar ChangeSkinColour: " + colour);
+        DebugCharacterCreatorLog("Avatar ChangeSkinColour: " + colour);
         Avatar.SetColor("Skin", colour);
         Avatar.UpdateColors(true);
     }
@@ -144,61 +146,64 @@ public class CharacterCreator : MonoBehaviour
     }
 
     public void ChangeHairColour(Color colour){
-        Debug.Log("Avatar ChangeHairColour: " + colour);
+        DebugCharacterCreatorLog("Avatar ChangeHairColour: " + colour);
         Avatar.SetColor("Hair", colour);
         Avatar.UpdateColors(true);
     }
 
     public void SaveRecipe(){
         string key = GameManager.Instance.PlayerName;
-        Debug.Log("SaveRecipe() using: " + key);
+        DebugCharacterCreatorLog("SaveRecipe() using: " + key);
         if (key.Length == 0){
             key = "Player";
-            Debug.Log("SaveRecipe() overriding to: " + key);
+            DebugCharacterCreatorLog("SaveRecipe() overriding to: " + key);
         }
         SaveRecipe(key);
     }
 
     public void SaveInputNamedRecipe(){
         string key = keyInputField.GetComponent<TMP_InputField>().text;
-        Debug.Log("SaveInputNamedRecipe() using: " + key);
+        DebugCharacterCreatorLog("SaveInputNamedRecipe() using: " + key);
         SaveRecipe(key);
     }
 
     public void SaveRecipe(string key){
-        Debug.LogWarning("SaveRecipe(" + key + ") <<<<<<<=======");
+        DebugCharacterCreatorLog("SaveRecipe(" + key + ") <<<<<<<=======");
         UpdatePlayerName(key);
         string recipe = Avatar.GetCurrentRecipe();
-        Debug.Log("Saving receipe(" + key + "): " + recipe);
+        DebugCharacterCreatorLog("Saving receipe(" + key + "): " + recipe);
         Repository.SaveString(Repository.PlayerKey, key, recipe);
     }
 
     public void LoadRecipe(){
         string key = GameManager.Instance.PlayerName;
-        Debug.Log("LoadRecipe() using: " + key);
+        DebugCharacterCreatorLog("LoadRecipe() using: " + key);
         if (key.Length == 0){
             key = "Player!";
-            Debug.Log("LoadRecipe() overriding to: " + key);
+            DebugCharacterCreatorLog("LoadRecipe() overriding to: " + key);
         }
         LoadRecipe(key);
     }
 
     public void LoadRecipe(string key){
-        Debug.LogWarning("LoadRecipe(" + key + ") <<<<<<<=======");
+        DebugCharacterCreatorLog("LoadRecipe(" + key + ") <<<<<<<=======");
         UpdatePlayerName(key);
         string recipe = Repository.LoadString(Repository.PlayerKey, key, "{}");
         Avatar.ClearSlots();
-        Debug.Log("Loading receipe(" + key + "): " + recipe);
+        DebugCharacterCreatorLog("Loading receipe(" + key + "): " + recipe);
         Avatar.LoadFromRecipeString(recipe);
         Player.SetActive(true);
     }
 
     private void UpdatePlayerName(string name){
-        Debug.Log("CharacterCreator: UpdatePlayerName(" + name + ")");
+        DebugCharacterCreatorLog("CharacterCreator: UpdatePlayerName(" + name + ")");
         GameManager.Instance.PlayerName=name;
         keyInputField.GetComponent<TMP_InputField>().SetTextWithoutNotify(GameManager.Instance.PlayerName);
     }
 
-
+    private static void DebugCharacterCreatorLog(string message){
+        if (DebugCharacterCreator)
+            Debug.Log(message);
+    }
 
 }

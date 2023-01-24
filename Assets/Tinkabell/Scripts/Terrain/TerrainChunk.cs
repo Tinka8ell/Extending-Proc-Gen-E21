@@ -214,7 +214,7 @@ public class TerrainChunk {
 
     internal void DestroyChunk()
     {
-		Debug.Log("Destroying game objects for this chunk");
+		// Debug.Log("Destroying game objects for this chunk");
         if(seaObject){
 			GameObject.Destroy(seaObject);
 		}
