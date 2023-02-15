@@ -7,7 +7,7 @@ using DevionGames.UIWidgets;
 
 public class GameManager : MonoBehaviour
 {
-    public static bool DebugGameManager = false;
+    public static bool DebugGameManager = true;
     
     public UnityEvent GameClockTickEvent;
     public bool stillAlive;
@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DebugGameManagerLog("GameManager Start");
         // initialise startTime
         startTime = (long) DateTime.Now.TimeOfDay.TotalSeconds; // set to now
         float offset = HMS_to_Time(gameStartTime) / speed; // convert "game start time" to world time
@@ -127,24 +128,28 @@ public class GameManager : MonoBehaviour
         if (welcome == null){
             welcome = WidgetUtility.Find<UIWidget>("Welcome Screen");
             if (welcome == null){
-                Debug.LogError("Cannot find the Welcome Screen");
+                Debug.Log("No Welcome Screen, so probbaly running a game!");
             }
         }
         if (startMenu == null){
             startMenu = WidgetUtility.Find<UIWidget>("Start Menu");
             if (startMenu == null){
-                Debug.LogError("Cannot find the StartMenu");
+                Debug.Log("No Start Menu, so probbaly running a game!");
             }
         }
-        if (!gameState.CompletedIntro){
-            RunIntro();
+        if (welcome == null || startMenu == null){
+            DebugGameManagerLog("Must be running ...");
+            player.SetActive(true);
         }
-        if (gameState.CompletedIntro && !gameState.DoneMenu){
-            OpenMenu();
-        }
-        if (gameState.DoneMenu){
-            Debug.Log("Done menu, so load game");
-            // load the game?
+        else {
+            if (!gameState.CompletedIntro){
+                RunIntro();
+            } else if (!gameState.DoneMenu){
+                OpenMenu();
+            } else { // gameState.CompletedIntro and gameState.DoneMenu must be true
+                Debug.Log("Done menu, so load game");
+                // load the game?
+            }
         }
     }
 

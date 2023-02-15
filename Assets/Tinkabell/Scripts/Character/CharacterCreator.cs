@@ -42,6 +42,7 @@ public class CharacterCreator : MonoBehaviour
     public ImageColorPicker skinTones;
     public ImageColorPicker hairColours;
     public GameObject keyInputField;
+    public GameObject startButton;
 
     private List<string> hairTypes;
     private int hairType;
@@ -113,7 +114,7 @@ public class CharacterCreator : MonoBehaviour
             Avatar.ChangeRace(MALE);
         else if (!male && Avatar.activeRace.name != FEMALE)
             Avatar.ChangeRace(FEMALE);
-        Player.SetActive(true);
+        ActivatePlayer();
     }
 
     public void ChangeHeight(float value){
@@ -192,7 +193,17 @@ public class CharacterCreator : MonoBehaviour
         Avatar.ClearSlots();
         DebugCharacterCreatorLog("Loading receipe(" + key + "): " + recipe);
         Avatar.LoadFromRecipeString(recipe);
+        ActivatePlayer();
+    }
+
+    private void ActivatePlayer(){
         Player.SetActive(true);
+        // as player is active, we can start the game ...
+        if(startButton == null){
+            Debug.LogError("Start button has not been set in Character Chreator!");
+        } else {
+            startButton.SetActive(true);
+        }
     }
 
     private void UpdatePlayerName(string name){

@@ -70,7 +70,8 @@ public class ScatterMyStars : MonoBehaviour
     }
 
     private void OnDestroy(){
-        dayNightController.WorldSpunEvent.RemoveListener(UpdateStars);
+        if (dayNightController != null)
+            dayNightController.WorldSpunEvent.RemoveListener(UpdateStars);
     }
 
 
