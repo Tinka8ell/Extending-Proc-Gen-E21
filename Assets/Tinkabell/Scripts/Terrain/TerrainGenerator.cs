@@ -50,6 +50,9 @@ public class TerrainGenerator : MonoBehaviour {
 				heightMapSettings.SaveAs(WorldName);  // create the default
 			}
 		}
+		// make sure our viewer is our player ...
+		viewer = gameManager.player.transform;
+
 	}
 
 	/* On Start of the Terrain Generator:
