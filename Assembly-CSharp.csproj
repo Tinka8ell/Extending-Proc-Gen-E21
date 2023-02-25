@@ -36,68 +36,68 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
      <Compile Include="Assets\Devion Games\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\Displace.cs" />
-     <Compile Include="Assets\Devion Games\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\PlanarReflection.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
      <Compile Include="Assets\Tinkabell\InputControl\PlayerInputControl.cs" />
-     <Compile Include="Assets\Devion Games\Inventory System\Examples\Particle Effects\ShurikenMagic\Scripts\SM_AnimSpeedRandomizer.cs" />
      <Compile Include="Assets\Devion Games\Inventory System\Examples\Particle Effects\ShurikenMagic\Scripts\SM_DestroyTimed.cs" />
      <Compile Include="Assets\Devion Games\Triggers\Integrations\UI Widgets\Scripts\Runtime\YesNoDialog.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
-     <Compile Include="Assets\Tinkabell\Scenes\SceneChanger.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
-     <Compile Include="Assets\Devion Games\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\GerstnerDisplace.cs" />
      <Compile Include="Assets\Devion Games\Inventory System\Examples\Particle Effects\ShurikenMagic\Scripts\SM_TrailFade.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
-     <Compile Include="Assets\Devion Games\Inventory System\Examples\Particle Effects\ShurikenMagic\Scripts\SM_Rotate.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
      <Compile Include="Assets\Devion Games\Third Person Controller\Example\Particles\Impact\Scripts\AutoDestruct.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+     <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualJoystick.cs" />
+     <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualTouchZone.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
-     <Compile Include="Assets\Devion Games\Inventory System\Examples\Particle Effects\ShurikenMagic\Scripts\SM_RandomScale.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
      <Compile Include="Assets\Devion Games\Triggers\Integrations\UI Widgets\Scripts\Runtime\Show.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
      <Compile Include="Assets\Devion Games\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\WaterTile.cs" />
      <Compile Include="Assets\Devion Games\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\SpecularLighting.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
      <Compile Include="Assets\Devion Games\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\WaterBase.cs" />
      <Compile Include="Assets\Devion Games\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\MeshContainer.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
+     <Compile Include="Assets\StarterAssets\ThirdPersonController\Scripts\ThirdPersonController.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
-     <Compile Include="Assets\Devion Games\Standard Assets\Water (Pro Only)\Sources\Scripts\Water.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\Devion Games\Inventory System\Examples\Particle Effects\ShurikenMagic\Scripts\SM_PrefabGenerator.cs" />
-     <Compile Include="Assets\StarterAssets\ThirdPersonController\Scripts\ThirdPersonController.cs" />
-     <Compile Include="Assets\StarterAssets\ThirdPersonController\Scripts\BasicRigidBodyPush.cs" />
-     <Compile Include="Assets\StarterAssets\InputSystem\StarterAssetsInputs.cs" />
-     <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualJoystick.cs" />
-     <Compile Include="Assets\StarterAssets\TutorialInfo\Scripts\Readme.cs" />
-     <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualTouchZone.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
      <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualButton.cs" />
-     <Compile Include="Assets\StarterAssets\Mobile\Scripts\Utilities\MobileDisableAutoSwitchControls.cs" />
+     <Compile Include="Assets\StarterAssets\InputSystem\StarterAssetsInputs.cs" />
+     <Compile Include="Assets\Devion Games\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\PlanarReflection.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
+     <Compile Include="Assets\Devion Games\Inventory System\Examples\Particle Effects\ShurikenMagic\Scripts\SM_AnimSpeedRandomizer.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
+     <Compile Include="Assets\Tinkabell\Scenes\SceneChanger.cs" />
      <Compile Include="Assets\StarterAssets\Mobile\Scripts\CanvasInputs\UICanvasControllerInput.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
+     <Compile Include="Assets\StarterAssets\Mobile\Scripts\Utilities\MobileDisableAutoSwitchControls.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
+     <Compile Include="Assets\Devion Games\Standard Assets\Water (Pro Only)\Water4\Sources\Scripts\GerstnerDisplace.cs" />
+     <Compile Include="Assets\Devion Games\Inventory System\Examples\Particle Effects\ShurikenMagic\Scripts\SM_Rotate.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+     <Compile Include="Assets\Devion Games\Inventory System\Examples\Particle Effects\ShurikenMagic\Scripts\SM_RandomScale.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+     <Compile Include="Assets\StarterAssets\ThirdPersonController\Scripts\BasicRigidBodyPush.cs" />
+     <Compile Include="Assets\StarterAssets\TutorialInfo\Scripts\Readme.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
+     <Compile Include="Assets\Devion Games\Standard Assets\Water (Pro Only)\Sources\Scripts\Water.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <None Include="Assets\Devion Games\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Devion Games\Inventory System\Changes.txt" />
@@ -387,9 +387,6 @@
     <Reference Include="UnityEditor.UnityConnectModule">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.18f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-        <HintPath>C:\Users\marki\Code\Zenva\Under Development\Extending-Proc-Gen-E21\Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Burst.Cecil.Mdb">
         <HintPath>C:\Users\marki\Code\Zenva\Under Development\Extending-Proc-Gen-E21\Library\PackageCache\com.unity.burst@1.8.2\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
     </Reference>
@@ -401,6 +398,9 @@
     </Reference>
     <Reference Include="Unity.Burst.Cecil.Rocks">
         <HintPath>C:\Users\marki\Code\Zenva\Under Development\Extending-Proc-Gen-E21\Library\PackageCache\com.unity.burst@1.8.2\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+        <HintPath>C:\Users\marki\Code\Zenva\Under Development\Extending-Proc-Gen-E21\Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.18f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
@@ -778,6 +778,18 @@
       <Project>{efc0c067-32d5-93d1-f500-282f17e35b45}</Project>
       <Name>Unity.VSCode.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Universal.Shaders.csproj">
+      <Project>{82979836-b7f2-fa0c-22fe-cc234f894392}</Project>
+      <Name>Unity.RenderPipelines.Universal.Shaders</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Universal.Runtime.csproj">
+      <Project>{f00bfc36-d85f-ec8f-ee1a-78732762d0eb}</Project>
+      <Name>Unity.RenderPipelines.Universal.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="PPv2URPConverters.csproj">
+      <Project>{bf879b83-dc29-0801-2a6e-07c6569a0e6a}</Project>
+      <Name>PPv2URPConverters</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
       <Project>{650d609c-455e-4585-c289-215c9fa46fba}</Project>
       <Name>Unity.TextMeshPro.Editor</Name>
@@ -810,13 +822,21 @@
       <Project>{7ce2f932-12fc-5d04-9de7-b103a5578843}</Project>
       <Name>Unity.VisualScripting.State.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj">
-      <Project>{a4599a2a-3b02-dd18-54ca-ce3ff2aeb626}</Project>
-      <Name>Unity.VisualScripting.SettingsProvider.Editor</Name>
+    <ProjectReference Include="Unity.Burst.Editor.csproj">
+      <Project>{21d3a85d-62c4-8415-4fce-f57972bb6e18}</Project>
+      <Name>Unity.Burst.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Searcher.Editor.csproj">
+      <Project>{62422ce9-0b2e-e09a-baf0-a3aacc1cbc4f}</Project>
+      <Name>Unity.Searcher.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.2D.Sprite.Editor.csproj">
       <Project>{af920074-9753-09a8-6d89-4e279e28d849}</Project>
       <Name>Unity.2D.Sprite.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj">
+      <Project>{a4599a2a-3b02-dd18-54ca-ce3ff2aeb626}</Project>
+      <Name>Unity.VisualScripting.SettingsProvider.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="DevionGames.ThirdPersonController.csproj">
       <Project>{577301e6-0811-d9a6-94a1-f8ba392c0b4e}</Project>
@@ -838,13 +858,21 @@
       <Project>{1a332b2a-4954-ecc9-a9fd-a475eb4ea93e}</Project>
       <Name>Unity.Rider.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.PlasticSCM.Editor.csproj">
-      <Project>{5229a80b-bf66-cc6c-00ab-a854f75402b3}</Project>
-      <Name>Unity.PlasticSCM.Editor</Name>
+    <ProjectReference Include="Unity.RenderPipelines.Core.ShaderLibrary.csproj">
+      <Project>{2e91e7e5-2166-676f-1f66-f5f659b2c34c}</Project>
+      <Name>Unity.RenderPipelines.Core.ShaderLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
       <Project>{5681be12-c45e-bca6-f3e8-0beb538e9bc9}</Project>
       <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.PlasticSCM.Editor.csproj">
+      <Project>{5229a80b-bf66-cc6c-00ab-a854f75402b3}</Project>
+      <Name>Unity.PlasticSCM.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.csproj">
+      <Project>{cb6736a2-8e7c-e65f-110f-37dcadf8316b}</Project>
+      <Name>Unity.RenderPipelines.Core.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Core.csproj">
       <Project>{e8e07674-d9d6-10cf-924e-36098a333fd0}</Project>
@@ -854,6 +882,14 @@
       <Project>{79dc52e9-8bcb-3c73-9f92-8f8fb72f0553}</Project>
       <Name>DevionGames.StatSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Mathematics.csproj">
+      <Project>{82a972d1-5aa6-dbf8-c631-2201eae40eeb}</Project>
+      <Name>Unity.Mathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ShaderGraph.Editor.csproj">
+      <Project>{9ecc801e-2657-cb13-0195-2188821b737f}</Project>
+      <Name>Unity.ShaderGraph.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Cinemachine.csproj">
       <Project>{267970c5-5fc1-a746-a35e-adf61cedb6f7}</Project>
       <Name>Cinemachine</Name>
@@ -862,9 +898,17 @@
       <Project>{56356754-b172-05cc-e61e-35d65a0d728a}</Project>
       <Name>DevionGames.Utilities</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Burst.csproj">
+      <Project>{c71bef15-ddac-f128-593c-424677f3676c}</Project>
+      <Name>Unity.Burst</Name>
+    </ProjectReference>
     <ProjectReference Include="com.unity.cinemachine.editor.csproj">
       <Project>{b331f457-5ec3-aeed-16e6-bd4e061a14d0}</Project>
       <Name>com.unity.cinemachine.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Universal.Editor.csproj">
+      <Project>{ace77cdc-1d28-215f-2786-ae5fdd771969}</Project>
+      <Name>Unity.RenderPipelines.Universal.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UMA_Content.csproj">
       <Project>{9d9133ce-eca5-2873-fd6a-013428201617}</Project>
@@ -886,9 +930,21 @@
       <Project>{9227496a-616d-c3f0-c430-8a8aeda0aaaa}</Project>
       <Name>UMA_Examples</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.csproj">
+      <Project>{9637a71c-9c99-2ce7-5609-64ed8fdede0d}</Project>
+      <Name>Unity.RenderPipeline.Universal.ShaderLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.Editor.csproj">
       <Project>{e7cd2d24-8807-d588-bff3-7f3c2f050865}</Project>
       <Name>Unity.Timeline.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.csproj">
+      <Project>{f9bd7173-e2a6-0769-0f91-5378d7090ab7}</Project>
+      <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Mathematics.Editor.csproj">
+      <Project>{13865175-c05b-43dc-82f4-8edace3fe453}</Project>
+      <Name>Unity.Mathematics.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UMA_Core.csproj">
       <Project>{65d90127-63c4-72d1-1880-3b86c95bd5c8}</Project>
@@ -902,6 +958,10 @@
       <Project>{e64f760f-988b-439d-2774-c7f25bfaeba7}</Project>
       <Name>MainSripts</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Core.Editor.csproj">
+      <Project>{882b106e-0661-047e-da42-9166f36ea432}</Project>
+      <Name>Unity.RenderPipelines.Core.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Addressable_Editor.csproj">
       <Project>{537768ff-fede-4731-39e3-79c319e00353}</Project>
       <Name>Addressable_Editor</Name>
@@ -913,66 +973,6 @@
     <ProjectReference Include="Unity.VisualScripting.State.csproj">
       <Project>{9cce76ef-743a-1a52-b058-174adba81316}</Project>
       <Name>Unity.VisualScripting.State</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Universal.Shaders.csproj">
-      <Project>{82979836-b7f2-fa0c-22fe-cc234f894392}</Project>
-      <Name>Unity.RenderPipelines.Universal.Shaders</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.csproj">
-      <Project>{cb6736a2-8e7c-e65f-110f-37dcadf8316b}</Project>
-      <Name>Unity.RenderPipelines.Core.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Searcher.Editor.csproj">
-      <Project>{62422ce9-0b2e-e09a-baf0-a3aacc1cbc4f}</Project>
-      <Name>Unity.Searcher.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PPv2URPConverters.csproj">
-      <Project>{bf879b83-dc29-0801-2a6e-07c6569a0e6a}</Project>
-      <Name>PPv2URPConverters</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Universal.Editor.csproj">
-      <Project>{ace77cdc-1d28-215f-2786-ae5fdd771969}</Project>
-      <Name>Unity.RenderPipelines.Universal.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Mathematics.Editor.csproj">
-      <Project>{13865175-c05b-43dc-82f4-8edace3fe453}</Project>
-      <Name>Unity.Mathematics.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.csproj">
-      <Project>{9637a71c-9c99-2ce7-5609-64ed8fdede0d}</Project>
-      <Name>Unity.RenderPipeline.Universal.ShaderLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Core.Editor.csproj">
-      <Project>{882b106e-0661-047e-da42-9166f36ea432}</Project>
-      <Name>Unity.RenderPipelines.Core.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Core.ShaderLibrary.csproj">
-      <Project>{2e91e7e5-2166-676f-1f66-f5f659b2c34c}</Project>
-      <Name>Unity.RenderPipelines.Core.ShaderLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Mathematics.csproj">
-      <Project>{82a972d1-5aa6-dbf8-c631-2201eae40eeb}</Project>
-      <Name>Unity.Mathematics</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.csproj">
-      <Project>{f9bd7173-e2a6-0769-0f91-5378d7090ab7}</Project>
-      <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Burst.csproj">
-      <Project>{c71bef15-ddac-f128-593c-424677f3676c}</Project>
-      <Name>Unity.Burst</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ShaderGraph.Editor.csproj">
-      <Project>{9ecc801e-2657-cb13-0195-2188821b737f}</Project>
-      <Name>Unity.ShaderGraph.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Universal.Runtime.csproj">
-      <Project>{f00bfc36-d85f-ec8f-ee1a-78732762d0eb}</Project>
-      <Name>Unity.RenderPipelines.Universal.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Burst.Editor.csproj">
-      <Project>{21d3a85d-62c4-8415-4fce-f57972bb6e18}</Project>
-      <Name>Unity.Burst.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
