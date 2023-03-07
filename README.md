@@ -3,7 +3,7 @@ Extend  Sebastian Lague's Procedural Landmass Generation (Proc Gen E21) to gener
 
 I am looking to create a "Survival" RPG based on generated islands.
 
-## What to change and why
+## [What to change and why](./DetailReadMe.md#the-details)
 
 1. [Islands are the wrong scale](./DetailReadMe.md#islands-are-the-wrong-scale)
    * Did not realise this until I added some scaling blobs which made visible how low they were!
@@ -38,6 +38,14 @@ I am looking to create a "Survival" RPG based on generated islands.
    * Create Avatar
 1. [Game Load and Save](./DetailReadMe.md#game-load-and-save)
    * Initialise world data
+1. [Update on skunk works](./DetailReadMe.md#update-on-skunk-works)
+   * [Completed UI for Game-Start scene](./DetailReadMe.md#completed-ui-for-game-start-scene)
+   * [Sorted out a lot of missing GameObjects](./DetailReadMe.md#sorted-out-a-lot-of-missing-gameobjects)
+   * [Looked at returning to StarterAssets](./DetailReadMe.md#looked-at-returning-to-starterassets)
+   * [Explored more on animations](./DetailReadMe.md#explored-more-on-animations)
+
+## [Future or Wild ideas](./DetailReadMe.md#future-or-wild-ideas)
+
 1. [The next stage](./DetailReadMe.md#the-next-stage)
    * [Clothing and Decoration](./DetailReadMe.md#clothing-and-decoration)
    * [Inventory System](./DetailReadMe.md#inventory-system)

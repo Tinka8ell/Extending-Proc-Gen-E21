@@ -296,6 +296,49 @@ Design the Game load and save and new
   * What about camp stores?
 * The current time - what is our base (temp and long term)
 
+### Update on skunk works
+
+Seems that I have not been planning but just going for it ...
+
+#### Completed UI for Game-Start scene
+
+* Renamed the scenes
+* Completed / got working:
+  * New Game UI with:
+    * Character creator
+    * Name character (basically save for re-use)
+    * Select world (only default at the moment)
+    * Start - change to Game-Main scene with world and character selected
+
+#### Sorted out a lot of missing GameObjects
+
+* Mostly due to do not destroy and singleton mis-matches
+
+#### Looked at returning to StarterAssets
+
+* The frustration with the Devonian code
+  * It is far to easy to break
+    * Missing objects
+    * Just getting the default 3rd person avatar to work
+    * Too many ways to drop out of expected environments (e.g. screen size!)
+* Code is cleaver and extensible but as clear as mud!
+* Struggle to get head round the way Devonian 3rd person controller does actions / animations
+* StarterAssets have their own issues
+  * Use the CinemachinBrain
+  * Possibly using different shader / renderer - led to "pink objects"!
+  * Limited animations and they still looked very robotic
+
+#### Explored more on animations
+
+* Found a really helpful YouTube course on [Unity's Animation System](https://www.youtube.com/playlist?list=PLwyUzJb_FNeTQwyGujWRLqnfKpV-cj-eO)
+* Now have a better idea of:
+  * how animations can interact and 
+  * some of the compexity that was being done with Devion code
+    * I don't forgive them (no comments and bad error checking), but an apprecaiation of what they were dealing with
+  * Retargetting animations and avitars
+
+## Future or Wild ideas
+
 ### The next stage
 
 This is my bucket of things I think of...
