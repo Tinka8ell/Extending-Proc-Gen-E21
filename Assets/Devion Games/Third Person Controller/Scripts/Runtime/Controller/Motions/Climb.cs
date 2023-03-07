@@ -40,9 +40,9 @@ namespace DevionGames
 
 		public override void OnStart()
         {
-			this.m_Controller.IsGrounded = false;
+			this.Controller.IsGrounded = false;
 			
-			this.m_Controller.Velocity = Vector3.zero;
+			this.Controller.Velocity = Vector3.zero;
 			this.m_Rigidbody.velocity = Vector3.zero;
 			this.m_Rigidbody.useGravity = false;
 		
@@ -86,7 +86,7 @@ namespace DevionGames
 
         public override bool CanStart()
 		{
-			if (this.m_Controller.RelativeInput.z < this.m_MinForwardInput) return false;
+			if (this.Controller.RelativeInput.z < this.m_MinForwardInput) return false;
 
 			Ray ray = new Ray(transform.position+transform.forward * this.m_MaxDistance + Vector3.up * this.m_MaxHeight, Vector3.down);
 			RaycastHit hit;
@@ -200,7 +200,7 @@ namespace DevionGames
 			if (!IsPlaying() ) {
 				return false;
 			}
-			Vector3 rootMotion = this.m_Controller.RootMotionForce;
+			Vector3 rootMotion = this.Controller.RootMotionForce;
 			rootMotion += transform.TransformDirection(this.m_ExtraForce);
 			float force = this.m_Animator.GetFloat("Force");
 			rootMotion += transform.forward * force;

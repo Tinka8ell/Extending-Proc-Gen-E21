@@ -133,10 +133,20 @@ namespace DevionGames
 
 		public ThirdPersonController Controller {
 			get { 
-				return this.m_Controller;
+				if (this.n_Controller == null){
+					ThirdPersonController[] controllers = this.m_Transform.GetComponents<ThirdPersonController> ();
+					Debug.Log("ReStart motion: " + InputName + ", with " + controllers.Length + " controllers");
+					for (int i = 0; i < controllers.Length; i++) {
+						Debug.Log("ReStart motion: " + i + "-th controller enabled = " + controllers[i].enabled);
+						if (controllers [i].enabled) {
+							this.n_Controller = controllers [i];
+						}
+					}
+				}
+				return this.n_Controller;
 			}
 			set { 
-				this.m_Controller = value;
+				this.n_Controller = value;
 			}
 		}
 
@@ -144,7 +154,7 @@ namespace DevionGames
 		protected ThirdPersonCamera m_Camera;
 		protected Rigidbody m_Rigidbody;
 		protected CapsuleCollider m_CapsuleCollider;
-		protected ThirdPersonController m_Controller;
+		protected ThirdPersonController n_Controller;
 		protected Transform m_Transform;
 		protected bool m_InPosition = true;
 
@@ -159,9 +169,11 @@ namespace DevionGames
 			this.m_Camera = Camera.main.GetComponent<ThirdPersonCamera>();
 
 			ThirdPersonController[] controllers = this.m_Transform.GetComponents<ThirdPersonController> ();
+			Debug.Log("Start motion: " + InputName + ", with " + controllers.Length + " controllers");
 			for (int i = 0; i < controllers.Length; i++) {
+				Debug.Log("Start motion: " + i + "-th controller enabled = " + controllers[i].enabled);
 				if (controllers [i].enabled) {
-					this.m_Controller = controllers [i];
+					this.n_Controller = controllers [i];
 				}
 			}
 		}
@@ -185,8 +197,12 @@ namespace DevionGames
 			this.m_IsActive = false;
 			OnStop ();
 			if(!string.IsNullOrEmpty(GetDestinationState()))
-				m_Controller.CheckDefaultAnimatorStates();
+				Controller.CheckDefaultAnimatorStates();
+			if (this.m_Camera == null){
+				Debug.Log("m_Camera was unexpectedly null)");
+				this.m_Camera = Camera.main.GetComponent<ThirdPersonCamera>();
 
+			}
 			this.m_Camera.Deactivate(CameraPreset);
 			/*CameraSettings preset = this.m_Camera.Presets.Where(x => x.Name == CameraPreset).FirstOrDefault();
 			if (preset != null && preset.Name != "Default")
@@ -207,6 +223,13 @@ namespace DevionGames
 
 			OnStart ();
 
+			if(!string.IsNullOrEmpty(GetDestinationState()))
+				Controller.CheckDefaultAnimatorStates();
+			if (this.m_Camera == null){
+				Debug.Log("m_Camera was unexpectedly null)");
+				this.m_Camera = Camera.main.GetComponent<ThirdPersonCamera>();
+
+			}
 			this.m_Camera.Activate(CameraPreset);
 			/*CameraSettings preset = this.m_Camera.Presets.Where(x => x.Name == CameraPreset).FirstOrDefault();
 			if (preset != null)

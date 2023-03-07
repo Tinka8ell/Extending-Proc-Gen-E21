@@ -429,6 +429,9 @@ namespace DevionGames
 			this.m_ControllerEvents = GetComponentsInChildren<IControllerEventHandler>(true);
 			this.m_Rigidbody = GetComponent<Rigidbody>();
 			this.m_Transform = transform;
+			if (m_Transform == null){
+				Debug.LogError("No m_Transorm, so gameobject does not exist!");
+			}
 			this.m_Animator = GetComponent<Animator>();
 			Animator childAnimator = gameObject.GetComponentsInChildren<Animator>().Where(x => x != this.m_Animator).FirstOrDefault();
 			if (childAnimator != null && this.m_UseChildAnimator)
@@ -440,6 +443,9 @@ namespace DevionGames
 
 			this.m_CapsuleCollider = GetComponent<CapsuleCollider>();
 			this.m_CameraTransform = Camera.main.transform;
+			if (m_CameraTransform == null){
+				Debug.LogError("No m_CameraTransform, so Camera does not exist!");
+			}
 			this.m_CharacterIK = GetComponent<CharacterIK>();
 			this.m_ToggleState = new Dictionary<MotionState, bool>();
 
@@ -583,6 +589,14 @@ namespace DevionGames
 						this.TryStopMotion (motion);
 					}
 				}
+			}
+			if (m_CameraTransform == null){
+				Debug.LogWarning("No m_CameraTransform, so Camera has gone missing!");
+				this.m_CameraTransform = Camera.main.transform;
+			}
+			if (m_Transform == null){
+				Debug.LogWarning("No m_Transform, so gameobject has gone missing!");
+				this.m_Transform = transform;
 			}
 			this.m_LookRotation = Quaternion.Euler (this.m_Transform.eulerAngles.x, this.m_CameraTransform.eulerAngles.y, this.m_Transform.eulerAngles.z);
 

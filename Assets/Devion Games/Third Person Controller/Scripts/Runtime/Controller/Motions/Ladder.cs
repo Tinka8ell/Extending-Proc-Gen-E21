@@ -16,8 +16,8 @@ namespace DevionGames
 			GetComponent<CharacterIK>().enabled = false;
 			this.m_Rigidbody.useGravity = false;
 			this.m_Rigidbody.velocity = Vector3.zero;
-			this.m_Controller.Velocity = Vector3.zero;
-			this.m_Controller.IsGrounded = false;
+			this.Controller.Velocity = Vector3.zero;
+			this.Controller.IsGrounded = false;
 			this.m_StartMove = false;
 			Vector3 startPosition = this.m_Trigger.transform.position;
 			startPosition.y += 0.186f;
@@ -34,18 +34,18 @@ namespace DevionGames
 
         public override bool CanStart()
 		{
-			return this.m_Trigger != null && this.m_Controller.RawInput.z > 0f;
+			return this.m_Trigger != null && this.Controller.RawInput.z > 0f;
 		}
 
         public override bool CanStop()
         {
-            return (this.m_Trigger== null || this.m_Controller.IsGrounded && this.m_Controller.RawInput.z < 0f);
+            return (this.m_Trigger== null || this.Controller.IsGrounded && this.Controller.RawInput.z < 0f);
         }
 
 		public override bool UpdateVelocity(ref Vector3 velocity)
 		{
 			if(this.m_StartMove)
-				velocity = this.m_Controller.RootMotionForce;
+				velocity = this.Controller.RootMotionForce;
 			return false;
 		}
 
@@ -53,14 +53,14 @@ namespace DevionGames
         {
 			if (this.m_StartMove)
 			{
-				this.m_Animator.SetFloat("Forward Input", this.m_Controller.RawInput.z);
+				this.m_Animator.SetFloat("Forward Input", this.Controller.RawInput.z);
 			}
             return false;
         }
 
         public override bool CheckGround()
         {
-            return this.m_Controller.RawInput.z < 0f;
+            return this.Controller.RawInput.z < 0f;
         }
 
         public override bool UpdateRotation()

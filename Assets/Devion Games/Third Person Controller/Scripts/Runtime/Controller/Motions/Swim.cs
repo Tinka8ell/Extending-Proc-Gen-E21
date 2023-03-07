@@ -27,11 +27,11 @@ namespace DevionGames
 		{
 			this.m_Rigidbody.useGravity = false;
 			this.m_Rigidbody.velocity = Vector3.zero;
-			this.m_Controller.Velocity = Vector3.zero;
+			this.Controller.Velocity = Vector3.zero;
 			Vector3 position = transform.position;
 			position.y = m_Trigger.transform.position.y + this.m_HeightOffset;
 			transform.position = position;
-			this.m_Controller.IsGrounded = true;
+			this.Controller.IsGrounded = true;
 			this.m_CapsuleCollider.height += this.m_HeightAdjustment;
 			this.m_CapsuleCollider.center = new Vector3 (this.m_CapsuleCollider.center.x, this.m_CapsuleCollider.center.y + this.m_HeightAdjustment * 0.5f, this.m_CapsuleCollider.center.z);
 		}
@@ -63,7 +63,7 @@ namespace DevionGames
 		public override bool UpdateVelocity (ref Vector3 velocity)
 		{
 
-			if (!this.m_Controller.IsStepping) {
+			if (!this.Controller.IsStepping) {
 				Vector3 position = transform.position;
 				this.m_SmoothOffset = Mathf.SmoothDamp (position.y, m_Trigger.transform.position.y + this.m_HeightOffset, ref this.m_SmoothVelocity, this.m_OffsetSmoothing);
 				position.y = this.m_SmoothOffset;
@@ -75,7 +75,7 @@ namespace DevionGames
 
 		public override bool CheckGround ()
 		{
-			this.m_Controller.CheckStep ();
+			this.Controller.CheckStep ();
 			return false;
 		}
 

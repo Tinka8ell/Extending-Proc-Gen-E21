@@ -20,7 +20,7 @@ namespace DevionGames
             }
             else
             {
-                //Debug.Log("Multiple "+gameObject.name+" in scene. Destroying instance!");
+                Debug.Log("Multiple "+gameObject.name+" in scene. Destroying instance!");
                 DestroyImmediate(gameObject);
             }
         }

@@ -27,7 +27,7 @@ namespace DevionGames
 			Vector3 targetPosition = hitInfo.point + hitInfo.normal * this.m_Distance;
 			targetPosition.y = this.m_Transform.position.y;
 			this.MoveToTarget (this.m_Transform, targetPosition, Quaternion.LookRotation (-hitInfo.normal), 0.5f, delegate() {
-				this.m_PushableObject.StartMove (this.m_Controller);
+				this.m_PushableObject.StartMove (this.Controller);
 			});
 		}
 
@@ -72,7 +72,7 @@ namespace DevionGames
 
 		private bool CheckPush (float distance)
 		{
-			Vector3 direction = this.m_Controller.LookRotation * (this.m_Controller.IsAiming ? this.m_Controller.RelativeInput : this.m_Controller.RawInput);
+			Vector3 direction = this.Controller.LookRotation * (this.Controller.IsAiming ? this.Controller.RelativeInput : this.Controller.RawInput);
 			Ray ray = new Ray (transform.position + new Vector3 (0f, this.m_CapsuleCollider.height * 0.5f, 0f), direction.normalized);
 			if (Physics.Raycast (ray, out hitInfo, distance)) {
 

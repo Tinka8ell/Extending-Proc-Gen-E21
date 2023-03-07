@@ -31,19 +31,19 @@ namespace DevionGames
 		{
 			if (this.IsActive) {
 				this.jumpTime = Time.time;
-				this.m_Controller.IsGrounded = false;
+				this.Controller.IsGrounded = false;
 				Vector3 velocity = this.m_Rigidbody.velocity;
 				velocity.y = m_Force;
 				this.m_Rigidbody.velocity = velocity;
 				this.m_Animator.SetFloat ("Float Value", this.m_Rigidbody.velocity.y);
                 float cycle = 0f;
-                if (this.m_Controller.IsMoving)
+                if (this.Controller.IsMoving)
                 {
                     float normalizedTime = this.m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1f;
                     cycle = Mathf.Sin(360f * normalizedTime);
                 }
                 this.m_Animator.SetFloat("Leg", cycle);
-                if (this.m_Controller.RawInput.z < 0f)
+                if (this.Controller.RawInput.z < 0f)
                 {
                     this.m_Animator.SetBool("Bool Value", true);
                 }else {
@@ -75,13 +75,13 @@ namespace DevionGames
 
 		public override bool CanStart ()
 		{
-			return this.m_Controller.IsGrounded && (Time.time > lastJumpTime + this.m_RecurrenceDelay);
+			return this.Controller.IsGrounded && (Time.time > lastJumpTime + this.m_RecurrenceDelay);
 		}
 
 		public override bool CanStop ()
 		{
 		
-			return !this.m_Controller.IsGrounded && this.m_Rigidbody.velocity.y < 0.01f && Time.time > jumpTime + 0.2f; 
+			return !this.Controller.IsGrounded && this.m_Rigidbody.velocity.y < 0.01f && Time.time > jumpTime + 0.2f; 
 		}
 	}
 }

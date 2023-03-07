@@ -14,7 +14,7 @@ namespace DevionGames
 		public override void OnStart ()
 		{
 			this.m_Animator.SetInteger ("Int Value", 0);
-            if (this.m_Controller.RawInput.z < 0f)
+            if (this.Controller.RawInput.z < 0f)
             {
                 this.m_Animator.SetBool("Bool Value", true);
             }
@@ -44,7 +44,7 @@ namespace DevionGames
 				return false;
 			}
 
-			return this.m_Rigidbody.velocity.y < 0f && !this.m_Controller.IsGrounded;
+			return this.m_Rigidbody.velocity.y < 0f && !this.Controller.IsGrounded;
 		}
 
 		private void OnControllerLanded ()
