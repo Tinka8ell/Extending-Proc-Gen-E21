@@ -336,6 +336,7 @@ Seems that I have not been planning but just going for it ...
   * some of the compexity that was being done with Devion code
     * I don't forgive them (no comments and bad error checking), but an apprecaiation of what they were dealing with
   * Retargetting animations and avitars
+  * Layers
 
 ## Future or Wild ideas
 
