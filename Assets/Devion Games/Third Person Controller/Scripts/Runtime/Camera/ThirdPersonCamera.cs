@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections;
 using UnityEngine.UI;
 using System.Linq;
 
@@ -60,12 +59,14 @@ namespace DevionGames
         private void Awake()
         {
             this.m_FocusTarget = GetComponent<FocusTarget>();
+            //Debug.Log("===> ThirdPersonCamera - Awake focusTarget is " + (m_FocusTarget != null? "not ": "") + "null");
             if (this.m_FocusTarget != null) 
                 this.m_FocusTarget.OnFocusChange += OnFucusTarget;
         }
 
         private void Start ()
 		{
+            //Debug.Log("===> ThirdPersonCamera - start");
 			this.m_Transform = transform;
 			if (this.m_Transform.parent != null) {
 				this.m_Transform.parent = null;
@@ -75,10 +76,13 @@ namespace DevionGames
 				DontDestroyOnLoad (gameObject);
 			}
 
+            //Debug.Log("===> ThirdPersonCamera - presets: " + m_Presets.Length);
 			for (int i = 0; i < this.m_Presets.Length; i++) {
 				if (this.m_Presets [i].Activation == CameraSettings.ActivationType.Automatic) {
 					this.m_ActivePreset = this.m_Presets [i];
 					this.m_ActivePreset.IsActive = true;
+                    //Debug.Log("===> ThirdPersonCamera.Start - presets selected: " + i);
+                    //Debug.Log("===> ThirdPersonCamera. - activePreset.TurnButton : " + m_ActivePreset.TurnButton);
 					break;
 				}
 			}
@@ -103,6 +107,8 @@ namespace DevionGames
 
         private void OnEnable()
         {
+            //Debug.Log("===> ThirdPersonCamera - OnEnable");
+            //Debug.Log("===> ThirdPersonCamera - OnEnable focusTarget is " + (m_FocusTarget != null? "not ": "") + "null");
             //SendMessage("Focus", false, SendMessageOptions.DontRequireReceiver);
             if (this.m_CrosshairImage != null)
             {
@@ -113,6 +119,7 @@ namespace DevionGames
 
         private void OnDisable()
         {
+            //Debug.Log("===> ThirdPersonCamera - OnDisable");
            // SendMessage("Focus", true, SendMessageOptions.DontRequireReceiver);
             if (this.m_CrosshairImage != null) {
                 this.m_CrosshairActive = this.m_CrosshairImage.gameObject.activeSelf;
@@ -121,6 +128,7 @@ namespace DevionGames
         }
 
         private void OnFucusTarget(bool state) {
+            //Debug.Log("===> ThirdPersonCamera - OnFocusTarget: " + state);
             if (state)
             {
                 if (this.m_CrosshairImage != null)
@@ -138,6 +146,7 @@ namespace DevionGames
         }
 
         private void OnSetControllerActive(bool active) {
+            //Debug.Log("===> ThirdPersonCamera - OnSetControllerActive: " + active);
             this.m_CharacterControllerActive = active;
         }
 
@@ -209,17 +218,19 @@ namespace DevionGames
                             if (Input.GetButtonDown(preset.InputName))
                             {
                                 preset.IsActive = true;
-
+                                //Debug.Log("===> ThirdPersonCamera.UpdateInput - preset[" + i + "](" + preset.InputName + ") activated by button");
                             }
                             if (Input.GetButtonUp(preset.InputName))
                             {
                                 preset.IsActive = false;
+                                //Debug.Log("===> ThirdPersonCamera.UpdateInput - preset[" + i + "](" + preset.InputName + ") deactivated by button");
                             }
                             break;
                         case CameraSettings.ActivationType.Toggle:
                             if (Input.GetButtonDown(preset.InputName))
                             {
                                 preset.IsActive = !preset.IsActive;
+                                //Debug.Log("===> ThirdPersonCamera.UpdateInput - preset[" + i + "](" + preset.InputName + ") toggled to " + (preset.IsActive?"active":"inactive") + " by button");
                             }
                             break;
                     }
@@ -239,6 +250,7 @@ namespace DevionGames
                         if (this.m_ActivePreset.InheritDistance)
                             this.m_ActivePreset.Zoom = currentZoom;
                         ApplyCrosshair(this.m_ActivePreset.Crosshair);
+                        //Debug.Log("===> ThirdPersonCamera.UpdateInput - switched to preset[" + i + "](" + preset.Name + ")");
                     }
                     break;
                 }

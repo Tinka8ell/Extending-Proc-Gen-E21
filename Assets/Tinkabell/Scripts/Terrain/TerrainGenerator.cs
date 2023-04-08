@@ -38,20 +38,20 @@ public class TerrainGenerator : MonoBehaviour {
 		GameManager gameManager = GameManager.Instance;
 		if (heightMapSettings == null){ // starting a new world
 			WorldName = gameManager.WorldName;
-			Debug.Log("Starting terrain from new, so loading world '" + WorldName + "' heightMapSettings");
+			//Debug.Log("Starting terrain from new, so loading world '" + WorldName + "' heightMapSettings");
 			LoadNewWorld();
 		} else { // starting game, so prep world system if not there
-			Debug.Log("Awakening terrain, so checking world '" + WorldName + "' exists");
+			//Debug.Log("Awakening terrain, so checking world '" + WorldName + "' exists");
 			gameManager.WorldName = WorldName;
 			HeightMapSettings defaultWorld = (HeightMapSettings) ScriptableObject.CreateInstance("HeightMapSettings");
 			defaultWorld.Load(WorldName);
 			if (defaultWorld == null || defaultWorld.height == 0){ // no settings out there
-				Debug.Log("It is missing so creating from ourselves");
+				//Debug.Log("It is missing so creating from ourselves");
 				heightMapSettings.SaveAs(WorldName);  // create the default
 			}
 		}
 		// make sure our viewer is our player ...
-		viewer = gameManager.player.transform;
+		viewer = gameManager.Player.transform;
 
 	}
 
@@ -61,7 +61,7 @@ public class TerrainGenerator : MonoBehaviour {
 	 * Initialise the visible chunks
 	 */
 	void Start() {
-		Debug.Log("TerrainGenerator is starting up");
+		//Debug.Log("TerrainGenerator is starting up");
 		if (heightMapSettings == null || heightMapSettings.height == 0){ 
 			// no settings out there!
 			Debug.LogError(WorldName + " is missing so aborting!");
@@ -172,7 +172,7 @@ public class TerrainGenerator : MonoBehaviour {
 	public void LoadNewWorld(string name, bool updateVisisbleChunks=true){
 		string oldName = GameManager.Instance.WorldName;
 		GameManager.Instance.WorldName = name;
-		Debug.Log("Loading new world '" + name + "' heightMapSettings");
+		//Debug.Log("Loading new world '" + name + "' heightMapSettings");
 		HeightMapSettings newHeightMapSettings = (HeightMapSettings) ScriptableObject.CreateInstance("HeightMapSettings");
 		newHeightMapSettings.Load(name);
 		if (newHeightMapSettings.height == 0){ // no settings out there
@@ -181,7 +181,7 @@ public class TerrainGenerator : MonoBehaviour {
 		} else {
 			heightMapSettings = newHeightMapSettings;
 			// Reset any existing chunks
-			Debug.Log("Destroying " + terrainChunkDictionary.Count + " exisitng chunks");
+			//Debug.Log("Destroying " + terrainChunkDictionary.Count + " exisitng chunks");
 			foreach (var item in terrainChunkDictionary)
 			{
 				item.Value.DestroyChunk();
@@ -190,7 +190,7 @@ public class TerrainGenerator : MonoBehaviour {
 			visibleTerrainChunks = new List<TerrainChunk>();
 			if(updateVisisbleChunks){
         		// Initialise the visible chunks
-				Debug.Log("Updating visible chunks");
+				//Debug.Log("Updating visible chunks");
 		        UpdateVisibleChunks();
 			}
 		}

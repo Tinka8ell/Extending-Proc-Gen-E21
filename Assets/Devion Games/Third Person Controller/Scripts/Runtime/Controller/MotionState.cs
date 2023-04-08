@@ -135,9 +135,9 @@ namespace DevionGames
 			get { 
 				if (this.n_Controller == null){
 					ThirdPersonController[] controllers = this.m_Transform.GetComponents<ThirdPersonController> ();
-					Debug.Log("ReStart motion: " + InputName + ", with " + controllers.Length + " controllers");
+					//Debug.Log("ReStart motion: " + InputName + ", with " + controllers.Length + " controllers");
 					for (int i = 0; i < controllers.Length; i++) {
-						Debug.Log("ReStart motion: " + i + "-th controller enabled = " + controllers[i].enabled);
+						//Debug.Log("ReStart motion: " + i + "-th controller enabled = " + controllers[i].enabled);
 						if (controllers [i].enabled) {
 							this.n_Controller = controllers [i];
 						}
@@ -169,9 +169,9 @@ namespace DevionGames
 			this.m_Camera = Camera.main.GetComponent<ThirdPersonCamera>();
 
 			ThirdPersonController[] controllers = this.m_Transform.GetComponents<ThirdPersonController> ();
-			Debug.Log("Start motion: " + InputName + ", with " + controllers.Length + " controllers");
+			//Debug.Log("Start motion: " + InputName + ", with " + controllers.Length + " controllers");
 			for (int i = 0; i < controllers.Length; i++) {
-				Debug.Log("Start motion: " + i + "-th controller enabled = " + controllers[i].enabled);
+				//Debug.Log("Start motion: " + i + "-th controller enabled = " + controllers[i].enabled);
 				if (controllers [i].enabled) {
 					this.n_Controller = controllers [i];
 				}
@@ -199,7 +199,7 @@ namespace DevionGames
 			if(!string.IsNullOrEmpty(GetDestinationState()))
 				Controller.CheckDefaultAnimatorStates();
 			if (this.m_Camera == null){
-				Debug.Log("m_Camera was unexpectedly null)");
+				Debug.LogWarning("m_Camera was unexpectedly null)");
 				this.m_Camera = Camera.main.GetComponent<ThirdPersonCamera>();
 
 			}
@@ -226,7 +226,7 @@ namespace DevionGames
 			if(!string.IsNullOrEmpty(GetDestinationState()))
 				Controller.CheckDefaultAnimatorStates();
 			if (this.m_Camera == null){
-				Debug.Log("m_Camera was unexpectedly null)");
+				Debug.LogWarning("m_Camera was unexpectedly null)");
 				this.m_Camera = Camera.main.GetComponent<ThirdPersonCamera>();
 
 			}

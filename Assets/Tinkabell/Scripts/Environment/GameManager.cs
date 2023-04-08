@@ -7,7 +7,7 @@ using DevionGames.UIWidgets;
 
 public class GameManager : MonoBehaviour
 {
-    public static bool DebugGameManager = true;
+    public static bool DebugGameManager = false;
     
     public UnityEvent GameClockTickEvent;
     public bool stillAlive;
@@ -88,7 +88,15 @@ public class GameManager : MonoBehaviour
     }
     public GameState gameState = new GameState(false);
 
-    public GameObject player;
+    private GameObject m_player;
+    public GameObject Player {
+        get {
+            if (m_player == null){
+                m_player = GameObject.FindGameObjectWithTag("Player");
+            }
+            return m_player;
+        }
+    }
 
     void Awake(){
         DebugGameManagerLog("GameManager Awake");
@@ -124,7 +132,7 @@ public class GameManager : MonoBehaviour
 
     private void StartGame(){
         // start with player invisible!
-        player.SetActive(false);
+        m_player.SetActive(false);
         if (welcome == null){
             welcome = WidgetUtility.Find<UIWidget>("Welcome Screen");
             if (welcome == null){
@@ -139,7 +147,7 @@ public class GameManager : MonoBehaviour
         }
         if (welcome == null || startMenu == null){
             DebugGameManagerLog("Must be running ...");
-            player.SetActive(true);
+            m_player.SetActive(true);
         }
         else {
             if (!gameState.CompletedIntro){

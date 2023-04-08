@@ -76,6 +76,7 @@ namespace DevionGames
 
                     if (Input.GetButton(this.m_SpinButton) && !this.m_GUIClick)
                     {
+                        Debug.Log("Focuatarget: Update is spinning target");
                         float input = Input.GetAxis("Mouse X") * -this.m_Speed; 
                         target.Rotate(0, input, 0, Space.World);
                     }
@@ -87,7 +88,7 @@ namespace DevionGames
         {
             if (this.m_Focus == focus)
                 return;
-
+            Debug.Log("FocusTarget: Focus changing to " + focus);
             this.m_Focus = focus;
             this.m_TargetRotationFinished = false;
             this.m_GUIClick = false;

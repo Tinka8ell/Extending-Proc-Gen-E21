@@ -29,7 +29,7 @@ public class CharacterCreator : MonoBehaviour
         get
         {
             if (player == null){
-                player = GameManager.Instance.player;
+                player = GameManager.Instance.Player;
                 if (player == null){
                     Debug.LogError("Player is not set in GameManager!");
                 }
