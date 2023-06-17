@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TerrainChunk {
-	public static bool DebugTerrainChunck = true;
-	public event System.Action<TerrainChunk, bool> onVisibilityChanged;
+public class BiomeChunk {
+
+	public static bool DebugBiomeChunck = true;
+	
 	public Vector2 coord;
-	public bool heightMapReceived;
-	public HeightMap heightMap;
-	public Transform parent; 
 	 
 	GameObject meshObject; // this chunck
-	GameObject seaObject; // if sea is associated with this chunk
-	GameObject seaPrefab;
 	Vector2 sampleCentre;
 	Bounds bounds;
 
@@ -24,6 +19,9 @@ public class TerrainChunk {
 	LODMesh[] lodMeshes;
 	int colliderLODIndex;
 
+	HeightMap heightMap;
+	HeightMap filterMap;
+	bool heightMapReceived;
 	int previousLODIndex = -1;
 	bool hasSetCollider;
 	float maxViewDst;
@@ -31,32 +29,27 @@ public class TerrainChunk {
 	HeightMapSettings heightMapSettings;
 	MeshSettings meshSettings;
 	Transform viewer;
-	Material material;
-	Material biomeMaterial;
 
+	TerrainChunk parent;
 
-    List<Biome> biomes = new List<Biome>();
-
-	/* Create Terrain Chunk
+	/* Create Biom Chunk
 	 * Initialised from TerrainGenerator
 	 * Initialised invisible
 	 * LODMesh array initialised with callbacks
 	 * Contents are added by callbacks after it is Loaded
 	 */
-	public TerrainChunk(
+	public BiomeChunk(
 		Vector2 coord, 
 		HeightMapSettings heightMapSettings, 
 		MeshSettings meshSettings, 
 		LODInfo[] detailLevels, 
 		int colliderLODIndex, 
-		Transform parent, 
+		TerrainChunk parent, 
 		Transform viewer, 
-		Material material,
-		Material biomeMaterial, 
+		Material material, 
 		Material redMaterial, 
 		Material blueMaterial, 
-		Material greenMaterial,
-		GameObject seaPrefab) 
+		Material greenMaterial) 
 		{
 		this.coord = coord;
 		this.heightMapSettings = heightMapSettings;
@@ -65,46 +58,40 @@ public class TerrainChunk {
 		this.colliderLODIndex = colliderLODIndex;
 		this.parent = parent;
 		this.viewer = viewer;
-		this.material = material;
-		this.biomeMaterial = biomeMaterial;
-		this.seaPrefab = seaPrefab;
 
 		sampleCentre = coord * meshSettings.meshWorldSize / meshSettings.meshScale;
 		Vector2 position = coord * meshSettings.meshWorldSize ;
 		bounds = new Bounds(position,Vector2.one * meshSettings.meshWorldSize );
 
-		DebugTerrainChunckLog("new()");
-		meshObject = new GameObject("Terrain Chunk" + coord.ToString());
+		DebugBiomeChunckLog("new()");
+
+		meshObject = new GameObject("Biome Chunk" + coord.ToString());
 		meshRenderer = meshObject.AddComponent<MeshRenderer>();
 		meshFilter = meshObject.AddComponent<MeshFilter>();
 		meshCollider = meshObject.AddComponent<MeshCollider>();
-		meshRenderer.material = this.material;
+		meshRenderer.material = blueMaterial;
 
 		meshObject.transform.position = new Vector3(position.x,0,position.y);
-		meshObject.transform.parent = this.parent;
+		meshObject.transform.parent = parent.parent;
 		SetVisible(false);
 
 		lodMeshes = new LODMesh[detailLevels.Length];
 		for (int i = 0; i < detailLevels.Length; i++) {
-			lodMeshes[i] = new LODMesh(detailLevels[i].lod);
-			lodMeshes[i].updateCallback += UpdateTerrainChunk;
+			lodMeshes[i] = new LODMesh(detailLevels[i].lod, true); // make it a biome mesh
+			lodMeshes[i].updateCallback += UpdateBiomeChunk;
 			if (i == colliderLODIndex) {
 				lodMeshes[i].updateCallback += UpdateCollisionMesh;
 			}
 		}
 
 		maxViewDst = detailLevels [detailLevels.Length - 1].visibleDstThreshold;
-
-		Biome damp = new Biome(BiomeType.Damp);
-		damp.biomeChunk = new BiomeChunk(coord, heightMapSettings, meshSettings, detailLevels, colliderLODIndex, this, viewer, biomeMaterial, redMaterial, blueMaterial, greenMaterial);
-		biomes.Add(damp);
 	}
 
 	/* Load the terrain Chunck
 	 * Actually kick of the callback process to build it in the background
 	 */
 	public void Load() {
-		DebugTerrainChunckLog("Load()");
+		DebugBiomeChunckLog("Load()");
 		// Request the basic HeightMap to be used for this chunck
 		ThreadedDataRequester.RequestData(
 			() => HeightMapGenerator.GenerateHeightMap (
@@ -114,15 +101,22 @@ public class TerrainChunk {
 
 	/* Once the HeightMap has been created update it to match
 	 */
-	void OnHeightMapReceived(object heightMapObject) {
-		DebugTerrainChunckLog("OnHeightMapReceived()");
-		this.heightMap = (HeightMap)heightMapObject;
-		heightMapReceived = true;
-		foreach (Biome biome in biomes)
-		{
-			biome.biomeChunk.OnHeightMapReceived(heightMapObject);
+	public void OnHeightMapReceived(object heightMapObject) {
+		DebugBiomeChunckLog("OnHeightMapReceived()");
+		this.filterMap = (HeightMap)heightMapObject;
+		int size = this.filterMap.values.GetLength(0);
+		DebugBiomeChunckLog("OnHeightMapReceived(), size: " + size);
+		float[,] values = new float[size, size];
+		/*
+		for (int i = 0; i < size; i++){
+			for (int j = 0; j < size; j++){
+				
+			}
 		}
-		UpdateTerrainChunk ();
+		*/
+		this.heightMap = (HeightMap)heightMapObject; //new HeightMap(values, this.heightMap.minValue, this.heightMap.maxValue);
+		heightMapReceived = true;
+		// UpdateBiomeChunk ();
 	}
 
 	/* Update a chunk because of changes
@@ -134,18 +128,17 @@ public class TerrainChunk {
 	 *     else: request it
 	 * If visibility changed then react to it
 	 */
-	public void UpdateTerrainChunk() {
-		DebugTerrainChunckLog("UpdateTerrainChunk()");
+	public void UpdateBiomeChunk() {
+		DebugBiomeChunckLog("UpdateBiomeChunk()");
+		/*
+		if (!heightMapReceived) {
+			if (parent.heightMapReceived) {
+				heightMap = parent.heightMap;
+				heightMapReceived = parent.heightMapReceived;
+			}
+		}
+		*/
 		if (heightMapReceived) {
-			foreach (Biome biome in biomes)
-			{
-				biome.biomeChunk.UpdateBiomeChunk();
-			}
-			/*
-			if (!hasBiome){
-				AddBiome();
-			}
-			*/
 			float viewerDstFromNearestEdge = Mathf.Sqrt (bounds.SqrDistance (viewerPosition));
 
 			bool wasVisible = IsVisible ();
@@ -168,16 +161,13 @@ public class TerrainChunk {
 						previousLODIndex = lodIndex;
 						meshFilter.mesh = lodMesh.mesh;
 					} else if (!lodMesh.hasRequestedMesh) {
-						lodMesh.RequestMesh (heightMap, meshSettings);
+						lodMesh.RequestMesh (heightMap, meshSettings, true);
 					}
 				}
 			}
 
 			if (wasVisible != visible) {
 				SetVisible(visible);
-				if (onVisibilityChanged != null) {
-					onVisibilityChanged(this, visible);
-				}
 			}
 		}
 	}
@@ -188,6 +178,8 @@ public class TerrainChunk {
 	 * If now dangerously close and have it: apply the collider mesh 
 	 */
 	public void UpdateCollisionMesh() {
+		DebugBiomeChunckLog("UpdateCollisionMesh()");
+		hasSetCollider = true; // temp to make sure we don't set one!
 		if (!hasSetCollider) {
 			float sqrDstFromViewerToEdge = bounds.SqrDistance (viewerPosition);
 
@@ -206,20 +198,6 @@ public class TerrainChunk {
 		}
 	}
 
-/*
-	public void AddBiome(){
-		DebugTerrainChunckLogFormat("AddBiome called for {0}", meshObject.transform.position);
-		biome = new Biome();
-		hasBiome = true;
-		// temp for now
-		biome.seaType = SeaType.HasSea;
-		if (biome.seaType == SeaType.HasSea){
-			DebugTerrainChunckLogFormat("AddBiome creating sea for {0}", meshObject.transform.position);
-			seaObject = GameObject.Instantiate<GameObject>(seaPrefab, meshObject.transform.position, Quaternion.identity, meshObject.transform);
-		}
-	}
-*/
-
 	// utility methods
 
 	// Convert "viewer" to a 2D position
@@ -231,9 +209,6 @@ public class TerrainChunk {
 
 	public void SetVisible(bool visible) {
 		meshObject.SetActive(visible);
-		if (seaObject != null) { // if we have an associated sea object then keep it in sync
-			seaObject.SetActive(visible);
-		}
 	}
 
 	public bool IsVisible() {
@@ -242,19 +217,14 @@ public class TerrainChunk {
 
     internal void DestroyChunk()
     {
-		// DebugTerrainChunckLog("Destroying game objects for this chunk");
-        if(seaObject){
-			GameObject.Destroy(seaObject);
-		}
+		// Debug.Log("Destroying game objects for this chunk");
         if(meshObject){
 			GameObject.Destroy(meshObject);
 		}
     }
 
-    private void DebugTerrainChunckLog(string message){
-        if (DebugTerrainChunck && coord.x == 0 && coord.y == 0)
-            Debug.Log("TerrainChunck(" + coord.ToString() + "): " + message);
+    private void DebugBiomeChunckLog(string message){
+        if (DebugBiomeChunck && coord.x == 0 && coord.y == 0)
+            Debug.Log("DebugBiomeChunck(" + coord.ToString() + "): " + message);
     }
-
 }
-

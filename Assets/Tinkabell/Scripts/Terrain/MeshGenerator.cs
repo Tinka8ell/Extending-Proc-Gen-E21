@@ -3,15 +3,16 @@ using System.Collections;
 
 public static class MeshGenerator {
 
+	private static float highTide = 1f;
 
-	public static MeshData GenerateTerrainMesh(float[,] heightMap, MeshSettings meshSettings, int levelOfDetail) {
+	public static MeshData GenerateTerrainMesh(float[,] heightMap, MeshSettings meshSettings, int levelOfDetail, bool isBiome = false) {
 
 		int skipIncrement = (levelOfDetail == 0)?1:levelOfDetail * 2;
 		int numVertsPerLine = meshSettings.numVertsPerLine;
 
 		Vector2 topLeft = new Vector2 (-1, 1) * meshSettings.meshWorldSize / 2f;
 
-		MeshData meshData = new MeshData (numVertsPerLine, skipIncrement, meshSettings.useFlatShading);
+		MeshData meshData = new MeshData (numVertsPerLine, skipIncrement, meshSettings.useFlatShading, isBiome);
 
 		int[,] vertexIndicesMap = new int[numVertsPerLine, numVertsPerLine];
 		int meshVertexIndex = 0;
@@ -58,7 +59,16 @@ public static class MeshGenerator {
 						height = heightMainVertexA * (1 - dstPercentFromAToB) + heightMainVertexB * dstPercentFromAToB;
 					}
 
-					meshData.AddVertex (new Vector3(vertexPosition2D.x, height, vertexPosition2D.y), percent, vertexIndex);
+					bool isWet = false;
+					if (isBiome){
+						isWet = (height < highTide); // those below highTide are wet
+						height = highTide + 0.1f; // make biome flat!
+					}
+					meshData.AddVertex (
+						new Vector3(vertexPosition2D.x, height, vertexPosition2D.y), 
+						percent, 
+						vertexIndex,
+						isWet);
 
 					bool createTriangle = x < numVertsPerLine - 1 && y < numVertsPerLine - 1 && (!isEdgeConnectionVertex || (x != 2 && y != 2));
 
@@ -88,6 +98,7 @@ public class MeshData {
 	int[] triangles;
 	Vector2[] uvs;
 	Vector3[] bakedNormals;
+	bool[] wetVertex;
 
 	Vector3[] outOfMeshVertices;
 	int[] outOfMeshTriangles;
@@ -96,9 +107,11 @@ public class MeshData {
 	int outOfMeshTriangleIndex;
 
 	bool useFlatShading;
+	bool isBiome;
 
-	public MeshData(int numVertsPerLine, int skipIncrement, bool useFlatShading) {
+	public MeshData(int numVertsPerLine, int skipIncrement, bool useFlatShading, bool isBiome = false) {
 		this.useFlatShading = useFlatShading;
+		this.isBiome = isBiome;
 
 		int numMeshEdgeVertices = (numVertsPerLine - 2) * 4 - 4;
 		int numEdgeConnectionVertices = (skipIncrement - 1) * (numVertsPerLine - 5) / skipIncrement * 4;
@@ -107,6 +120,7 @@ public class MeshData {
 
 		vertices = new Vector3[numMeshEdgeVertices + numEdgeConnectionVertices + numMainVertices];
 		uvs = new Vector2[vertices.Length];
+		wetVertex = new bool[vertices.Length];
 
 		int numMeshEdgeTriangles = 8 * (numVertsPerLine - 4);
 		int numMainTriangles = (numMainVerticesPerLine - 1) * (numMainVerticesPerLine - 1) * 2;
@@ -116,11 +130,12 @@ public class MeshData {
 		outOfMeshTriangles = new int[24 * (numVertsPerLine-2)];
 	}
 
-	public void AddVertex(Vector3 vertexPosition, Vector2 uv, int vertexIndex) {
+	public void AddVertex(Vector3 vertexPosition, Vector2 uv, int vertexIndex, bool isWet) {
 		if (vertexIndex < 0) {
 			outOfMeshVertices [-vertexIndex - 1] = vertexPosition;
 		} else {
 			vertices [vertexIndex] = vertexPosition;
+			wetVertex[vertexIndex] = isWet;
 			uvs [vertexIndex] = uv;
 		}
 	}
@@ -139,7 +154,118 @@ public class MeshData {
 		}
 	}
 
+	public void ProcessMesh() {
+		if (isBiome){
+			MakeBiomeMesh();
+		}
+		if (useFlatShading) {
+			FlatShading ();
+		} else {
+			BakeNormals ();
+		}
+	}
+
+	public Mesh CreateMesh() {
+		Mesh mesh = new Mesh ();
+		mesh.vertices = vertices;
+		mesh.triangles = triangles;
+		mesh.uv = uvs;
+		if (useFlatShading) {
+			mesh.RecalculateNormals ();
+		} else {
+			mesh.normals = bakedNormals;
+		}
+		return mesh;
+	}
+
+	private void MakeBiomeMesh(){
+		// here to filter out the cells we don't want!
+		Debug.Log("MakeBiomeMesh() called");
+
+		bool[] keepVertex = new bool[vertices.Length];
+		int keepTrianglesCount = 0;
+		for (int i = 0; i < triangles.Length; i += 3)
+		{
+			if (wetVertex[triangles[i]] || wetVertex[triangles[i + 1]] || wetVertex[triangles[i + 2]]){
+				// wet triangle so keep all vertecies
+				keepVertex[triangles[i]] = keepVertex[triangles[i + 1]] = keepVertex[triangles[i + 2]] = true;
+				keepTrianglesCount += 3;
+			}
+		}
+
+		int keepVerticesCount = 0;
+		for (int i = 0; i < keepVertex.Length; i++)
+		{
+			if (keepVertex[i]){
+				keepVerticesCount++;
+			}
+		}
+		Debug.Log("MakeBiomeMesh: vertices: " + vertices.Length + ", keepV: " + keepVerticesCount);
+		Debug.Log("MakeBiomeMesh: triangles: " + triangles.Length + ", keepT: " + keepTrianglesCount);
+
+		Vector3[] keepVertices =  new Vector3[keepVerticesCount];
+		Vector2[] keepUvs = new Vector2[keepVerticesCount];
+
+		int[] newVertexIndex =  new int[vertices.Length];
+		int index = 0;
+		for (int i = 0; i < keepVertex.Length; i++)
+		{
+			if (keepVertex[i]){
+				keepVertices[index] = vertices[i];
+				keepUvs[index] = uvs[i];
+				newVertexIndex[i] = index;
+				index++;
+			}
+		}
+
+		int[] keepTriangles =  new int[keepTrianglesCount * 3];
+		index = 0;
+		for (int i = 0; i < triangles.Length; i += 3)
+		{
+			if (wetVertex[triangles[i]] || wetVertex[triangles[i + 1]] || wetVertex[triangles[i + 2]]){
+				for (int j = 0; j < 3; j++)
+				{
+					keepTriangles[index] = newVertexIndex[triangles[i + j]];
+					index++;
+				}
+			}
+		}
+
+		// also adjust the out of index triangles
+		for (int i = 0; i < outOfMeshTriangles.Length; i++) {
+			if (outOfMeshTriangles[i] >= 0){
+				outOfMeshTriangles[i] = newVertexIndex[outOfMeshTriangles[i]];
+			}
+		}
+
+		vertices = keepVertices;
+		uvs = keepUvs;
+		triangles = keepTriangles;
+	}
+
+	void BakeNormals() {
+		bakedNormals = CalculateNormals ();
+	}
+
+	void FlatShading() {
+		// this code is garbage! vertices and uvs are not the same dimention as traingles!
+		Vector3[] flatShadedVertices = new Vector3[triangles.Length];
+		Vector2[] flatShadedUvs = new Vector2[triangles.Length];
+
+		for (int i = 0; i < triangles.Length; i++) {
+			flatShadedVertices [i] = vertices [triangles [i]];
+			flatShadedUvs [i] = uvs [triangles [i]];
+			triangles [i] = i;
+		}
+
+		vertices = flatShadedVertices;
+		uvs = flatShadedUvs;
+	}
+
 	Vector3[] CalculateNormals() {
+		if (vertices.Length <= 0){
+			return new Vector3[0];
+		}
 
 		Vector3[] vertexNormals = new Vector3[vertices.Length];
 		int triangleCount = triangles.Length / 3;
@@ -184,6 +310,8 @@ public class MeshData {
 	}
 
 	Vector3 SurfaceNormalFromIndices(int indexA, int indexB, int indexC) {
+		if (vertices.Length <= 0){ // if we don't have any valid vertices, whis is ignored!
+			return Vector3.up;};
 		Vector3 pointA = (indexA < 0)?outOfMeshVertices[-indexA-1] : vertices [indexA];
 		Vector3 pointB = (indexB < 0)?outOfMeshVertices[-indexB-1] : vertices [indexB];
 		Vector3 pointC = (indexC < 0)?outOfMeshVertices[-indexC-1] : vertices [indexC];
@@ -191,45 +319,6 @@ public class MeshData {
 		Vector3 sideAB = pointB - pointA;
 		Vector3 sideAC = pointC - pointA;
 		return Vector3.Cross (sideAB, sideAC).normalized;
-	}
-
-	public void ProcessMesh() {
-		if (useFlatShading) {
-			FlatShading ();
-		} else {
-			BakeNormals ();
-		}
-	}
-
-	void BakeNormals() {
-		bakedNormals = CalculateNormals ();
-	}
-
-	void FlatShading() {
-		Vector3[] flatShadedVertices = new Vector3[triangles.Length];
-		Vector2[] flatShadedUvs = new Vector2[triangles.Length];
-
-		for (int i = 0; i < triangles.Length; i++) {
-			flatShadedVertices [i] = vertices [triangles [i]];
-			flatShadedUvs [i] = uvs [triangles [i]];
-			triangles [i] = i;
-		}
-
-		vertices = flatShadedVertices;
-		uvs = flatShadedUvs;
-	}
-
-	public Mesh CreateMesh() {
-		Mesh mesh = new Mesh ();
-		mesh.vertices = vertices;
-		mesh.triangles = triangles;
-		mesh.uv = uvs;
-		if (useFlatShading) {
-			mesh.RecalculateNormals ();
-		} else {
-			mesh.normals = bakedNormals;
-		}
-		return mesh;
 	}
 
 }

@@ -4,8 +4,10 @@ using System.Collections.Generic;
 
 public class TerrainGenerator : MonoBehaviour {
 
-	const float viewerMoveThresholdForChunkUpdate = 25f;
-	const float sqrViewerMoveThresholdForChunkUpdate = viewerMoveThresholdForChunkUpdate * viewerMoveThresholdForChunkUpdate;
+	public static float viewerMoveThresholdForChunkUpdate = 25f;
+	public static float sqrViewerMoveThresholdForChunkUpdate = viewerMoveThresholdForChunkUpdate * viewerMoveThresholdForChunkUpdate;
+	public static float colliderGenerationDistanceThreshold = 5;
+	public static float sqrColliderGenerationDistanceThreshold = colliderGenerationDistanceThreshold * colliderGenerationDistanceThreshold;
 
 
 	public int colliderLODIndex;
@@ -19,6 +21,10 @@ public class TerrainGenerator : MonoBehaviour {
 
 	public Transform viewer; 
 	public Material mapMaterial;
+	public Material biomeMaterial;
+	public Material redMaterial;
+	public Material blueMaterial;
+	public Material greenMaterial;
 
 	public GameObject seaPrefab;
 	
@@ -139,6 +145,10 @@ public class TerrainGenerator : MonoBehaviour {
 							transform, 
 							viewer, 
 							mapMaterial,
+							biomeMaterial,
+							redMaterial, 
+							blueMaterial, 
+							greenMaterial,
 							seaPrefab);
 						terrainChunkDictionary.Add (viewedChunkCoord, newChunk);
 						newChunk.onVisibilityChanged += OnTerrainChunkVisibilityChanged;
@@ -210,5 +220,50 @@ public struct LODInfo {
 		get {
 			return visibleDstThreshold * visibleDstThreshold;
 		}
+	}
+}
+
+class LODMesh {
+
+	public Mesh mesh;
+	public bool hasRequestedMesh;
+	public bool hasMesh;
+	int lod;
+	bool isBiome;
+
+	// Once created initialised to UpdateTerrainChunck
+	// and if collision LOD also UpdateCollisionMask
+	public event System.Action updateCallback;
+
+	public LODMesh(int lod, bool isBiome = false) {
+		this.lod = lod;
+		this.isBiome = isBiome;
+	}
+
+	void OnMeshDataReceived(object meshDataObject) {
+		mesh = ((MeshData)meshDataObject).CreateMesh();
+		hasMesh = true;
+		updateCallback(); // so the relevant callbacks get called
+	}
+
+	public void RequestMesh(HeightMap heightMap, MeshSettings meshSettings, bool isBiome = false) {
+		hasRequestedMesh = true;
+		ThreadedDataRequester.RequestData (
+			() => MeshGenerator.GenerateTerrainMesh (heightMap.values, meshSettings, lod, isBiome), 
+			OnMeshDataReceived);
+	}
+
+}
+
+enum SeaType {Unknown, HasSea, NotSea, LandLocked};
+enum BiomeType {Damp};
+
+class Biome{
+	public BiomeType biomeType;
+	public SeaType seaType = SeaType.Unknown;
+	public BiomeChunk biomeChunk;
+
+	public Biome(BiomeType type){
+		biomeType = type;
 	}
 }

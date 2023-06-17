@@ -24,6 +24,11 @@ namespace DevionGames.UIWidgets
 
 		public void SetResolution(int index)
 		{
+			int last = Screen.resolutions.Length - 1;
+			if (index < 0 || index > Screen.resolutions.Length){
+				Debug.Log("Invalid index for Screen Resolution(" + index + "), using last! - " + last);
+				index = last;
+			}
 			Resolution resolution = Screen.resolutions[index];
 			SetResolution(resolution.width, resolution.height);
 			PlayerPrefs.SetInt(RESOLUTION_KEY,index);
