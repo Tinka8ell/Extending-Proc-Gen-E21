@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using DevionGames.UIWidgets;
 
 public class GameManager : MonoBehaviour
 {
@@ -65,27 +64,6 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
-
-    private UIWidget welcome;
-    public UIWidget Welcome {
-        get
-        {
-            if (welcome == null){
-                Debug.LogError("Welcome is not set!");
-            }
-            return welcome;
-        }
-    }
-    private UIWidget startMenu;
-    public UIWidget StartMenu {
-        get
-        {
-            if (startMenu == null){
-                Debug.LogError("Start Menu is not set!");
-            }
-            return startMenu;
-        }
-    }
     public GameState gameState = new GameState(false);
 
     private GameObject m_player;
@@ -133,48 +111,6 @@ public class GameManager : MonoBehaviour
     private void StartGame(){
         // start with player invisible!
         m_player.SetActive(false);
-        if (welcome == null){
-            welcome = WidgetUtility.Find<UIWidget>("Welcome Screen");
-            if (welcome == null){
-                Debug.Log("No Welcome Screen, so probbaly running a game!");
-            }
-        }
-        if (startMenu == null){
-            startMenu = WidgetUtility.Find<UIWidget>("Start Menu");
-            if (startMenu == null){
-                Debug.Log("No Start Menu, so probbaly running a game!");
-            }
-        }
-        if (welcome == null || startMenu == null){
-            DebugGameManagerLog("Must be running ...");
-            m_player.SetActive(true);
-        }
-        else {
-            if (!gameState.CompletedIntro){
-                RunIntro();
-            } else if (!gameState.DoneMenu){
-                OpenMenu();
-            } else { // gameState.CompletedIntro and gameState.DoneMenu must be true
-                Debug.Log("Done menu, so load game");
-                // load the game?
-            }
-        }
-    }
-
-    public void RunIntro(){
-        DebugGameManagerLog("Running Intro");
-        gameState.CompletedIntro = false;
-        saveGameState();
-        StartMenu.Close();
-        Welcome.Show();
-    }
-
-    public void OpenMenu(){
-        DebugGameManagerLog("Opening Menu");
-        gameState.CompletedIntro = true;
-        saveGameState();
-        Welcome.Close();
-        StartMenu.Show();
     }
 
     IEnumerator GameClockTick(float delay)
